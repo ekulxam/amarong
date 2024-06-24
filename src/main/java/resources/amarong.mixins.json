@@ -1,0 +1,29 @@
+{
+  "required": true,
+  "package": "survivalblock.amarong.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "coreblock.BeaconBlockEntityAccessor",
+    "coreblock.BeaconBlockEntityAccessor$BeamSegmentAccessor",
+    "coreblock.BeaconBlockEntityMixin",
+    "duck.LivingEntityMixin",
+    "duck.PersistentProjectileEntityMixin",
+    "kaleidoscope.PlayerEntityMixin",
+    "ticketgun.TerrificTrinketsApiMixin",
+    "verylongsword.LivingEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "kaleidoscope.client.GameRendererMixin",
+    "kaleidoscope.client.InGameHudMixin",
+    "kaleidoscope.client.PlayerHeldItemFeatureRendererMixin",
+    "models.client.ItemRendererMixin",
+    "models.client.ModelLoaderMixin",
+    "verylongsword.client.BipedEntityModelMixin",
+    "verylongsword.client.CrossbowPosingMixin",
+    "verylongsword.client.HeldItemRendererMixin",
+    "verylongsword.client.PlayerEntityRendererMixin"
+  ]
+}
