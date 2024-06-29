@@ -30,6 +30,10 @@ repositories {
 			includeGroup 'gay.lemmaeof'
 		}
 	}
+	maven {
+		name 'Xander Maven'
+		url 'https://maven.isxander.dev/releases'
+	}
 }
 
 fabricApi {
@@ -47,9 +51,20 @@ dependencies {
 
 	include modApi("org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cardinal_components_version}")
 	include modApi("org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cardinal_components_version}")
+	include modImplementation("gay.lemmaeof:terrifictickets:${project.terrifictickets_version}")
+	modApi("dev.isxander:yet-another-config-lib:${project.yet_another_config_lib_version}")
+	modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
 
-	modImplementation include("gay.lemmaeof:terrifictickets:${project.terrifictickets_version}")
-	modRuntimeOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+	modCompileOnly "dev.emi:emi-fabric:${project.emi_version}"
+	modRuntimeOnly "dev.emi:emi-fabric:${project.emi_version}"
+
+	modRuntimeOnly "maven.modrinth:honque:${project.honque_version}"
+	modCompileOnly "maven.modrinth:honque:${project.honque_version}"
+
+	modRuntimeOnly "maven.modrinth:twirl:${project.twirl_version}"
+	modCompileOnly "maven.modrinth:twirl:${project.twirl_version}"
+
+	modRuntimeOnly "maven.modrinth:wowozela:${project.wowozela_version}"
 }
 
 processResources {
