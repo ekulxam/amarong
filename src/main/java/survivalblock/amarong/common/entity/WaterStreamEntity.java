@@ -21,6 +21,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import survivalblock.amarong.common.init.AmarongDamageTypes;
 import survivalblock.amarong.common.init.AmarongEntityTypes;
+import survivalblock.amarong.common.init.AmarongSounds;
 
 public class WaterStreamEntity extends PersistentProjectileEntity {
 
@@ -110,6 +111,6 @@ public class WaterStreamEntity extends PersistentProjectileEntity {
 
     @Override
     protected SoundEvent getHitSound() {
-        return SoundEvents.WEATHER_RAIN;
+        return AmarongSounds.WATER_STREAM_HITS;
     }
 }

@@ -8,7 +8,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -53,7 +52,7 @@ public class AmarongCoreBlock extends HeavyCoreBlock implements BlockEntityProvi
             amarongCore.setMode(amarongCore.getMode() + 1);
             Vec3d blockCenter = Vec3d.ofCenter(pos);
             serverWorld.spawnParticles(ParticleTypes.END_ROD, blockCenter.getX(), blockCenter.getY(), blockCenter.getZ(), 16, 2, 2, 2, 0);
-            // player.sendMessage(Text.literal("Mode : " + amarongCore.getMode()));
+            stack.decrementUnlessCreative(1, player);
             return ItemActionResult.SUCCESS;
         }
         return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

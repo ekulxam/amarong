@@ -10,7 +10,7 @@ import survivalblock.amarong.common.block.AmarongCoreBlockEntity;
 
 public class AmarongBlocks {
 
-    public static final Block AMARONG_CORE = registerBlock("amarong_core", new AmarongCoreBlock(AbstractBlock.Settings.copy(Blocks.HEAVY_CORE).luminance((state) -> 10)));
+    public static final Block AMARONG_CORE = registerBlock("amarong_core", new AmarongCoreBlock(AbstractBlock.Settings.copy(Blocks.HEAVY_CORE).requiresTool().luminance((state) -> 10)));
 
     public static final BlockEntityType<AmarongCoreBlockEntity> AMARONG_CORE_BLOCK_ENTITY = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,

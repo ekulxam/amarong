@@ -3,16 +3,14 @@ package survivalblock.amarong.common.datagen;
 import gay.lemmaeof.terrifictickets.TerrificTickets;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.*;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import survivalblock.amarong.common.init.AmarongBlocks;
 import survivalblock.amarong.common.init.AmarongItems;
+import survivalblock.amarong.common.recipe.KaleidoscopeShaderTypeRecipe;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -98,7 +96,7 @@ public class AmarongRecipeGenerator extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(AmarongItems.AMARONG_CHUNK),
                         FabricRecipeProvider.conditionsFromItem(AmarongItems.AMARONG_CHUNK))
                 .offerTo(exporter, "amarong_core_rebuild");
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, AmarongItems.TICKET_GUN).pattern(" xo").pattern("cwx").pattern("lc ")
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, AmarongItems.TICKET_LAUNCHER).pattern(" xo").pattern("cwx").pattern("lc ")
                 .input('l', Items.LEVER)
                 .input('o', Items.DISPENSER)
                 .input('c', AmarongItems.AMARONG_CHUNK)
@@ -115,5 +113,6 @@ public class AmarongRecipeGenerator extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(TerrificTickets.PASSCARD),
                         FabricRecipeProvider.conditionsFromItem(TerrificTickets.PASSCARD))
                 .offerTo(exporter);
+        ComplexRecipeJsonBuilder.create(KaleidoscopeShaderTypeRecipe::new).offerTo(exporter, "kaleidoscope_shader_type");
     }
 }
