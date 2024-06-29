@@ -1,5 +1,5 @@
 {
   "exhaustion": 0.1,
-  "message_id": "amarong.flying_ticket_hit",
+  "message_id": "amarong.railgun_hit",
   "scaling": "when_caused_by_living_non_player"
 }
