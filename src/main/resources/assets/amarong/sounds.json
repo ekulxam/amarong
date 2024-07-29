@@ -5,6 +5,15 @@
       "amarong:duck_squeak"
     ]
   },
+  "flying_ticket_hits": {
+    "sounds": [
+      "random/bowhit1",
+      "random/bowhit2",
+      "random/bowhit3",
+      "random/bowhit4"
+    ],
+    "subtitle": "subtitles.amarong.entity.flying_ticket.hit"
+  },
   "water_stream_hits": {
     "sounds": [
       {
