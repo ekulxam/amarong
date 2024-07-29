@@ -2,7 +2,7 @@
 	"schemaVersion": 1,
 	"id": "amarong",
 	"version": "${version}",
-	"name": "amarong",
+	"name": "Amarong",
 	"description": "Adds a new material called Amarong, handheld \"rubber\" ducks, kaleidoscopes, and rainbow beacons with no redstone required",
 	"authors": [
 		"Survivalblock"
