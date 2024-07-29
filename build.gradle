@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -28,11 +28,19 @@ repositories {
 		url 'https://repo.sleeping.town'
 		content {
 			includeGroup 'gay.lemmaeof'
+			includeGroup 'folk.sisby'
 		}
 	}
 	maven {
 		name 'Xander Maven'
 		url 'https://maven.isxander.dev/releases'
+	}
+	maven {
+		name = "CottonMC"
+		url = "https://server.bbkr.space/artifactory/libs-release"
+		content {
+			includeGroup "io.github.cottonmc"
+		}
 	}
 }
 
@@ -65,6 +73,13 @@ dependencies {
 	modCompileOnly "maven.modrinth:twirl:${project.twirl_version}"
 
 	modRuntimeOnly "maven.modrinth:wowozela:${project.wowozela_version}"
+	modRuntimeOnly "maven.modrinth:beam-be-gone:${project.beam_be_gone_version}"
+
+	modRuntimeOnly "maven.modrinth:scattered-shards:${project.scattered_shards_version}"
+	modRuntimeOnly "io.github.cottonmc:LibGui:${project.libgui_version}"
+	modRuntimeOnly "me.lucko:fabric-permissions-api:${project.fabric_permissions_version}"
+	// modRuntimeOnly "maven.modrinth:crunchy-crunchy-advancements:${project.crunchy_advancements_version}"
+	// runtimeOnly "folk.sisby:kaleido-config:${project.kaleido_config_version}"
 }
 
 processResources {
