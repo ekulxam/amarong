@@ -4,7 +4,6 @@
   "plugin": "survivalblock.amarong.common.compat.AmarongMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "compat.emi.VanillaPluginAccessor",
     "compat.honque.TheFunnyAccessor",
     "coreblock.BeaconBlockEntityAccessor",
     "coreblock.BeaconBlockEntityAccessor$BeamSegmentAccessor",
@@ -34,6 +33,7 @@
     "kaleidoscope.client.PlayerHeldItemFeatureRendererMixin",
     "util.client.ItemRendererMixin",
     "util.client.ModelLoaderMixin",
+    "verylongsword.client.BeaconBlockEntityRendererAccessor",
     "verylongsword.client.BipedEntityModelMixin",
     "verylongsword.client.CrossbowPosingMixin",
     "verylongsword.client.HeldItemRendererMixin",
