@@ -8,10 +8,10 @@ import dev.emi.emi.api.stack.EmiStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
 import net.minecraft.util.Identifier;
+import survivalblock.amarong.common.Amarong;
 import survivalblock.amarong.common.init.AmarongDataComponentTypes;
 import survivalblock.amarong.common.init.AmarongItems;
 import survivalblock.amarong.common.recipe.KaleidoscopeShaderTypeRecipe;
-import survivalblock.amarong.mixin.compat.emi.VanillaPluginAccessor;
 
 import java.util.List;
 
@@ -21,27 +21,29 @@ import static survivalblock.amarong.common.item.KaleidoscopeItem.SUPER_SECRET_SE
 public class AmarongEMIPlugin implements EmiPlugin {
     @Override
     public void register(EmiRegistry registry) {
-        for (CraftingRecipe recipe : VanillaPluginAccessor.amarong$invokeGetRecipes(registry, RecipeType.CRAFTING)) {
+        RecipeManager manager = registry.getRecipeManager();
+        for (RecipeEntry<CraftingRecipe> entry : manager.listAllOfType(RecipeType.CRAFTING)) {
+            CraftingRecipe recipe = entry.value();
             if (recipe instanceof KaleidoscopeShaderTypeRecipe) {
-                addRandomToFirst(registry, recipe);
-                addConversions(registry, recipe);
-                addLastToRandom(registry, recipe);
+                addRandomToFirst(registry);
+                addConversions(registry);
+                addLastToRandom(registry);
             }
         }
     }
 
-    private void addRandomToFirst(EmiRegistry registry, CraftingRecipe recipe) {
+    private void addRandomToFirst(EmiRegistry registry) {
         ItemStack kaleidoscopeItemstack = new ItemStack(AmarongItems.KALEIDOSCOPE);
         EmiStack kaleidoscope = EmiStack.of(kaleidoscopeItemstack);
         ItemStack resultItemstack = new ItemStack(AmarongItems.KALEIDOSCOPE);
         resultItemstack.set(AmarongDataComponentTypes.SHADER_TYPE, SUPER_SECRET_SETTING_PROGRAMS.getFirst());
-        VanillaPluginAccessor.amarong$invokeAddRecipeSafe(registry, () -> new EmiCraftingRecipe(List.of(kaleidoscope),
+        registry.addRecipe(new EmiCraftingRecipe(List.of(kaleidoscope),
                 EmiStack.of(resultItemstack),
-                VanillaPluginAccessor.amarong$invokeSynthetic("crafting/kaleidoscope_shader_type", "random"),
-                true), recipe);
+                Amarong.id("/crafting/kaleidoscope_shader_type/first"),
+                true));
     }
 
-    private void addConversions(EmiRegistry registry, CraftingRecipe recipe) {
+    private void addConversions(EmiRegistry registry) {
         SUPER_SECRET_SETTING_PROGRAMS.forEach(identifier -> {
             ItemStack kaleidoscopeItemstack = new ItemStack(AmarongItems.KALEIDOSCOPE);
             kaleidoscopeItemstack.set(AmarongDataComponentTypes.SHADER_TYPE, identifier);
@@ -52,23 +54,23 @@ public class AmarongEMIPlugin implements EmiPlugin {
             int index = SUPER_SECRET_SETTING_PROGRAMS.indexOf(identifier) + 1;
             ItemStack resultItemstack = new ItemStack(AmarongItems.KALEIDOSCOPE);
             resultItemstack.set(AmarongDataComponentTypes.SHADER_TYPE, SUPER_SECRET_SETTING_PROGRAMS.get(index));
-            VanillaPluginAccessor.amarong$invokeAddRecipeSafe(registry, () -> new EmiCraftingRecipe(List.of(kaleidoscope),
+            registry.addRecipe(new EmiCraftingRecipe(List.of(kaleidoscope),
                     EmiStack.of(resultItemstack),
-                    VanillaPluginAccessor.amarong$invokeSynthetic("crafting/kaleidoscope_shader_type", EmiUtil.subId(identifier)),
-                    true), recipe);
+                    Amarong.id("crafting/kaleidoscope_shader_type/" + EmiUtil.subId(identifier)),
+                    true));
         });
     }
 
-    private void addLastToRandom(EmiRegistry registry, CraftingRecipe recipe) {
+    private void addLastToRandom(EmiRegistry registry) {
         Identifier id = SUPER_SECRET_SETTING_PROGRAMS.getLast();
         ItemStack kaleidoscopeItemstack = new ItemStack(AmarongItems.KALEIDOSCOPE);
         kaleidoscopeItemstack.set(AmarongDataComponentTypes.SHADER_TYPE, id);
         EmiStack kaleidoscope = EmiStack.of(kaleidoscopeItemstack);
         ItemStack resultItemstack = new ItemStack(AmarongItems.KALEIDOSCOPE);
-        VanillaPluginAccessor.amarong$invokeAddRecipeSafe(registry, () -> new EmiCraftingRecipe(List.of(kaleidoscope),
+        registry.addRecipe(new EmiCraftingRecipe(List.of(kaleidoscope),
                 EmiStack.of(resultItemstack),
-                VanillaPluginAccessor.amarong$invokeSynthetic("crafting/kaleidoscope_shader_type", EmiUtil.subId(id)),
-                true), recipe);
+                Amarong.id("crafting/kaleidoscope_shader_type/" + EmiUtil.subId(id)),
+                true));
     }
 
 }

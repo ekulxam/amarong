@@ -223,7 +223,6 @@ public class RailgunEntity extends Entity implements Ownable {
 
     @FunctionalInterface
     public interface IRailgunRaycast {
-
         void step(World world, Set<PlayerEntity> encountered, Vec3d pitchYaw, Vec3d currentRaycastPosition, double x, double y, double z, int iterations);
     }
 }

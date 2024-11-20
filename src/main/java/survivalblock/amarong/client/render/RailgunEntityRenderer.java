@@ -17,8 +17,8 @@ public class RailgunEntityRenderer extends EntityRenderer<RailgunEntity> {
     }
 
     @Override
-    public void render(RailgunEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-        super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
+    public void render(RailgunEntity entity, float yaw, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light) {
+        super.render(entity, yaw, tickDelta, matrixStack, vertexConsumerProvider, light);
     }
 
     @Override

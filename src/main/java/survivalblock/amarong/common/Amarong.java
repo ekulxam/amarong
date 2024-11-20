@@ -32,7 +32,7 @@ public class Amarong implements ModInitializer {
 		AmarongParticleTypes.init();
 		shouldDoConfig = FabricLoader.getInstance().isModLoaded("yet_another_config_lib_v3");
 		if (!shouldDoConfig) {
-			LOGGER.warn("YACL is not installed, so Component View's Config will not be accessible!");
+			LOGGER.warn("YACL is not installed, so Amarong's Config will not be accessible!");
 		} else {
 			configLoaded = AmarongConfig.load();
 			if (!configLoaded) {
