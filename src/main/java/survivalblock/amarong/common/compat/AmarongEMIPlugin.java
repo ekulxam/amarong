@@ -56,7 +56,7 @@ public class AmarongEMIPlugin implements EmiPlugin {
             resultItemstack.set(AmarongDataComponentTypes.SHADER_TYPE, SUPER_SECRET_SETTING_PROGRAMS.get(index));
             registry.addRecipe(new EmiCraftingRecipe(List.of(kaleidoscope),
                     EmiStack.of(resultItemstack),
-                    Amarong.id("crafting/kaleidoscope_shader_type/" + EmiUtil.subId(identifier)),
+                    Amarong.id("/crafting/kaleidoscope_shader_type/" + EmiUtil.subId(identifier)),
                     true));
         });
     }
@@ -69,7 +69,7 @@ public class AmarongEMIPlugin implements EmiPlugin {
         ItemStack resultItemstack = new ItemStack(AmarongItems.KALEIDOSCOPE);
         registry.addRecipe(new EmiCraftingRecipe(List.of(kaleidoscope),
                 EmiStack.of(resultItemstack),
-                Amarong.id("crafting/kaleidoscope_shader_type/" + EmiUtil.subId(id)),
+                Amarong.id("/crafting/kaleidoscope_shader_type/" + EmiUtil.subId(id)),
                 true));
     }
 
