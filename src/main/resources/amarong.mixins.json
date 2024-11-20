@@ -33,7 +33,6 @@
     "kaleidoscope.client.PlayerHeldItemFeatureRendererMixin",
     "util.client.ItemRendererMixin",
     "util.client.ModelLoaderMixin",
-    "verylongsword.client.BeaconBlockEntityRendererAccessor",
     "verylongsword.client.BipedEntityModelMixin",
     "verylongsword.client.CrossbowPosingMixin",
     "verylongsword.client.HeldItemRendererMixin",
