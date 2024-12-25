@@ -42,6 +42,7 @@ repositories {
 			includeGroup "io.github.cottonmc"
 		}
 	}
+	maven { url 'https://jitpack.io' }
 }
 
 fabricApi {
@@ -62,6 +63,7 @@ dependencies {
 	include modImplementation("gay.lemmaeof:terrifictickets:${project.terrifictickets_version}")
 	modApi("dev.isxander:yet-another-config-lib:${project.yet_another_config_lib_version}")
 	modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
+	include modApi("com.github.ekulxam:AtmosphericAPI:${project.atmospheric_api_tag}")
 
 	modCompileOnly "dev.emi:emi-fabric:${project.emi_version}"
 	modRuntimeOnly "dev.emi:emi-fabric:${project.emi_version}"
@@ -79,7 +81,7 @@ dependencies {
 	modRuntimeOnly "io.github.cottonmc:LibGui:${project.libgui_version}"
 	modRuntimeOnly "me.lucko:fabric-permissions-api:${project.fabric_permissions_version}"
 	// modRuntimeOnly "maven.modrinth:crunchy-crunchy-advancements:${project.crunchy_advancements_version}"
-	// runtimeOnly "folk.sisby:kaleido-config:${project.kaleido_config_version}"
+	runtimeOnly "folk.sisby:kaleido-config:${project.kaleido_config_version}"
 }
 
 processResources {
