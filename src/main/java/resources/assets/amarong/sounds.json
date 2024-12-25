@@ -1,0 +1,62 @@
+{
+  "duck_squeaks": {
+    "subtitle": "subtitles.amarong.item.duck_squeezed",
+    "sounds": [
+      "amarong:duck_squeak"
+    ]
+  },
+  "flying_ticket_hits": {
+    "sounds": [
+      "random/bowhit1",
+      "random/bowhit2",
+      "random/bowhit3",
+      "random/bowhit4"
+    ],
+    "subtitle": "subtitles.amarong.entity.flying_ticket.hit"
+  },
+  "water_stream_hits": {
+    "sounds": [
+      {
+        "name": "entity/boat/paddle_water1",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/boat/paddle_water2",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/boat/paddle_water3",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/boat/paddle_water4",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/boat/paddle_water5",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/boat/paddle_water6",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/boat/paddle_water7",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/boat/paddle_water8",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.amarong.entity.water_stream.hit"
+  },
+  "railgun_charges": {
+    "sounds": [
+      "amarong:charge1",
+      "amarong:charge2",
+      "amarong:charge3"
+    ],
+    "subtitle": "subtitles.amarong.entity.railgun.charge"
+  }
+}
