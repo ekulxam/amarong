@@ -1,6 +1,5 @@
 package survivalblock.amarong.common.item;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -8,8 +7,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -17,7 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import survivalblock.amarong.common.Amarong;
-import survivalblock.amarong.common.compat.AmarongHammerHonqueCompat;
 import survivalblock.amarong.common.compat.AmarongHammerTwirlCompat;
 import survivalblock.amarong.common.init.AmarongTags;
 
@@ -45,11 +41,6 @@ public class AmarongHammerItem extends MiningToolItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
-        boolean wasASuccess = false;
-        if (Amarong.honque) {
-            AmarongHammerHonqueCompat.whack(user);
-            wasASuccess = true;
-        }
         if (Amarong.twirl) {
             if (AmarongHammerTwirlCompat.hasTwirl(stack)) {
                 user.setCurrentHand(hand);
@@ -62,9 +53,6 @@ public class AmarongHammerItem extends MiningToolItem {
             if (!world.isClient()) {
                 user.getItemCooldownManager().set(this, 200);
             }
-            return TypedActionResult.success(stack, world.isClient());
-        }
-        if (wasASuccess) {
             return TypedActionResult.success(stack, world.isClient());
         }
         return super.use(world, user, hand);

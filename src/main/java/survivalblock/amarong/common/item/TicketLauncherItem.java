@@ -23,6 +23,9 @@ import survivalblock.amarong.common.init.AmarongTags;
 import java.util.List;
 
 public class TicketLauncherItem extends Item {
+
+    public static final Identifier TICKET_LAUNCHER_ACHIEVEMENT = Amarong.id("when_tickets_fly");;
+
     public TicketLauncherItem(Settings settings) {
         super(settings);
     }
@@ -90,7 +93,7 @@ public class TicketLauncherItem extends Item {
         flyingTicket.setVelocity(Vec3d.fromPolar(user.getPitch(), user.getYaw()).multiply(1.2));
         world.spawnEntity(flyingTicket);
         if (user instanceof ServerPlayerEntity serverPlayer) {
-            serverPlayer.atmospheric_api$grantAdvancement(Amarong.id("when_tickets_fly"));
+            serverPlayer.atmospheric_api$grantAdvancement(TICKET_LAUNCHER_ACHIEVEMENT);
         }
     }
 
@@ -100,12 +103,12 @@ public class TicketLauncherItem extends Item {
             return false;
         }
         checkForReset(stack);
-        int tickets = TerrificTicketsApi.getTickets(otherStack);
+        int tickets = TerrificTicketsApi.getTickets(otherStack); // track the other stack's tickets
         if (tickets <= 0) {
             if (!otherStack.isEmpty()) {
                 return false;
             }
-            tickets = TerrificTicketsApi.getTickets(stack);
+            tickets = TerrificTicketsApi.getTickets(stack); // tickets now track this stack's tickets
             if (tickets <= 0) {
                 return false;
             }

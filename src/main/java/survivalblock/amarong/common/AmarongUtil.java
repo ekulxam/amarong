@@ -111,10 +111,6 @@ public class AmarongUtil {
         return TRANS_LIGHT_BLUE.getRGB();
     }
 
-    public static Box getProperlyScaledBox(Entity entity) {
-        return entity.getBoundingBox(); // so apparently mojang did do it correctly
-    }
-
     public static boolean shouldDamageWithAmarong(Entity entity) {
         if (entity instanceof ArmorStandEntity armorStandEntity && armorStandEntity.isMarker()) {
             return false;

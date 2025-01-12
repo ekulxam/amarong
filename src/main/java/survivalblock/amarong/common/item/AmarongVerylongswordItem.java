@@ -56,7 +56,7 @@ public class AmarongVerylongswordItem extends SwordItem implements TwoHandedItem
                     VerylongswordComponent verylongswordComponent = AmarongEntityComponents.VERYLONGSWORD_COMPONENT.get(user);
                     if (railgun) {
                         verylongswordComponent.deathStar(stack);
-                        user.getItemCooldownManager().set(this, retainsCharge ? 5 : RailgunEntity.WARNING_TICKS);
+                        user.getItemCooldownManager().set(this, retainsCharge ? 5 : RailgunEntity.FIRING_TICKS);
                     } else {
                         verylongswordComponent.enterObscure();
                         user.getItemCooldownManager().set(this, VerylongswordComponent.OBSCURE);

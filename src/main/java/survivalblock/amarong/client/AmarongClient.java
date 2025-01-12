@@ -13,6 +13,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.particle.SonicBoomParticle;
 import net.minecraft.text.Text;
 import survivalblock.amarong.client.render.FlyingTicketEntityRenderer;
+import survivalblock.amarong.client.render.PhasingBoomerangEntityRenderer;
 import survivalblock.amarong.client.render.RailgunEntityRenderer;
 import survivalblock.amarong.client.render.WaterStreamEntityRenderer;
 import survivalblock.amarong.common.Amarong;
@@ -30,10 +31,12 @@ public class AmarongClient implements ClientModInitializer {
 		EntityRendererRegistry.register(AmarongEntityTypes.WATER_STREAM, WaterStreamEntityRenderer::new);
 		EntityRendererRegistry.register(AmarongEntityTypes.FLYING_TICKET, FlyingTicketEntityRenderer::new);
 		EntityRendererRegistry.register(AmarongEntityTypes.RAILGUN, RailgunEntityRenderer::new);
+		EntityRendererRegistry.register(AmarongEntityTypes.BOOMERANG, PhasingBoomerangEntityRenderer::new);
 
 		ParticleFactoryRegistry.getInstance().register(AmarongParticleTypes.RAILGUN_PARTICLE, SonicBoomParticle.Factory::new);
 
 		AlternateItemModelRegistry.register(AmarongItems.AMARONG_VERYLONGSWORD, AmarongClientUtil.VERYLONGSWORD_INVENTORY);
+		AlternateItemModelRegistry.register(AmarongItems.AMARONG_BOOMERANG, AmarongClientUtil.BOOMERANG_INVENTORY);
 		AlternateItemModelRegistry.register(AmarongItems.KALEIDOSCOPE, AmarongClientUtil.KALEIDOSCOPE_INVENTORY);
 		AlternateItemModelRegistry.registerSpyglass(AmarongItems.KALEIDOSCOPE, AmarongClientUtil.KALEIDOSCOPE_IN_HAND);
 

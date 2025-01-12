@@ -27,6 +27,7 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add(AmarongItems.TICKET_LAUNCHER, "Amarong Ticket Launcher");
         translationBuilder.add(AmarongItems.AMARONG_HAMMER, "Amarong Hammer");
         translationBuilder.add(AmarongBlocks.AMARONG_CORE, "Amarong Core");
+        translationBuilder.add(AmarongItems.AMARONG_BOOMERANG, "Amarong Boomerang");
         translationBuilder.add("amarong.itemGroup.amarong_group", "Amarong");
 
         // entity types
@@ -36,6 +37,7 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
 
         // gamerules
         translationBuilder.add("gamerule.amarong:flyingTicketsDrop", "Amarong - Flying Tickets drop themselves on being discarded");
+        translationBuilder.add("gamerule.amarong:boomerangDamage", "Amarong - Boomerang Damage");
 
         // subtitles
         translationBuilder.add("subtitles.amarong.item.duck_squeezed", "Duck squeaks");
@@ -139,6 +141,8 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("amarong.yacl.option.boolean.twoHandedVerylongsword.desc", "Amarong Verylongsword is held with both hands");
         translationBuilder.add("amarong.yacl.option.boolean.noKaleidoscopeZoom", "No Kaleidoscope Zoom");
         translationBuilder.add("amarong.yacl.option.boolean.noKaleidoscopeZoom.desc", "Don't zoom in while using a kaleidoscope");
+        translationBuilder.add("amarong.yacl.option.float.boomerangSpinMultiplier", "Boomerang Spin Multiplier");
+        translationBuilder.add("amarong.yacl.option.float.boomerangSpinMultiplier.desc", "This value controls how fast an Amarong Boomerang should spin");
 
         // damage types
         translationBuilder.add("death.attack.amarong.flying_ticket_hit", " %1$s was shot by %2$s with flying tickets");

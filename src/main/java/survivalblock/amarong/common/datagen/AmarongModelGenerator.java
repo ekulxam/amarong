@@ -23,5 +23,6 @@ public class AmarongModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(AmarongItems.KALEIDOSCOPE, Models.GENERATED);
         itemModelGenerator.register(AmarongItems.AMARONG_SHEET, Models.GENERATED);
         itemModelGenerator.register(AmarongItems.AMARONG_CHUNK, Models.GENERATED);
+        itemModelGenerator.register(AmarongItems.AMARONG_BOOMERANG, Models.HANDHELD);
     }
 }

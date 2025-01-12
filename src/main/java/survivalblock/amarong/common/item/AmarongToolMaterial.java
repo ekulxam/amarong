@@ -1,6 +1,9 @@
 package survivalblock.amarong.common.item;
 
+import net.fabricmc.fabric.api.item.v1.EquipmentSlotProvider;
 import net.minecraft.block.Block;
+import net.minecraft.component.ComponentType;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.ToolMaterials;
@@ -8,6 +11,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 
 public class AmarongToolMaterial implements ToolMaterial {
 
@@ -54,18 +58,48 @@ public class AmarongToolMaterial implements ToolMaterial {
         }
 
         @Override
-        public Item.Settings maxDamage(int maxDamage) {
+        public Configuration maxDamage(int maxDamage) {
             return this;
         }
 
         @Override
-        public Item.Settings maxCount(int maxCount) {
-            return super.maxCount(1);
+        public Configuration maxCount(int maxCount) {
+            return (Configuration) super.maxCount(1);
         }
 
         @SuppressWarnings({"UnusedReturnValue", "unused"})
-        public Item.Settings maxCount() {
+        public Configuration maxCount() {
             return this.maxCount(1);
+        }
+
+        @Override
+        public Configuration attributeModifiers(AttributeModifiersComponent attributeModifiersComponent) {
+            return (Configuration) super.attributeModifiers(attributeModifiersComponent);
+        }
+
+        @Override
+        public Configuration rarity(Rarity rarity) {
+            return (Configuration) super.rarity(rarity);
+        }
+
+        @Override
+        public <T> Configuration component(ComponentType<T> type, T value) {
+            return (Configuration) super.component(type, value);
+        }
+
+        @Override
+        public Configuration recipeRemainder(Item recipeRemainder) {
+            return (Configuration) super.recipeRemainder(recipeRemainder);
+        }
+
+        @Override
+        public Configuration fireproof() {
+            return (Configuration) super.fireproof();
+        }
+
+        @Override
+        public Configuration equipmentSlot(EquipmentSlotProvider equipmentSlotProvider) {
+            return (Configuration) super.equipmentSlot(equipmentSlotProvider);
         }
     }
 }

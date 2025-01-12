@@ -24,7 +24,7 @@ import survivalblock.amarong.common.init.AmarongBlocks;
 
 import java.util.List;
 
-@Debug(export = true)
+//@Debug(export = true)
 @Mixin(BeaconBlockEntity.class)
 public class BeaconBlockEntityMixin {
 

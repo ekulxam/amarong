@@ -9,7 +9,7 @@ import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import survivalblock.amarong.common.Amarong;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.datagen.EnchantmentRegistryEntryLookupContainer;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.datagen.RegistryEntryLookupContainer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,10 +23,10 @@ public class AmarongEnchantments {
     public static final RegistryKey<Enchantment> RAILGUN = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("railgun"));
     public static final RegistryKey<Enchantment> VAULT = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("vault"));
 
-    public static ImmutableMap<RegistryKey<Enchantment>, Enchantment> asEnchantments(EnchantmentRegistryEntryLookupContainer container) {
+    public static ImmutableMap<RegistryKey<Enchantment>, Enchantment> asEnchantments(RegistryEntryLookupContainer container) {
         Map<RegistryKey<Enchantment>, Enchantment> enchantments = new HashMap<>();
-        RegistryEntryLookup<Enchantment> enchantmentRegistryEntryLookup = container.enchantmentRegistryEntryLookup();
-        RegistryEntryLookup<Item> itemRegistryEntryLookup = container.itemRegistryEntryLookup();
+        RegistryEntryLookup<Enchantment> enchantmentRegistryEntryLookup = container.get(RegistryKeys.ENCHANTMENT);
+        RegistryEntryLookup<Item> itemRegistryEntryLookup = container.get(RegistryKeys.ITEM);
         enchantments.put(CAPACITY, Enchantment.builder(Enchantment.definition(
                 itemRegistryEntryLookup.getOrThrow(AmarongTags.AmarongItemTags.DUCK_ENCHANTABLE),
                 1,
@@ -87,7 +87,7 @@ public class AmarongEnchantments {
     }
 
     public static void bootstrap(Registerable<Enchantment> registry) {
-        for (Map.Entry<RegistryKey<Enchantment>, Enchantment> entry : asEnchantments(new EnchantmentRegistryEntryLookupContainer(registry)).entrySet()) {
+        for (Map.Entry<RegistryKey<Enchantment>, Enchantment> entry : asEnchantments(new RegistryEntryLookupContainer(registry)).entrySet()) {
             registry.register(entry.getKey(), entry.getValue());
         }
     }

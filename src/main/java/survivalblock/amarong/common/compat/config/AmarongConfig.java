@@ -1,34 +1,38 @@
 package survivalblock.amarong.common.compat.config;
 
 import net.minecraft.client.gui.screen.Screen;
-import survivalblock.amarong.common.Amarong;
 
 public class AmarongConfig {
 
-    private static class Defaults {
-        public static boolean verboseLogging = true;
-        public static boolean twoHandedVerylongsword = true;
-        public static boolean noKaleidoscopeZoom = false;
+    public static final class Defaults {
+        public static final boolean VERBOSE_LOGGING = true;
+        public static final boolean TWO_HANDED_VERYLONGSWORD = true;
+        public static final boolean NO_KALEIDOSCOPE_ZOOM = false;
+        public static final float BOOMERANG_SPIN_MULTIPLIER = 12;
     }
 
     public static boolean verboseLogging() {
-        return Amarong.shouldDoConfig ? AmarongYACLCompat.HANDLER.instance().verboseLogging : Defaults.verboseLogging;
+        return Defaults.VERBOSE_LOGGING;
     }
 
     public static boolean twoHandedVerylongsword() {
-        return Amarong.shouldDoConfig ? AmarongYACLCompat.HANDLER.instance().twoHandedVerylongsword : Defaults.twoHandedVerylongsword;
+        return Defaults.TWO_HANDED_VERYLONGSWORD;
     }
 
     public static boolean noKaleidoscopeZoom() {
-        return Amarong.shouldDoConfig ?AmarongYACLCompat.HANDLER.instance().noKaleidoscopeZoom : Defaults.noKaleidoscopeZoom;
+        return Defaults.NO_KALEIDOSCOPE_ZOOM;
     }
 
+    public static float boomerangSpinMultiplier() {
+        return Defaults.BOOMERANG_SPIN_MULTIPLIER;
+    }
+
+    @SuppressWarnings("unused")
     public static Screen create(Screen parent) {
-        return Amarong.shouldDoConfig ? AmarongYACLCompat.create(parent) : null;
+        return null;
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     public static boolean load() {
-        return Amarong.shouldDoConfig && AmarongYACLCompat.HANDLER.load();
+        return false;
     }
 }

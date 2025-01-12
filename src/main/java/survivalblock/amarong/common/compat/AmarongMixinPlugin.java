@@ -4,6 +4,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+import survivalblock.amarong.common.Amarong;
 
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,8 @@ public class AmarongMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.contains("compat")) {
             if (mixinClassName.contains("honque")) {
                 return FabricLoader.getInstance().isModLoaded("honque");
+            } else if (mixinClassName.contains("config")) {
+                return Amarong.resetShouldDoConfig();
             } else if (mixinClassName.contains("twirl")) {
                 return FabricLoader.getInstance().isModLoaded("twirl");
             }

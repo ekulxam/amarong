@@ -3,6 +3,7 @@ package survivalblock.amarong.common.compat.config;
 import com.google.gson.GsonBuilder;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
+import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
@@ -42,26 +43,34 @@ public class AmarongYACLCompat {
                                         .binding(AmarongYACLCompat.HANDLER.defaults().noKaleidoscopeZoom, () -> AmarongYACLCompat.HANDLER.instance().noKaleidoscopeZoom, newVal -> AmarongYACLCompat.HANDLER.instance().noKaleidoscopeZoom = newVal)
                                         .controller(BooleanControllerBuilder::create)
                                         .build())
+                                .option(Option.<Float>createBuilder()
+                                        .name(Text.translatable("amarong.yacl.option.float.boomerangSpinMultiplier"))
+                                        .description(OptionDescription.of(Text.translatable("amarong.yacl.option.float.boomerangSpinMultiplier.desc")))
+                                        .binding(AmarongYACLCompat.HANDLER.defaults().boomerangSpinMultiplier, () -> AmarongYACLCompat.HANDLER.instance().boomerangSpinMultiplier, newVal -> AmarongYACLCompat.HANDLER.instance().boomerangSpinMultiplier = newVal)
+                                        .controller(FloatFieldControllerBuilder::create)
+                                        .build())
                                 .build())
                         .build())
-                .save(() -> AmarongYACLCompat.HANDLER.save())
+                .save(AmarongYACLCompat.HANDLER::save)
                 .build()
                 .generateScreen(parent);
     }
 
-    public static ConfigClassHandler<AmarongYACLCompat> HANDLER = ConfigClassHandler.createBuilder(AmarongYACLCompat.class)
+    public static final ConfigClassHandler<AmarongYACLCompat> HANDLER = ConfigClassHandler.createBuilder(AmarongYACLCompat.class)
             .id(Amarong.id("amarong"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FabricLoader.getInstance().getConfigDir().resolve("amarong.json5"))
-                    .appendGsonBuilder(GsonBuilder::setPrettyPrinting) // not needed, pretty print by default
+                    .appendGsonBuilder(GsonBuilder::setPrettyPrinting)
                     .setJson5(true)
                     .build())
             .build();
 
     @SerialEntry
-    public boolean verboseLogging = true;
+    public boolean verboseLogging = AmarongConfig.Defaults.VERBOSE_LOGGING;
     @SerialEntry
-    public boolean twoHandedVerylongsword = true;
+    public boolean twoHandedVerylongsword = AmarongConfig.Defaults.TWO_HANDED_VERYLONGSWORD;
     @SerialEntry
-    public boolean noKaleidoscopeZoom = false;
+    public boolean noKaleidoscopeZoom = AmarongConfig.Defaults.NO_KALEIDOSCOPE_ZOOM;
+    @SerialEntry
+    public float boomerangSpinMultiplier = AmarongConfig.Defaults.BOOMERANG_SPIN_MULTIPLIER;
 }

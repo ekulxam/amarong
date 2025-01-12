@@ -34,17 +34,22 @@ public class AmarongItems {
     public static final Item AMARONG_SHEET = registerItem("amarong_sheet", new Item(new Item.Settings().maxCount(64)));
     public static final Item KALEIDOSCOPE = registerItem("amarong_kaleidoscope", new KaleidoscopeItem(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)));
     public static final Item AMARONG_VERYLONGSWORD = registerItem("amarong_verylongsword", new AmarongVerylongswordItem(AmarongToolMaterial.INSTANCE,
-            (AmarongToolMaterial.Configuration) new AmarongToolMaterial.Configuration()
+            new AmarongToolMaterial.Configuration()
                     .attributeModifiers(AmarongVerylongswordItem.createAttributeModifiers(22.4F, 0.5F, AMARONG_TOOL_REACH + 0.5F, AMARONG_TOOL_REACH))
     ));
     public static final Item AMARONG_HAMMER = registerItem("amarong_hammer", new AmarongHammerItem(AmarongToolMaterial.INSTANCE,
-            (AmarongToolMaterial.Configuration) new AmarongToolMaterial.Configuration()
+            new AmarongToolMaterial.Configuration()
                     .attributeModifiers(AmarongVerylongswordItem.createAttributeModifiers(6.0F, 0.6F, AMARONG_TOOL_REACH + 0.75F, AMARONG_TOOL_REACH + 0.5F))
                     .rarity(Rarity.EPIC)
     ));
+
     public static final Item TICKET_LAUNCHER = registerItem("amarong_ticket_dispenser", new TicketLauncherItem(new Item.Settings().maxCount(1).component(AmarongDataComponentTypes.TICKETS, 0)));
     public static final Item SOMEWHAT_A_DUCK = registerItem("somewhat_a_duck", new SomewhatADuckItem(new Item.Settings().maxCount(1).component(AmarongDataComponentTypes.WATERGUN, SomewhatADuckItem.MAX_WATER).equipmentSlot((living, stack) -> EquipmentSlot.HEAD)));
     public static final Item AMARONG_CORE = registerBlockItem(AmarongBlocks.AMARONG_CORE, new Item.Settings());
+
+    public static final Item AMARONG_BOOMERANG = registerItem("amarong_boomerang", new AmarongBoomerangItem(AmarongToolMaterial.INSTANCE, new AmarongToolMaterial.Configuration()
+            .attributeModifiers(AmarongVerylongswordItem.createAttributeModifiers(4.0F, 1.6F, AMARONG_TOOL_REACH, AMARONG_TOOL_REACH))
+    ));
 
     private static Item registerItem(String name, Item item) {
         amarongItems.add(item);
@@ -74,7 +79,7 @@ public class AmarongItems {
                         addEnchantedStack(item, displayContext, "amarong:obscure", entries);
                         addEnchantedStack(item, displayContext, "amarong:railgun", entries);
                     } else if (item.equals(TICKET_LAUNCHER)) {
-                        addEnchantedStack(item, displayContext, "amarong:pnuematic", entries);
+                        addEnchantedStack(item, displayContext, "amarong:pneumatic", entries);
                         addEnchantedStack(item, displayContext, "amarong:particle_accelerator", entries);
                     } else if (item.equals(SOMEWHAT_A_DUCK)) {
                         addEnchantedStack(item, displayContext, "amarong:capacity", entries);

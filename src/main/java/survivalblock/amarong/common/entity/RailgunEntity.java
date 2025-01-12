@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -31,7 +32,8 @@ import java.util.*;
 import java.util.List;
 
 public class RailgunEntity extends Entity implements Ownable, StacklessPersistentProjectile {
-    public static final int WARNING_TICKS = 3 * 20;
+    public static final int FIRING_TICKS = 3 * 20;
+    public static final int WARNING_TICKS = 4;
     public static final int MAX_ITERATIONS = 384;
     @Nullable
     private UUID ownerUuid;
@@ -76,8 +78,8 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
         }
     }
 
-    public int getWarningTicks() {
-        return noDelay() ? 0 : WARNING_TICKS;
+    public int getFiringTicks() {
+        return noDelay() ? 0 : FIRING_TICKS;
     }
 
     public boolean noDelay() {
@@ -91,26 +93,27 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
     @Override
     public void tick() {
         World world = this.getWorld();
-        if (this.age > getWarningTicks() + 10 && !world.isClient()) {
+        if (this.age > getFiringTicks() + 10 && !world.isClient()) {
             this.discard();
             return;
         }
-        if (this.age == 4 && !noDelay()) {
+        if (this.age == WARNING_TICKS && !noDelay()) {
+            RegistryEntry<SoundEvent> registryEntry = Registries.SOUND_EVENT.getEntry(AmarongSounds.RAILGUN_CHARGES);
             raycastParticle((world1, encountered, pitchYaw, currentRaycastPosition, x, y, z, iterations) -> {
                 if (world1 instanceof ServerWorld serverWorld) {
                     List<ServerPlayerEntity> players = serverWorld.getPlayers();
                     for (ServerPlayerEntity player : players) {
                         serverWorld.spawnParticles(player, ParticleTypes.END_ROD, true, x, y, z, 1, 0, 0, 0, 0);
                         if (player.getPos().squaredDistanceTo(currentRaycastPosition) < 25 && !encountered.contains(player)) {
-                            Entity owner = this.getOwner();
-                            RegistryEntry<SoundEvent> registryEntry = Registries.SOUND_EVENT.getEntry(AmarongSounds.RAILGUN_CHARGES);
-                            player.networkHandler.sendPacket(new PlaySoundFromEntityS2CPacket(registryEntry, owner == null ? this.getSoundCategory() : owner.getSoundCategory(), player, 1.0F, 1.0F, this.getRandom().nextLong()));
+                            // don't send a million playSound packets
+                            player.networkHandler.sendPacket(new PlaySoundFromEntityS2CPacket(registryEntry, this.getSoundCategory(), player, 1.0F, 1.0F, this.getRandom().nextLong()));
                             encountered.add(player);
                         }
                     }
                 }
             });
-        } else if (this.age >= getWarningTicks() && !world.isClient()) {
+        } else if (this.age >= getFiringTicks() && !world.isClient()) {
+            final double boxRadius = 0.5;
             Set<Entity> entities = new HashSet<>(1024);
             raycastParticle((world1, encountered, pitchYaw, currentRaycastPosition, x, y, z, iterations) -> {
                 if (world1 instanceof ServerWorld serverWorld) {
@@ -118,20 +121,20 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
                     for (ServerPlayerEntity player : players) {
                         serverWorld.spawnParticles(player, AmarongParticleTypes.RAILGUN_PARTICLE, true, x, y, z, 1, 0.1, 0.1, 0.1, 0);
                     }
-                    final double boxRadius = 0.5;
                     Vec3d lowerCorner = currentRaycastPosition.subtract(boxRadius, boxRadius, boxRadius);
                     Vec3d upperCorner = currentRaycastPosition.add(boxRadius, boxRadius, boxRadius);
                     Box box = new Box(lowerCorner, upperCorner);
                     box.expand(2);
-                    serverWorld.atmospheric_api$getAndAddEntitiesToCollection(entity -> AmarongUtil.getProperlyScaledBox(entity).intersects(box), entities);
+                    serverWorld.atmospheric_api$getAndAddEntitiesToCollection(entity -> entity.getBoundingBox().intersects(box), entities);
                 }
             });
             DamageSource source;
             Entity owner = this.getOwner();
+            RegistryEntry.Reference<DamageType> reference = world.atmospheric_api$getEntryFromKey(RegistryKeys.DAMAGE_TYPE, AmarongDamageTypes.RAILGUN_HIT);
             if (owner instanceof LivingEntity living) {
-                source = new DamageSource(world.atmospheric_api$getEntryFromKey(RegistryKeys.DAMAGE_TYPE, AmarongDamageTypes.RAILGUN_HIT), this, living);
+                source = new DamageSource(reference, this, living);
             } else {
-                source = new DamageSource(world.atmospheric_api$getEntryFromKey(RegistryKeys.DAMAGE_TYPE, AmarongDamageTypes.RAILGUN_HIT), this);
+                source = new DamageSource(reference, this);
             }
             if (owner != null && entities.contains(owner)) {
                 entities.remove(owner);
@@ -139,9 +142,10 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
             if (entities.contains(this)) {
                 entities.remove(this);
             }
+            final float playerDamage = this.getPlayerDamage();
             entities.forEach(entity -> {
                 if (AmarongUtil.shouldDamageWithAmarong(entity)) {
-                    entity.damage(source, entity instanceof PlayerEntity ? getPlayerDamage() : 50);
+                    entity.damage(source, entity instanceof PlayerEntity ? playerDamage : 50);
                 }
             });
         }
