@@ -13,4 +13,5 @@ public class AmarongClientUtil {
 
     public static final Identifier NO_KALEIDOSCOPE_OVERLAY_PACK = Amarong.id("nokaleidoscopeoverlay");
     public static final Identifier SMOL_VERYLONGSWORD_PACK = Amarong.id("smolverylongsword");
+    public static final Identifier OLD_TICKET_LAUNCHER_PACK = Amarong.id("oldticketlauncher");
 }

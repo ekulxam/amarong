@@ -53,6 +53,7 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("resourcePack.amarong.nokaleidoscopeoverlay.name", "No Kaleidoscope Overlay");
         translationBuilder.add("resourcePack.amarong.nokaleidoscopezoom.name", "No Kaleidoscope Zoom");
         translationBuilder.add("resourcePack.amarong.smolverylongsword.name", "Smol Verylongsword");
+        translationBuilder.add("resourcePack.amarong.oldticketlauncher.name", "Old Ticket Launcher");
 
         // advancements
         translationBuilder.add("advancements.amarong.use_kaleidoscope.title", "A World of Color");

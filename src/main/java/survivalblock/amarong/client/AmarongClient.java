@@ -43,6 +43,7 @@ public class AmarongClient implements ClientModInitializer {
 		FabricLoader.getInstance().getModContainer(Amarong.MOD_ID).ifPresent(modContainer -> {
 			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.NO_KALEIDOSCOPE_OVERLAY_PACK, modContainer, Text.translatable("resourcePack.amarong.nokaleidoscopeoverlay.name"), ResourcePackActivationType.NORMAL);
 			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.SMOL_VERYLONGSWORD_PACK, modContainer, Text.translatable("resourcePack.amarong.smolverylongsword.name"), ResourcePackActivationType.NORMAL);
+			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.OLD_TICKET_LAUNCHER_PACK, modContainer, Text.translatable("resourcePack.amarong.oldticketlauncher.name"), ResourcePackActivationType.NORMAL);
 		});
 
 		AtmosphericSpecialItemRenderHandler.handleShouldZoomIn(AmarongItems.KALEIDOSCOPE, stack -> !AmarongConfig.noKaleidoscopeZoom());
