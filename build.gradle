@@ -5,12 +5,14 @@ plugins {
 
 version = project.mod_version
 group = project.maven_group
+atmospheric_api_tag = project.atmospheric_api_tag;
 
 base {
 	archivesName = project.archives_base_name
 }
 
 repositories {
+	mavenLocal()
 	maven {
 		name "ladysnake"
 		url "https://maven.ladysnake.org/releases"
@@ -65,7 +67,7 @@ dependencies {
 	modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
 
 	//include modApi("com.github.ekulxam:AtmosphericAPI:${project.atmospheric_api_tag}")
-	include modApi(files("dependencies/atmospheric_api-${project.atmospheric_api_tag}.jar"))
+	include modApi("survivalblock.atmosphere:atmospheric_api:${project.atmospheric_api_tag}")
 
 	modCompileOnly "dev.emi:emi-fabric:${project.emi_version}"
 	modRuntimeOnly "dev.emi:emi-fabric:${project.emi_version}"
