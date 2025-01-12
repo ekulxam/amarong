@@ -24,7 +24,7 @@ import java.util.List;
 
 public class TicketLauncherItem extends Item {
 
-    public static final Identifier TICKET_LAUNCHER_ACHIEVEMENT = Amarong.id("when_tickets_fly");;
+    public static final Identifier TICKET_LAUNCHER_ACHIEVEMENT = Amarong.id("when_tickets_fly");
 
     public TicketLauncherItem(Settings settings) {
         super(settings);

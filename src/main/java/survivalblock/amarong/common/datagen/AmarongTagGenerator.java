@@ -10,7 +10,6 @@ import net.minecraft.entity.damage.DamageType;
 import net.minecraft.item.Items;
 import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
-import survivalblock.amarong.common.Amarong;
 import survivalblock.amarong.common.init.*;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.damage_type.AtmosphericDamageTypeTags;
 
@@ -116,13 +115,16 @@ public class AmarongTagGenerator {
             getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_VERYLONGSWORD).add(AmarongEnchantments.OBSCURE);
             getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_VERYLONGSWORD).add(AmarongEnchantments.RAILGUN);
 
-
             getOrCreateTagBuilder(EnchantmentTags.TREASURE).add(AmarongEnchantments.PNEUMATIC);
             getOrCreateTagBuilder(EnchantmentTags.TREASURE).add(AmarongEnchantments.PARTICLE_ACCELERATOR);
             getOrCreateTagBuilder(EnchantmentTags.TREASURE).add(AmarongEnchantments.OBSCURE);
             getOrCreateTagBuilder(EnchantmentTags.TREASURE).add(AmarongEnchantments.RAILGUN);
             getOrCreateTagBuilder(EnchantmentTags.NON_TREASURE).add(AmarongEnchantments.CAPACITY);
             // no, I didn't forget about vault, but it's too weird to add to any tags, so I'll just pretend it doesn't exist here
+
+            getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.POWER_LIKE).add(Enchantments.POWER);
+
+            getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.INFINITY_LIKE).add(Enchantments.INFINITY);
         }
     }
 

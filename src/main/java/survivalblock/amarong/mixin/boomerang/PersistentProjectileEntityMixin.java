@@ -1,6 +1,5 @@
 package survivalblock.amarong.mixin.boomerang;
 
-import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;

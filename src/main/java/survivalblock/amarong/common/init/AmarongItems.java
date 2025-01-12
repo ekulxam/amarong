@@ -28,7 +28,7 @@ public class AmarongItems {
 
     private static final float AMARONG_TOOL_REACH = 1.25f;
 
-    public static List<Item> amarongItems = new ArrayList<>();
+    public static final List<Item> AMARONG_ITEMS = new ArrayList<>();
 
     public static final Item AMARONG_CHUNK = registerItem("amarong_chunk", new Item(new Item.Settings().maxCount(64)));
     public static final Item AMARONG_SHEET = registerItem("amarong_sheet", new Item(new Item.Settings().maxCount(64)));
@@ -52,7 +52,7 @@ public class AmarongItems {
     ));
 
     private static Item registerItem(String name, Item item) {
-        amarongItems.add(item);
+        AMARONG_ITEMS.add(item);
         return Registry.register(Registries.ITEM, Amarong.id(name), item);
     }
 
@@ -60,14 +60,14 @@ public class AmarongItems {
     private static Item registerBlockItem(Block block, Item.Settings settings) {
         BlockItem blockItem = new BlockItem(block, settings);
         blockItem.appendBlocks(Item.BLOCK_ITEMS, blockItem);
-        amarongItems.add(blockItem);
+        AMARONG_ITEMS.add(blockItem);
         return Registry.register(Registries.ITEM, Registries.BLOCK.getId(block), blockItem);
     }
 
     public static final ItemGroup AMARONG_GROUP = FabricItemGroup.builder()
             .displayName(Text.translatable("amarong.itemGroup.amarong_group"))
             .icon(KALEIDOSCOPE::getDefaultStack).entries((displayContext, entries) -> {
-                for (Item item : amarongItems) {
+                for (Item item : AMARONG_ITEMS) {
                     entries.add(item.getDefaultStack());
                     if (item.equals(KALEIDOSCOPE)) {
                         for (Identifier id : KaleidoscopeItem.SUPER_SECRET_SETTING_PROGRAMS) {

@@ -7,8 +7,6 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.world.World;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 import org.ladysnake.cca.api.v3.component.tick.CommonTickingComponent;
-import survivalblock.amarong.common.Amarong;
-import survivalblock.amarong.common.compat.AmarongHammerTwirlCompat;
 import survivalblock.amarong.common.entity.RailgunEntity;
 import survivalblock.amarong.common.init.AmarongEntityComponents;
 

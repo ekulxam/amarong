@@ -1,10 +1,14 @@
 package survivalblock.amarong.common.item;
 
+import net.fabricmc.fabric.api.item.v1.EnchantingContext;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
@@ -140,5 +144,18 @@ public class SomewhatADuckItem extends Item {
         tooltip.add(Text.translatable("item.amarong.somewhat_a_duck.water", checkForReset(stack), getMaxWater(stack)).withColor(WATER_COLOR.getRGB()));
     }
 
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return stack.getMaxCount() == 1;
+    }
 
+    @Override
+    public int getEnchantability() {
+        return (Items.BOW.getEnchantability() + Items.CROSSBOW.getEnchantability()) / 2;
+    }
+
+    @Override
+    public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
+        return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.isIn(AmarongTags.AmarongEnchantmentTags.POWER_LIKE);
+    }
 }

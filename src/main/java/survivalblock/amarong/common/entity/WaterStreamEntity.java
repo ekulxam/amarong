@@ -3,8 +3,6 @@ package survivalblock.amarong.common.entity;
 import net.minecraft.block.AbstractCandleBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -25,9 +23,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
+import org.jetbrains.annotations.NotNull;
 import survivalblock.amarong.common.init.AmarongDamageTypes;
 import survivalblock.amarong.common.init.AmarongEntityTypes;
 import survivalblock.amarong.common.init.AmarongSounds;
+import survivalblock.amarong.common.init.AmarongTags;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.entity.StacklessPersistentProjectile;
 
 public class WaterStreamEntity extends PersistentProjectileEntity implements StacklessPersistentProjectile {
@@ -38,11 +38,11 @@ public class WaterStreamEntity extends PersistentProjectileEntity implements Sta
         super(entityType, world);
     }
 
-    public WaterStreamEntity(World world, LivingEntity owner, ItemStack shotFrom) {
+    public WaterStreamEntity(World world, LivingEntity owner, @NotNull ItemStack shotFrom) {
         super(AmarongEntityTypes.WATER_STREAM, owner, world, ItemStack.EMPTY, shotFrom);
         try {
-            this.setDamage(BASE_DAMAGE + (EnchantmentHelper.getLevel(this.getRegistryManager().getWrapperOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(Enchantments.POWER), shotFrom) / 5f));
-        } catch (IllegalStateException illegalStateException) {
+            this.setDamage(BASE_DAMAGE + (shotFrom.atmospheric_api$getAbsoluteLevel(AmarongTags.AmarongEnchantmentTags.POWER_LIKE) / 5f));
+        } catch (Exception e) {
             this.setDamage(BASE_DAMAGE);
         }
     }

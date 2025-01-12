@@ -12,7 +12,6 @@ import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.world.World;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -68,10 +67,7 @@ public class BeaconBlockEntityMixin {
         if (block == null) {
             return true;
         }
-        if (block.equals(AmarongBlocks.AMARONG_CORE)) {
-            return false;
-        }
-        return true;
+        return !block.equals(AmarongBlocks.AMARONG_CORE);
     }
 
     @Unique

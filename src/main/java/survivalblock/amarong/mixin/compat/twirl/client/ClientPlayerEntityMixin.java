@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import survivalblock.amarong.common.AmarongUtil;
 import survivalblock.amarong.common.init.AmarongTags;
 
 @Mixin(ClientPlayerEntity.class)

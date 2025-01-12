@@ -42,6 +42,9 @@ public class AmarongTags {
         public static final TagKey<Enchantment> EXCLUSIVE_SET_TICKET_LAUNCHER = TagKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("exclusive_set/ticket_launcher"));
         public static final TagKey<Enchantment> EXCLUSIVE_SET_VERYLONGSWORD = TagKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("exclusive_set/verylongsword"));
 
+        public static final TagKey<Enchantment> POWER_LIKE = TagKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("power_like"));
+        public static final TagKey<Enchantment> INFINITY_LIKE = TagKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("infinity_like"));
+
     }
 
     public static class AmarongEntityTypeTags {

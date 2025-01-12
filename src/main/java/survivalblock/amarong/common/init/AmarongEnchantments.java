@@ -29,58 +29,58 @@ public class AmarongEnchantments {
         RegistryEntryLookup<Item> itemRegistryEntryLookup = container.get(RegistryKeys.ITEM);
         enchantments.put(CAPACITY, Enchantment.builder(Enchantment.definition(
                 itemRegistryEntryLookup.getOrThrow(AmarongTags.AmarongItemTags.DUCK_ENCHANTABLE),
-                1,
-                4,
-                Enchantment.leveledCost(1, 0),
-                Enchantment.leveledCost(1, 0),
-                1,
-                AttributeModifierSlot.MAINHAND)).build(CAPACITY.getValue()));
+                        1,
+                        4,
+                        Enchantment.leveledCost(1, 8),
+                        Enchantment.leveledCost(100, 8),
+                        1,
+                        AttributeModifierSlot.MAINHAND)).build(CAPACITY.getValue()));
         enchantments.put(OBSCURE, Enchantment.builder(Enchantment.definition(
                 itemRegistryEntryLookup.getOrThrow(AmarongTags.AmarongItemTags.VERYLONGSWORD_ENCHANTABLE),
+                        1,
+                        1,
+                        Enchantment.constantCost(1),
+                        Enchantment.constantCost(100),
                 1,
-                1,
-                Enchantment.leveledCost(1, 0),
-                Enchantment.leveledCost(1, 0),
-                1,
-                AttributeModifierSlot.MAINHAND))
+                        AttributeModifierSlot.MAINHAND))
                 .exclusiveSet(enchantmentRegistryEntryLookup.getOrThrow(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_VERYLONGSWORD))
                 .build(OBSCURE.getValue()));
         enchantments.put(PARTICLE_ACCELERATOR, Enchantment.builder(Enchantment.definition(
-                        itemRegistryEntryLookup.getOrThrow(AmarongTags.AmarongItemTags.TICKET_LAUNCHER_ENCHANTABLE),
+                itemRegistryEntryLookup.getOrThrow(AmarongTags.AmarongItemTags.TICKET_LAUNCHER_ENCHANTABLE),
                         1,
                         1,
-                        Enchantment.leveledCost(1, 0),
-                        Enchantment.leveledCost(1, 0),
+                        Enchantment.constantCost(1),
+                        Enchantment.constantCost(100),
                         1,
                         AttributeModifierSlot.MAINHAND))
                 .exclusiveSet(enchantmentRegistryEntryLookup.getOrThrow(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_TICKET_LAUNCHER))
                 .build(PARTICLE_ACCELERATOR.getValue()));
         enchantments.put(PNEUMATIC, Enchantment.builder(Enchantment.definition(
-                        itemRegistryEntryLookup.getOrThrow(AmarongTags.AmarongItemTags.TICKET_LAUNCHER_ENCHANTABLE),
+                itemRegistryEntryLookup.getOrThrow(AmarongTags.AmarongItemTags.TICKET_LAUNCHER_ENCHANTABLE),
                         1,
                         1,
-                        Enchantment.leveledCost(1, 0),
-                        Enchantment.leveledCost(1, 0),
+                        Enchantment.constantCost(1),
+                        Enchantment.constantCost(100),
                         1,
                         AttributeModifierSlot.MAINHAND))
                 .exclusiveSet(enchantmentRegistryEntryLookup.getOrThrow(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_TICKET_LAUNCHER))
                 .build(PNEUMATIC.getValue()));
         enchantments.put(RAILGUN, Enchantment.builder(Enchantment.definition(
-                        itemRegistryEntryLookup.getOrThrow(AmarongTags.AmarongItemTags.VERYLONGSWORD_ENCHANTABLE),
+                itemRegistryEntryLookup.getOrThrow(AmarongTags.AmarongItemTags.VERYLONGSWORD_ENCHANTABLE),
                         1,
                         1,
-                        Enchantment.leveledCost(1, 0),
-                        Enchantment.leveledCost(1, 0),
+                        Enchantment.constantCost(1),
+                        Enchantment.constantCost(100),
                         1,
                         AttributeModifierSlot.MAINHAND))
                 .exclusiveSet(enchantmentRegistryEntryLookup.getOrThrow(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_VERYLONGSWORD))
                 .build(RAILGUN.getValue()));
         enchantments.put(VAULT, Enchantment.builder(Enchantment.definition(
-                        itemRegistryEntryLookup.getOrThrow(AmarongTags.AmarongItemTags.HAMMER_ENCHANTABLE),
+                itemRegistryEntryLookup.getOrThrow(AmarongTags.AmarongItemTags.HAMMER_ENCHANTABLE),
                         1,
                         1,
-                        Enchantment.leveledCost(1, 0),
-                        Enchantment.leveledCost(1, 0),
+                        Enchantment.constantCost(1),
+                        Enchantment.constantCost(100),
                         1,
                         AttributeModifierSlot.MAINHAND)).build(VAULT.getValue()));
         return ImmutableMap.copyOf(enchantments);

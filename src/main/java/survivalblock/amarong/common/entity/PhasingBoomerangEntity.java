@@ -11,6 +11,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.EntityHitResult;
@@ -28,6 +29,7 @@ public class PhasingBoomerangEntity extends PersistentProjectileEntity {
     public static final int MAX_AGE = 120;
     public static final int HALF_MAX_AGE = MAX_AGE / 2;
     private int slot = 0;
+    private boolean infinity;
 
     public PhasingBoomerangEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -38,6 +40,10 @@ public class PhasingBoomerangEntity extends PersistentProjectileEntity {
         super(AmarongEntityTypes.BOOMERANG, owner, world, stack, null);
         this.dataTracker.set(RETURNING, false);
         this.slot = slot;
+    }
+
+    public void setInfinity(boolean infinity) {
+        this.infinity = infinity;
     }
 
     @Override
@@ -104,10 +110,10 @@ public class PhasingBoomerangEntity extends PersistentProjectileEntity {
         if (!((ProjectileEntityAccessor) this).amarong$getLeftOwner()) {
             return false;
         }
-        if (super.tryPickup(player)) {
-            return true;
-        }
         if (isOwner(player)) {
+            if (player.isInCreativeMode() || this.infinity) {
+                return true;
+            }
             ItemStack stack = player.getInventory().getStack(slot);
             if (stack == null || stack.isEmpty()) {
                 player.getInventory().setStack(slot, this.asItemStack());
@@ -129,6 +135,20 @@ public class PhasingBoomerangEntity extends PersistentProjectileEntity {
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(RETURNING, false);
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putBoolean("amarongBoomerangInfinity", this.infinity);
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        if (nbt.contains("amarongBoomerangInfinity")) {
+            this.infinity = nbt.getBoolean("amarongBoomerangInfinity");
+        }
     }
 
     protected float getDragInWater() {
