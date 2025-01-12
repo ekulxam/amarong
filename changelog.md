@@ -12,4 +12,6 @@ Amarong 1.1.1+1.21.1
 - Added the Amarong Boomerang
   - Added a config option for the boomerang spin speed
   - Added a gamerule for the boomerang damage
+  - Can be enchanted with infinity, but only if you have enough bookshelves
+- Duck can now be enchanted with power in survival
 - Updated README
