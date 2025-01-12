@@ -63,19 +63,21 @@ dependencies {
 	include modImplementation("gay.lemmaeof:terrifictickets:${project.terrifictickets_version}")
 	modApi("dev.isxander:yet-another-config-lib:${project.yet_another_config_lib_version}")
 	modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
-	include modApi("com.github.ekulxam:AtmosphericAPI:${project.atmospheric_api_tag}")
+
+	//include modApi("com.github.ekulxam:AtmosphericAPI:${project.atmospheric_api_tag}")
+	include modApi(files("dependencies/atmospheric_api-${project.atmospheric_api_tag}.jar"))
 
 	modCompileOnly "dev.emi:emi-fabric:${project.emi_version}"
 	modRuntimeOnly "dev.emi:emi-fabric:${project.emi_version}"
 
-	modRuntimeOnly "maven.modrinth:honque:${project.honque_version}"
-	modCompileOnly "maven.modrinth:honque:${project.honque_version}"
+	//modRuntimeOnly "maven.modrinth:honque:${project.honque_version}"
+	//modCompileOnly "maven.modrinth:honque:${project.honque_version}"
 
 	modRuntimeOnly "maven.modrinth:twirl:${project.twirl_version}"
 	modCompileOnly "maven.modrinth:twirl:${project.twirl_version}"
 
-	modRuntimeOnly "maven.modrinth:wowozela:${project.wowozela_version}"
-	modRuntimeOnly "maven.modrinth:beam-be-gone:${project.beam_be_gone_version}"
+	//modRuntimeOnly "maven.modrinth:wowozela:${project.wowozela_version}"
+	//modRuntimeOnly "maven.modrinth:beam-be-gone:${project.beam_be_gone_version}"
 
 	modRuntimeOnly "maven.modrinth:scattered-shards:${project.scattered_shards_version}"
 	modRuntimeOnly "io.github.cottonmc:LibGui:${project.libgui_version}"

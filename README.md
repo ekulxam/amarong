@@ -14,7 +14,8 @@ Originally created for ModFest</br>
 - Handheld Duck : Shoots water. Right-click on water to fill up the duck. Right-click anywhere else to shoot.
 - Amarong Ticket Launcher : Uses tickets from the Terrific Tickets mod as ammunition. Flying Tickets have less gravity than usual and will drop themselves upon being discarded. Right-click in inventory with tickets to load.
 - Amarong Kaleidoscope : Extension of the spyglass, and the main reason this mod exists. In Random mode, applies a random shader on-use. Put in a crafting table (special recipe) to get a version that only applies one shader. Repeating this recipe multiple times results in cycling through the different shaders.
-- Amarong Hammer : Mace, but it's made with an Amarong Core. No crafting recipe. Can be enchanted with all Mace enchantments. When the [Twirling](https://modrinth.com/mod/twirl) enchantment is on this item and it is being used, the Amarong Hammer will hit all entities within two blocks of the user. Damage scales based on the level of Twirling.
+- Amarong Hammer : A mace, but it's made with an Amarong Core. It currently has no crafting recipe. Doubles as a pickaxe, and can be enchanted with all Mace enchantments. When the [Twirling](https://modrinth.com/mod/twirl) enchantment is on this item, and it is being used, the hammer will hit entities within two blocks of the user. Damage scales based on the level of Twirling.
+- Amarong Boomerang : A throwable sword that will return to the user. The boomerang spawned on use will travel for a few seconds and then reverse direction. It can phase through walls (has noClip) and damage entities while traveling or returning.
 
 Comes with EMI integration (for the Kaleidoscope recipes) because I couldn't be bothered to add support for JEI and REI (I'll might get around to it later, who knows?)
 
@@ -24,4 +25,17 @@ Comes with EMI integration (for the Kaleidoscope recipes) because I couldn't be 
 - Obscure : Verylongsword enchantment. Using the power of the nether star, the verylongsword bends light around the user such that they can no longer be seen at all.
 - Railcannon : Verylongsword enchantment. Allows the verylongsword to shoot a beam of particles on right-click when fully charged. Depletes all charges. Railcannon will fire a warning laser (end rod particles), then fire the actual shot a few seconds later.
 - Capacity : Duck enchantment. Allows the duck to store more water.
-- Vault : Hammer enchantment. Right-click to get flung into the air. Pretty useless, and usually results in death by fall damage.
+- Vault : Hammer enchantment. Right-click to get flung into the air. (Almost) Pretty useless, and usually results in death by fall damage.
+
+### Configuration (Options):
+- Gamerules
+  - amarong:flyingTicketsDrop - Controls whether Flying Tickets drop themselves upon impact
+  - amarong:boomerangDamage - Controls the damage per hit of an Amarong Boomerang
+- YACL (YetAnotherConfigLib) Client Config
+  - verboseLogging
+  - twoHandedVerylongsword
+  - noKaleidoscopeZoom
+  - boomerangSpinMultiplier
+- Resource Packs
+  - noKaleidoscopeOverlay - Removes the rendering of the scope from kaleidoscopes
+  - smolverylongsword - Makes the Verylongsword always use the inventory texture

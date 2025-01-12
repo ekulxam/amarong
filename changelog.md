@@ -1,2 +1,15 @@
 Amarong 1.1.1+1.21.1
 - ATMOSPHERE
+- Enchantments can now be obtained in survival
+  - Capacity can now be obtained from an Enchanting Table
+  - Pneumatic and Particle Accelerator can be obtained from the Trial Chambers supply chest
+  - Obscure can now be obtained from End City treasure chests
+  - Railcannon can now be obtained from Ancient City chests
+- Updated Ticket Launcher
+  - You can now take tickets out of the Ticket Launcher
+  - Updated texture for Ticket Launcher, but I still can't texture
+  - Added resourcepack for old Ticket Launcher texture/model
+- Added the Amarong Boomerang
+  - Added a config option for the boomerang spin speed
+  - Added a gamerule for the boomerang damage
+- Updated README
