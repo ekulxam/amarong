@@ -4,7 +4,8 @@
   "plugin": "survivalblock.amarong.common.compat.AmarongMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "compat.honque.TheFunnyAccessor",
+    "boomerang.PersistentProjectileEntityMixin",
+    "boomerang.ProjectileEntityAccessor",
     "coreblock.BeaconBlockEntityAccessor",
     "coreblock.BeaconBlockEntityAccessor$BeamSegmentAccessor",
     "coreblock.BeaconBlockEntityMixin",
@@ -21,6 +22,7 @@
     "defaultRequire": 1
   },
   "client": [
+    "compat.config.AmarongConfigMixin",
     "compat.twirl.client.ClientPlayerEntityMixin",
     "kaleidoscope.client.GameRendererMixin",
     "verylongsword.client.PlayerEntityRendererMixin"
