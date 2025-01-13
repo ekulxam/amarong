@@ -50,7 +50,8 @@
 	"custom": {
 		"cardinal-components": [
 			"amarong:kaleidoscope_shader",
-			"amarong:verylongsword_component"
+			"amarong:verylongsword_component",
+			"amarong:boomerang_component"
 		]
 	}
 }
