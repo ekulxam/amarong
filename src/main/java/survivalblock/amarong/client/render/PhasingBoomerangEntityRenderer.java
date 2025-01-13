@@ -8,6 +8,8 @@ import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import survivalblock.amarong.common.Amarong;
@@ -27,7 +29,11 @@ public class PhasingBoomerangEntityRenderer extends EntityRenderer<PhasingBoomer
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(boomerang.getYaw(tickDelta) * AmarongConfig.boomerangSpinMultiplier()));
-        MinecraftClient.getInstance().getItemRenderer().renderItem(boomerang.getItemStack(), ModelTransformationMode.FIXED, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, boomerang.getWorld(), 0);
+        ItemStack stack = boomerang.getItemStack().copy();
+        if (boomerang.getBoomerangComponent().isEnchanted()) {
+            stack.set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true);
+        }
+        MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformationMode.FIXED, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, boomerang.getWorld(), 0);
         matrices.pop();
         super.render(boomerang, yaw, tickDelta, matrices, vertexConsumers, light);
     }

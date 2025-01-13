@@ -36,7 +36,7 @@ public class AmarongRecipeGenerator extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(AmarongItems.AMARONG_CHUNK),
                         FabricRecipeProvider.conditionsFromItem(AmarongItems.AMARONG_CHUNK))
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, AmarongItems.AMARONG_VERYLONGSWORD).pattern(" xw").pattern("vcx").pattern("sv ")
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, AmarongItems.AMARONG_VERYLONGSWORD).pattern(" xw").pattern("vcx").pattern("sv ")
                 .input('s', Items.NETHERITE_SWORD)
                 .input('v', Items.COPPER_INGOT)
                 .input('c', AmarongItems.AMARONG_CHUNK)
@@ -51,10 +51,10 @@ public class AmarongRecipeGenerator extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(AmarongItems.AMARONG_SHEET),
                         FabricRecipeProvider.conditionsFromItem(Items.AMETHYST_SHARD))
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, AmarongItems.SOMEWHAT_A_DUCK).pattern(" o ").pattern("sus").pattern(" _ ")
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, AmarongItems.SOMEWHAT_A_DUCK).pattern(" o ").pattern("sus").pattern(" _ ")
                 .input('o', Items.DISPENSER)
                 .input('s', Items.GOLD_BLOCK)
-                .input('u', Items.WATER_BUCKET)
+                .input('u', Items.WATER_BUCKET) // lol I did not intend for this to spell "osu"
                 .input('_', AmarongItems.AMARONG_SHEET)
                 .criterion(FabricRecipeProvider.hasItem(Items.DISPENSER),
                         FabricRecipeProvider.conditionsFromItem(Items.DISPENSER))
@@ -96,7 +96,7 @@ public class AmarongRecipeGenerator extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(AmarongItems.AMARONG_CHUNK),
                         FabricRecipeProvider.conditionsFromItem(AmarongItems.AMARONG_CHUNK))
                 .offerTo(exporter, "amarong_core_rebuild");
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, AmarongItems.TICKET_LAUNCHER).pattern(" xo").pattern("cwx").pattern("lc ")
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, AmarongItems.TICKET_LAUNCHER).pattern(" xo").pattern("cwx").pattern("lc ")
                 .input('l', Items.LEVER)
                 .input('o', Items.DISPENSER)
                 .input('c', AmarongItems.AMARONG_CHUNK)
@@ -112,6 +112,14 @@ public class AmarongRecipeGenerator extends FabricRecipeProvider {
                         FabricRecipeProvider.conditionsFromItem(Items.END_ROD))
                 .criterion(FabricRecipeProvider.hasItem(TerrificTickets.PASSCARD),
                         FabricRecipeProvider.conditionsFromItem(TerrificTickets.PASSCARD))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, AmarongItems.AMARONG_BOOMERANG).pattern(" /-").pattern("/  ").pattern("-  ")
+                .input('/', Items.STICK)
+                .input('-', AmarongItems.AMARONG_CHUNK)
+                .criterion(FabricRecipeProvider.hasItem(Items.STICK),
+                        FabricRecipeProvider.conditionsFromItem(Items.STICK))
+                .criterion(FabricRecipeProvider.hasItem(AmarongItems.AMARONG_CHUNK),
+                        FabricRecipeProvider.conditionsFromItem(AmarongItems.AMARONG_CHUNK))
                 .offerTo(exporter);
         ComplexRecipeJsonBuilder.create(KaleidoscopeShaderTypeRecipe::new).offerTo(exporter, "kaleidoscope_shader_type");
     }

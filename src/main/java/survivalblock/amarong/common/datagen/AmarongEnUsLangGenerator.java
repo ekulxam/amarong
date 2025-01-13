@@ -34,6 +34,7 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add(AmarongEntityTypes.FLYING_TICKET, "Flying Ticket");
         translationBuilder.add(AmarongEntityTypes.WATER_STREAM, "Water Stream");
         translationBuilder.add(AmarongEntityTypes.RAILGUN, "Railcannon");
+        translationBuilder.add(AmarongEntityTypes.BOOMERANG, "Amarong Boomerang");
 
         // gamerules
         translationBuilder.add("gamerule.amarong:flyingTicketsDrop", "Amarong - Flying Tickets drop themselves on being discarded");
@@ -54,6 +55,7 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("resourcePack.amarong.nokaleidoscopezoom.name", "No Kaleidoscope Zoom");
         translationBuilder.add("resourcePack.amarong.smolverylongsword.name", "Smol Verylongsword");
         translationBuilder.add("resourcePack.amarong.oldticketlauncher.name", "Old Ticket Launcher");
+        translationBuilder.add("resourcePack.amarong.amethysthandleticketlauncher.name", "Amethyst Handle Ticket Launcher");
 
         // advancements
         translationBuilder.add("advancements.amarong.use_kaleidoscope.title", "A World of Color");
@@ -146,8 +148,8 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("amarong.yacl.option.float.boomerangSpinMultiplier.desc", "This value controls how fast an Amarong Boomerang should spin");
 
         // damage types
-        translationBuilder.add("death.attack.amarong.flying_ticket_hit", " %1$s was shot by %2$s with flying tickets");
-        translationBuilder.add("death.attack.amarong.flying_ticket_hit.player", " %1$s was shot by %2$s with flying tickets");
+        translationBuilder.add("death.attack.amarong.flying_ticket_hit", "%1$s was shot by %2$s with flying tickets");
+        translationBuilder.add("death.attack.amarong.flying_ticket_hit.player", "%1$s was shot by %2$s with flying tickets");
         translationBuilder.add("death.attack.amarong.flying_ticket_hit.item", "%2$s used %3$s to shoot %1$s to death with flying tickets");
         translationBuilder.add("death.attack.amarong.water_stream_hit", "%1$s was sprinkled to death by %2$s");
         translationBuilder.add("death.attack.amarong.water_stream_hit.player", "%1$s was sprinkled to death by %2$s");
@@ -155,11 +157,9 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("death.attack.amarong.railgun_hit", "%1$s was shot by a railcannon from %2$s");
         translationBuilder.add("death.attack.amarong.railgun_hit.player", "%1$s was shot by a railcannon from %2$s");
         translationBuilder.add("death.attack.amarong.railgun_hit.item", "%1$s was shot by a railcannon from %2$s using %3$s");
-
-        translationBuilder.add("message.amarong.compat.honque.honk", "Honk activated");
-        translationBuilder.add("message.amarong.compat.honque.badLuck", "Bad Luck activated");
-        translationBuilder.add("message.amarong.compat.honque.veryBadLuck", "Very Bad Luck activated");
-        translationBuilder.add("message.amarong.compat.honque.trulyUnfortunateCircumstance", "Truly Unfortunate Circumstance activated");
+        translationBuilder.add("death.attack.amarong.boomerang_hit", "%1$s was shot by %2$s with an Amarong Boomerang");
+        translationBuilder.add("death.attack.amarong.boomerang_hit.player", "%1$s was shot by %2$s with an Amarong Boomerang");
+        translationBuilder.add("death.attack.amarong.boomerang_hit.item", "%2$s used %3$s to shot %1$s with an Amarong Boomerang");
 
         // command
         translationBuilder.add("commands.amarongconfig.noyacl", "Unable to generate Amarong config screen. Do you have YACL installed?");
