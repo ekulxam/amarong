@@ -3,6 +3,7 @@ package survivalblock.amarong.common.item;
 import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
@@ -29,7 +30,17 @@ public class AmarongBoomerangItem extends SwordItem implements AlternateModelIte
         ItemStack stack = user.getStackInHand(hand);
         if (!world.isClient()) {
             boolean infinity = stack.atmospheric_api$getAbsoluteLevel(AmarongTags.AmarongEnchantmentTags.INFINITY_LIKE) > 0;
-            PhasingBoomerangEntity boomerang = new PhasingBoomerangEntity(user, world, stack.copyWithCount(1), user.getInventory().getSlotWithStack(stack));
+            PlayerInventory inventory = user.getInventory();
+            int slot = 0;
+            final int size = inventory.size();
+            for (int i = 0; i < size; i++) {
+                ItemStack tempStack = inventory.getStack(i);
+                if (stack.equals(tempStack)) {
+                    slot = i;
+                    break;
+                }
+            }
+            PhasingBoomerangEntity boomerang = new PhasingBoomerangEntity(user, world, stack.copyWithCount(1), slot);
             boomerang.setInfinity(infinity);
             boomerang.setVelocity(Vec3d.fromPolar(user.getPitch(), user.getYaw()));
             boomerang.setDamage(world.getGameRules().get(AmarongGameRules.BOOMERANG_DAMAGE).get());
