@@ -1,7 +1,4 @@
-Amarong 1.1.2+1.21.1
-- Boomerang can now render with glint
-- Added damage type for boomerang because I forgot
-- Added translation key for boomerang because I forgot
-- Fixed boomerang not saving some data
-- Fixed death messages being mixed up
-- Changed the category of some weapon recipes from TOOLS to COMBAT
+Amarong 1.1.3+1.21.1
+- Fixed crash where receiving a boomerang thrown from the offhand would throw an ArrayIndexOutOfBoundsException
+- Boomerangs do not have a hit sound
+- Boomerangs now always hit entities up against walls
