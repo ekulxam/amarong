@@ -1,17 +1,7 @@
-Amarong 1.1.1+1.21.1
-- ATMOSPHERE
-- Enchantments can now be obtained in survival
-  - Capacity can now be obtained from an Enchanting Table
-  - Pneumatic and Particle Accelerator can be obtained from the Trial Chambers supply chest
-  - Obscure can now be obtained from End City treasure chests
-  - Railcannon can now be obtained from Ancient City chests
-- Updated Ticket Launcher
-  - You can now take tickets out of the Ticket Launcher
-  - Updated texture for Ticket Launcher, but I still can't texture
-  - Added resourcepack for old Ticket Launcher texture/model
-- Added the Amarong Boomerang
-  - Added a config option for the boomerang spin speed
-  - Added a gamerule for the boomerang damage
-  - Can be enchanted with infinity, but only if you have enough bookshelves
-- Duck can now be enchanted with power in survival
-- Updated README
+Amarong 1.1.2+1.21.1
+- Boomerang can now render with glint
+- Added damage type for boomerang because I forgot
+- Added translation key for boomerang because I forgot
+- Fixed boomerang not saving some data
+- Fixed death messages being mixed up
+- Changed the category of some weapon recipes from TOOLS to COMBAT

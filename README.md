@@ -37,5 +37,7 @@ Comes with EMI integration (for the Kaleidoscope recipes) because I couldn't be 
   - noKaleidoscopeZoom
   - boomerangSpinMultiplier
 - Resource Packs
-  - noKaleidoscopeOverlay - Removes the rendering of the scope from kaleidoscopes
-  - smolverylongsword - Makes the Verylongsword always use the inventory texture
+  - nokaleidoscopeoverlay - Removes the rendering of the scope from kaleidoscopes.
+  - smolverylongsword - Makes the Verylongsword always use the inventory texture.
+  - oldticketlauncher - Uses the old Ticket Launcher texture/model.
+  - amethysthandleticketlauncher - Makes the Ticket Launcher use an amethyst handle instead of a copper one (or the old solid black one). Loaded by default.
