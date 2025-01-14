@@ -8,12 +8,14 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.EndermanEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.EntityTypeTags;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -133,16 +135,41 @@ public class WaterStreamEntity extends PersistentProjectileEntity implements Sta
         }
     }
 
+    private boolean isOwnerAlive() {
+        Entity entity = this.getOwner();
+        if (entity != null && entity.isAlive()) {
+            return !(entity instanceof ServerPlayerEntity) || !entity.isSpectator();
+        } else {
+            return false;
+        }
+    }
+
+    protected boolean canModifyWorld(BlockPos pos) {
+        if (this.isOwnerAlive()) {
+            Entity owner = this.getOwner();
+            if (!(owner instanceof PlayerEntity player)) {
+                return true;
+            }
+            World world = this.getWorld();
+            return world.canPlayerModifyAt(player, pos) && player.canModifyBlocks();
+        }
+        return true;
+    }
+
     protected void extinguishFire(BlockPos pos) {
-        BlockState blockState = this.getWorld().getBlockState(pos);
+        if (!this.canModifyWorld(pos)) {
+            return;
+        }
+        World world = this.getWorld();
+        BlockState blockState = world.getBlockState(pos);
         if (blockState.isIn(BlockTags.FIRE)) {
-            this.getWorld().breakBlock(pos, false, this);
+            world.breakBlock(pos, false, this);
         } else if (AbstractCandleBlock.isLitCandle(blockState)) {
-            AbstractCandleBlock.extinguish(null, blockState, this.getWorld(), pos);
+            AbstractCandleBlock.extinguish(null, blockState, world, pos);
         } else if (CampfireBlock.isLitCampfire(blockState)) {
-            this.getWorld().syncWorldEvent(null, WorldEvents.FIRE_EXTINGUISHED, pos, 0);
-            CampfireBlock.extinguish(this.getOwner(), this.getWorld(), pos, blockState);
-            this.getWorld().setBlockState(pos, blockState.with(CampfireBlock.LIT, false));
+            world.syncWorldEvent(null, WorldEvents.FIRE_EXTINGUISHED, pos, 0);
+            CampfireBlock.extinguish(this.getOwner(), world, pos, blockState);
+            world.setBlockState(pos, blockState.with(CampfireBlock.LIT, false));
         }
     }
 }

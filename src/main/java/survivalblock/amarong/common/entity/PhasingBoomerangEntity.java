@@ -33,7 +33,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 public class PhasingBoomerangEntity extends PersistentProjectileEntity {
 
@@ -123,6 +122,7 @@ public class PhasingBoomerangEntity extends PersistentProjectileEntity {
         this.discard();
     }
 
+
     private boolean isOwnerAlive() {
         Entity entity = this.getOwner();
         if (entity != null && entity.isAlive()) {
@@ -143,7 +143,10 @@ public class PhasingBoomerangEntity extends PersistentProjectileEntity {
             return false;
         }
         if (isOwner(player)) {
-            if (player.isInCreativeMode() || this.infinity) {
+            if (PickupPermission.CREATIVE_ONLY.equals(this.pickupType)) {
+                return true;
+            }
+            if (this.infinity) {
                 return true;
             }
             PlayerInventory inventory = player.getInventory();
