@@ -1,4 +1,3 @@
-Amarong 1.1.3+1.21.1
-- Fixed crash where receiving a boomerang thrown from the offhand would throw an ArrayIndexOutOfBoundsException
-- Boomerangs do not have a hit sound
-- Boomerangs now always hit entities up against walls
+Amarong 1.1.4+1.21.1
+- Fixed bug where switching to creative mode after throwing a boomerang would not add it to your inventory
+- Fixed water streams being able to put out fires when players were in adventure mode
