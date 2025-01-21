@@ -1,4 +1,4 @@
-package survivalblock.amarong.client.render;
+package survivalblock.amarong.client.render.entity;
 
 import gay.lemmaeof.terrifictickets.TerrificTickets;
 import net.minecraft.client.MinecraftClient;

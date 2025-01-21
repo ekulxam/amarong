@@ -48,6 +48,8 @@ public class AmarongBoomerangItem extends SwordItem implements AlternateModelIte
                 boomerang.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
             } else if (infinity) {
                 boomerang.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
+            } else {
+                boomerang.pickupType = PersistentProjectileEntity.PickupPermission.ALLOWED;
             }
             world.spawnEntity(boomerang);
             user.getItemCooldownManager().set(stack.getItem(), 20);

@@ -9,6 +9,7 @@ public class AmarongConfig {
         public static final boolean TWO_HANDED_VERYLONGSWORD = true;
         public static final boolean NO_KALEIDOSCOPE_ZOOM = false;
         public static final float BOOMERANG_SPIN_MULTIPLIER = 12;
+        public static final float STAFF_ROTATION_MULTIPLIER = 1.5f;
     }
 
     public static boolean verboseLogging() {
@@ -25,6 +26,10 @@ public class AmarongConfig {
 
     public static float boomerangSpinMultiplier() {
         return Defaults.BOOMERANG_SPIN_MULTIPLIER;
+    }
+
+    public static float staffRotationMultiplier() {
+        return Defaults.STAFF_ROTATION_MULTIPLIER;
     }
 
     @SuppressWarnings("unused")

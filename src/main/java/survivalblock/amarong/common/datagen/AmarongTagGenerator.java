@@ -4,6 +4,8 @@ import folk.sisby.twirl.Twirl;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
+import net.minecraft.component.ComponentType;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageType;
@@ -89,6 +91,33 @@ public class AmarongTagGenerator {
             getOrCreateTagBuilder(DamageTypeTags.ALWAYS_KILLS_ARMOR_STANDS).add(AmarongDamageTypes.RAILGUN_HIT);
             // no bypasses shield for funny
             // no bypasses wolf armor because I'm not that evil
+        }
+    }
+
+    public static class AmarongDataComponentTypeTagGenerator extends FabricTagProvider<ComponentType<?>> {
+        public AmarongDataComponentTypeTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, RegistryKeys.DATA_COMPONENT_TYPE, registriesFuture);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup lookup) {
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.ATTRIBUTE_MODIFIERS);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.CUSTOM_MODEL_DATA);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.CUSTOM_NAME);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.ITEM_NAME);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.RECIPES);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.DAMAGE);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.ENCHANTMENTS);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.FIRE_RESISTANT);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.MAX_DAMAGE);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.MAX_STACK_SIZE);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.BUNDLE_CONTENTS);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.CUSTOM_DATA);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.HIDE_ADDITIONAL_TOOLTIP);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.HIDE_TOOLTIP);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.FOOD);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.TOOL);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.UNBREAKABLE);
         }
     }
 

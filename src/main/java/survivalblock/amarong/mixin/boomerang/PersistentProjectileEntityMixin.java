@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import survivalblock.amarong.common.entity.PhasingBoomerangEntity;
 
-@Debug(export = true)
 @Mixin(PersistentProjectileEntity.class)
 public class PersistentProjectileEntityMixin {
 

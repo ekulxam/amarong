@@ -1,6 +1,7 @@
 package survivalblock.amarong.common.init;
 
 import net.minecraft.block.Block;
+import net.minecraft.component.ComponentType;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -26,6 +27,11 @@ public class AmarongTags {
 
         public static final TagKey<Item> TWIRL_DAMAGE = TagKey.of(RegistryKeys.ITEM, Amarong.id("twirl_damage"));
 
+        public static final TagKey<Item> STAFF_UNUSABLE = TagKey.of(RegistryKeys.ITEM, Amarong.id("staff_unusable"));
+    }
+
+    public static class AmarongDataComponentTypeTags {
+        public static final TagKey<ComponentType<?>> STAFF_IGNORE = TagKey.of(RegistryKeys.DATA_COMPONENT_TYPE, Amarong.id("staff_ignore"));
     }
 
     public static class AmarongEnchantmentTags {

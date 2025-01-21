@@ -28,6 +28,7 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add(AmarongItems.AMARONG_HAMMER, "Amarong Hammer");
         translationBuilder.add(AmarongBlocks.AMARONG_CORE, "Amarong Core");
         translationBuilder.add(AmarongItems.AMARONG_BOOMERANG, "Amarong Boomerang");
+        translationBuilder.add(AmarongItems.AMARONG_STAFF, "Amarong Staff");
         translationBuilder.add("amarong.itemGroup.amarong_group", "Amarong");
 
         // entity types
@@ -97,6 +98,7 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add(AmarongTags.AmarongItemTags.HAMMER_ENCHANTABLE, "Enchantable - Hammer");
         translationBuilder.add(AmarongTags.AmarongItemTags.STICKS, "Sticks");
         translationBuilder.add(AmarongTags.AmarongItemTags.TWIRL_DAMAGE, "Deals damage with Twirl");
+        translationBuilder.add(AmarongTags.AmarongItemTags.STAFF_UNUSABLE, "Unusable - Staff");
 
         // enchantment tags
         translationBuilder.add(AmarongTags.AmarongEnchantmentTags.PNUEMATIC_EFFECT, "Pnuematic Effect");
@@ -146,6 +148,8 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("amarong.yacl.option.boolean.noKaleidoscopeZoom.desc", "Don't zoom in while using a kaleidoscope");
         translationBuilder.add("amarong.yacl.option.float.boomerangSpinMultiplier", "Boomerang Spin Multiplier");
         translationBuilder.add("amarong.yacl.option.float.boomerangSpinMultiplier.desc", "This value controls how fast an Amarong Boomerang should spin");
+        translationBuilder.add("amarong.yacl.option.float.staffRotationMultiplier", "Staff Rotation Multiplier");
+        translationBuilder.add("amarong.yacl.option.float.staffRotationMultiplier.desc", "This value controls how fast the item rendered in an Amarong Staff should spin");
 
         // damage types
         translationBuilder.add("death.attack.amarong.flying_ticket_hit", "%1$s was shot by %2$s with flying tickets");

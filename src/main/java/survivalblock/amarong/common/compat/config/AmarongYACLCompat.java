@@ -49,6 +49,12 @@ public class AmarongYACLCompat {
                                         .binding(AmarongYACLCompat.HANDLER.defaults().boomerangSpinMultiplier, () -> AmarongYACLCompat.HANDLER.instance().boomerangSpinMultiplier, newVal -> AmarongYACLCompat.HANDLER.instance().boomerangSpinMultiplier = newVal)
                                         .controller(FloatFieldControllerBuilder::create)
                                         .build())
+                                .option(Option.<Float>createBuilder()
+                                        .name(Text.translatable("amarong.yacl.option.float.staffRotationMultiplier"))
+                                        .description(OptionDescription.of(Text.translatable("amarong.yacl.option.float.staffRotationMultiplier.desc")))
+                                        .binding(AmarongYACLCompat.HANDLER.defaults().staffRotationMultiplier, () -> AmarongYACLCompat.HANDLER.instance().staffRotationMultiplier, newVal -> AmarongYACLCompat.HANDLER.instance().staffRotationMultiplier = newVal)
+                                        .controller(FloatFieldControllerBuilder::create)
+                                        .build())
                                 .build())
                         .build())
                 .save(AmarongYACLCompat.HANDLER::save)
@@ -73,4 +79,6 @@ public class AmarongYACLCompat {
     public boolean noKaleidoscopeZoom = AmarongConfig.Defaults.NO_KALEIDOSCOPE_ZOOM;
     @SerialEntry
     public float boomerangSpinMultiplier = AmarongConfig.Defaults.BOOMERANG_SPIN_MULTIPLIER;
+    @SerialEntry
+    public float staffRotationMultiplier = AmarongConfig.Defaults.STAFF_ROTATION_MULTIPLIER;
 }

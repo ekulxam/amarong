@@ -1,4 +1,4 @@
-package survivalblock.amarong.client.render;
+package survivalblock.amarong.client.render.entity;
 
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.EntityRenderer;

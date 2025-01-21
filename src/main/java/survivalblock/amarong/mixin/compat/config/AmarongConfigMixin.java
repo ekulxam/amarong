@@ -34,6 +34,11 @@ public class AmarongConfigMixin {
         return Amarong.shouldDoConfig ? AmarongYACLCompat.HANDLER.instance().boomerangSpinMultiplier : original;
     }
 
+    @ModifyReturnValue(method = "staffRotationMultiplier", at = @At("RETURN"))
+    private static float staffRotationMultiplier(float original) {
+        return Amarong.shouldDoConfig ? AmarongYACLCompat.HANDLER.instance().staffRotationMultiplier : original;
+    }
+
     @ModifyReturnValue(method = "create", at = @At("RETURN"))
     private static Screen create(Screen original, Screen parent) {
         return Amarong.shouldDoConfig ? AmarongYACLCompat.create(parent) : original;

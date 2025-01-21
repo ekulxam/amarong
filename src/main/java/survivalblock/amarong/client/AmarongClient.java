@@ -7,15 +7,19 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.fabric.api.resource.ResourceReloadListenerKeys;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.particle.SonicBoomParticle;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.text.Text;
-import survivalblock.amarong.client.render.FlyingTicketEntityRenderer;
-import survivalblock.amarong.client.render.PhasingBoomerangEntityRenderer;
-import survivalblock.amarong.client.render.RailgunEntityRenderer;
-import survivalblock.amarong.client.render.WaterStreamEntityRenderer;
+import survivalblock.amarong.client.render.StaffTransformations;
+import survivalblock.amarong.client.render.StaffTransformationsManager;
+import survivalblock.amarong.client.render.entity.FlyingTicketEntityRenderer;
+import survivalblock.amarong.client.render.entity.PhasingBoomerangEntityRenderer;
+import survivalblock.amarong.client.render.entity.RailgunEntityRenderer;
+import survivalblock.amarong.client.render.entity.WaterStreamEntityRenderer;
 import survivalblock.amarong.common.Amarong;
 import survivalblock.amarong.common.compat.config.AmarongConfig;
 import survivalblock.amarong.common.init.AmarongEntityTypes;
@@ -25,6 +29,8 @@ import survivalblock.atmosphere.atmospheric_api.not_mixin.item.client.AlternateI
 import survivalblock.atmosphere.atmospheric_api.not_mixin.item.client.AtmosphericSpecialItemRenderHandler;
 
 public class AmarongClient implements ClientModInitializer {
+
+	public static final StaffTransformations STAFF_TRANSFORMATIONS = new StaffTransformations();
 
 	@Override
 	public void onInitializeClient() {
@@ -45,6 +51,7 @@ public class AmarongClient implements ClientModInitializer {
 			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.SMOL_VERYLONGSWORD_PACK, modContainer, Text.translatable("resourcePack.amarong.smolverylongsword.name"), ResourcePackActivationType.NORMAL);
 			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.OLD_TICKET_LAUNCHER_PACK, modContainer, Text.translatable("resourcePack.amarong.oldticketlauncher.name"), ResourcePackActivationType.NORMAL);
 			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.AMETHYST_HANDLE_TICKET_LAUNCHER_PACK, modContainer, Text.translatable("resourcePack.amarong.amethysthandleticketlauncher.name"), ResourcePackActivationType.DEFAULT_ENABLED);
+			ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(STAFF_TRANSFORMATIONS.getManager());
 		});
 
 		AtmosphericSpecialItemRenderHandler.handleShouldZoomIn(AmarongItems.KALEIDOSCOPE, stack -> !AmarongConfig.noKaleidoscopeZoom());
