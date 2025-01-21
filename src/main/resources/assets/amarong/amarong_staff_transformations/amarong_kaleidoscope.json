@@ -1,0 +1,8 @@
+{
+  "spin": true,
+  "mode": "thirdperson_righthand",
+  "transformation": {
+    "rotation": [180, 0, 0],
+    "translation": [0, -4, 0]
+  }
+}

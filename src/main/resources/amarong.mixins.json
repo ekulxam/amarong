@@ -10,6 +10,8 @@
     "coreblock.BeaconBlockEntityAccessor$BeamSegmentAccessor",
     "coreblock.BeaconBlockEntityMixin",
     "duck.LivingEntityMixin",
+    "staff.ItemStackMixin",
+    "staff.ItemUsageContextAccessor",
     "ticketlauncher.ExperienceBottleItemMixin",
     "ticketlauncher.TerrificTrinketsApiMixin",
     "ticketlauncher.ThrowablePotionItemMixin",
@@ -25,6 +27,8 @@
     "compat.config.AmarongConfigMixin",
     "compat.twirl.client.ClientPlayerEntityMixin",
     "kaleidoscope.client.GameRendererMixin",
+    "staff.client.BipedEntityModelMixin",
+    "staff.client.ItemRendererMixin",
     "verylongsword.client.PlayerEntityRendererMixin"
   ]
 }
