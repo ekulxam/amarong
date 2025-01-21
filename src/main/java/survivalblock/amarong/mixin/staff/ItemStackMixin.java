@@ -14,8 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import survivalblock.amarong.common.init.AmarongDataComponentTypes;
-import survivalblock.amarong.common.init.AmarongItems;
-import survivalblock.amarong.common.init.AmarongTags;
 import survivalblock.amarong.common.item.AmarongStaffItem;
 
 @Mixin(ItemStack.class)

@@ -5,18 +5,14 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
-import net.minecraft.client.render.model.json.Transformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.ToolItem;
-import net.minecraft.util.Arm;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -52,19 +48,15 @@ public abstract class ItemRendererMixin {
         }
         final boolean gui = ModelTransformationMode.GUI.equals(renderMode);
         boolean ground = false;
-        AmarongStaffTransformation staffTransformation = AmarongClient.STAFF_TRANSFORMATIONS.getTransformation(otherStack);
+        AmarongStaffTransformation staffTransformation = AmarongClient.STAFF_TRANSFORMATIONS_MANAGER.getTransformation(otherStack);
         ModelTransformationMode mode = gui ? ModelTransformationMode.FIXED : staffTransformation.getMode();
         if (!gui) {
             ground = ModelTransformationMode.GROUND.equals(renderMode);
             PlayerEntity player = client.player;
             if (player != null) {
-                if (amarong$isModeLeftHanded(renderMode) && ModelTransformationMode.FIRST_PERSON_RIGHT_HAND.equals(mode)) {
+                if (amarong$isModeLeftHanded(renderMode) && amarong$isModeRightHanded(mode)) {
                     leftHanded = !leftHanded;
-                } else if (amarong$isModeRightHanded(renderMode) && ModelTransformationMode.FIRST_PERSON_LEFT_HAND.equals(mode)) {
-                    leftHanded = !leftHanded;
-                } else if (amarong$isModeLeftHanded(renderMode) && ModelTransformationMode.THIRD_PERSON_RIGHT_HAND.equals(mode)) {
-                    leftHanded = !leftHanded;
-                } else if (amarong$isModeRightHanded(renderMode) && ModelTransformationMode.THIRD_PERSON_LEFT_HAND.equals(mode)) {
+                } else if (amarong$isModeRightHanded(renderMode) && amarong$isModeLeftHanded(mode)) {
                     leftHanded = !leftHanded;
                 }
             }
