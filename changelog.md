@@ -7,4 +7,5 @@ Amarong 1.2.0+1.21.1
 - Retextured the Amarong Chunk and Amarong Sheet
 - Prefixed Uniques with the mod id
 - Amarong Boomerang can now be enchanted with sharpness and other sword enchantments
+- Added the Easy Core Duplication datapack for people who would like to obtain multiple Amarong Cores more efficiently without farming withers
 - Update README
