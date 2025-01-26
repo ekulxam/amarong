@@ -3,13 +3,17 @@ package survivalblock.amarong.common;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import survivalblock.amarong.common.compat.config.AmarongConfig;
 import survivalblock.amarong.common.init.*;
 import survivalblock.amarong.common.recipe.KaleidoscopeShaderTypeRecipe;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.resource.AtmosphericResourceManagerHelper;
 
 public class Amarong implements ModInitializer {
 
@@ -29,16 +33,25 @@ public class Amarong implements ModInitializer {
 		AmarongEntityTypes.init();
 		KaleidoscopeShaderTypeRecipe.init();
 		AmarongParticleTypes.init();
+
+		final FabricLoader fabricLoader = FabricLoader.getInstance();
 		if (!resetShouldDoConfig()) {
-			LOGGER.warn("YACL is not installed, so Amarong's Config will not be accessible!");
+			LOGGER.warn("YACL is not installed, so Amarong's YACL Config will not be accessible!");
 		} else {
 			configLoaded = AmarongConfig.load();
 			if (!configLoaded) {
-				LOGGER.warn("Amarong Config could not be loaded!");
+				LOGGER.warn("Amarong YACL Config could not be loaded!");
 			}
 		}
-		twirl = FabricLoader.getInstance().isModLoaded("twirl");
+		twirl = fabricLoader.isModLoaded("twirl");
+
 		LootTableEvents.MODIFY.register(AmarongLootTableEvents.INSTANCE);
+
+		fabricLoader.getModContainer(MOD_ID).ifPresent(Amarong::registerBuiltinDataPacks);
+	}
+
+	private static void registerBuiltinDataPacks(ModContainer modContainer) {
+		AtmosphericResourceManagerHelper.registerBuiltinDataPack(AmarongUtil.EASY_CORE_DUPLICATION_PACK, modContainer, Text.translatable("dataPack.amarong.easy_core_duplication_pack.name"), ResourcePackActivationType.NORMAL);
 	}
 
 	public static Identifier id(String path) {

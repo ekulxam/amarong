@@ -4,8 +4,10 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
+import survivalblock.amarong.common.AmarongUtil;
 import survivalblock.amarong.common.init.AmarongDamageTypes;
 import survivalblock.amarong.common.init.AmarongEnchantments;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.datagen.FabricDataPackGenerator;
 
 public class AmarongDataGenerator implements DataGeneratorEntrypoint {
 
@@ -25,6 +27,8 @@ public class AmarongDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(AmarongTagGenerator.AmarongDataComponentTypeTagGenerator::new);
 		pack.addProvider(AmarongTagGenerator.AmarongEnchantmentTagGenerator::new);
 		pack.addProvider(AmarongTagGenerator.AmarongEntityTypeTagGenerator::new);
+		FabricDataGenerator.Pack easyCoreDuplicationPack = FabricDataPackGenerator.createBuiltinDataPack(fabricDataGenerator, AmarongUtil.EASY_CORE_DUPLICATION_PACK);
+		easyCoreDuplicationPack.addProvider(AmarongRecipeGenerator.EasyCoreDuplicationRecipeGenerator::new);
 	}
 
 	@Override

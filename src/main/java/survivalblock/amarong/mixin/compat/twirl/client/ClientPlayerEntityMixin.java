@@ -21,16 +21,16 @@ public abstract class ClientPlayerEntityMixin extends PlayerEntity {
 
     @ModifyExpressionValue(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingItem()Z", ordinal = 0))
     private boolean noSlowdown(boolean original){
-        return impedesMovement(original);
+        return amarong$impedesMovement(original);
     }
 
     @ModifyExpressionValue(method = "canStartSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingItem()Z"))
     private boolean doesNotDisableSprinting(boolean original){
-        return impedesMovement(original);
+        return amarong$impedesMovement(original);
     }
 
     @Unique
-    private boolean impedesMovement(boolean other){
+    private boolean amarong$impedesMovement(boolean other){
         ItemStack stack = this.getActiveItem();
         if (stack.isIn(AmarongTags.AmarongItemTags.TWIRL_DAMAGE) && stack.atmospheric_api$getAbsoluteLevel(Twirl.TWIRLING) > 0) {
             return false;

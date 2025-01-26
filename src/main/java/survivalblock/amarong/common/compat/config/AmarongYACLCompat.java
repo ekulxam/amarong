@@ -7,6 +7,8 @@ import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
+import dev.isxander.yacl3.impl.controller.EnumControllerBuilderImpl;
+import dev.isxander.yacl3.impl.controller.IntegerFieldControllerBuilderImpl;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
@@ -55,6 +57,18 @@ public class AmarongYACLCompat {
                                         .binding(AmarongYACLCompat.HANDLER.defaults().staffRotationMultiplier, () -> AmarongYACLCompat.HANDLER.instance().staffRotationMultiplier, newVal -> AmarongYACLCompat.HANDLER.instance().staffRotationMultiplier = newVal)
                                         .controller(FloatFieldControllerBuilder::create)
                                         .build())
+                                .option(Option.<BeaconBeamDebugMode>createBuilder()
+                                        .name(Text.translatable("amarong.yacl.option.enum.debugBeaconBeams"))
+                                        .description(OptionDescription.of(Text.translatable("amarong.yacl.option.enum.debugBeaconBeams.desc")))
+                                        .binding(AmarongYACLCompat.HANDLER.defaults().debugBeaconBeams, () -> AmarongYACLCompat.HANDLER.instance().debugBeaconBeams, newVal -> AmarongYACLCompat.HANDLER.instance().debugBeaconBeams = newVal)
+                                        .controller(option -> new EnumControllerBuilderImpl<>(option).enumClass(BeaconBeamDebugMode.class)) // crashes when not invoking the enumClass method
+                                        .build())
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.translatable("amarong.yacl.option.integer.maxBeaconBeamIterations"))
+                                        .description(OptionDescription.of(Text.translatable("amarong.yacl.option.integer.maxBeaconBeamIterations.desc")))
+                                        .binding(AmarongYACLCompat.HANDLER.defaults().maxBeaconBeamIterations, () -> AmarongYACLCompat.HANDLER.instance().maxBeaconBeamIterations, newVal -> AmarongYACLCompat.HANDLER.instance().maxBeaconBeamIterations = newVal)
+                                        .controller(option -> new IntegerFieldControllerBuilderImpl(option).min(10))
+                                        .build())
                                 .build())
                         .build())
                 .save(AmarongYACLCompat.HANDLER::save)
@@ -81,4 +95,8 @@ public class AmarongYACLCompat {
     public float boomerangSpinMultiplier = AmarongConfig.Defaults.BOOMERANG_SPIN_MULTIPLIER;
     @SerialEntry
     public float staffRotationMultiplier = AmarongConfig.Defaults.STAFF_ROTATION_MULTIPLIER;
+    @SerialEntry
+    public BeaconBeamDebugMode debugBeaconBeams = AmarongConfig.Defaults.DEBUG_BEACON_BEAMS;
+    @SerialEntry
+    public int maxBeaconBeamIterations = AmarongConfig.Defaults.MAX_BEACON_BEAM_ITERATIONS;
 }

@@ -4,6 +4,7 @@ import folk.sisby.twirl.Twirl;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.enchantment.Enchantments;
@@ -42,6 +43,16 @@ public class AmarongTagGenerator {
         @Override
         protected void configure(RegistryWrapper.WrapperLookup lookup) {
             getOrCreateTagBuilder(ItemTags.SWORDS).add(AmarongItems.AMARONG_VERYLONGSWORD);
+
+            getOrCreateTagBuilder(ItemTags.SWORD_ENCHANTABLE).add(AmarongItems.AMARONG_BOOMERANG);
+            getOrCreateTagBuilder(ItemTags.SHARP_WEAPON_ENCHANTABLE).add(AmarongItems.AMARONG_BOOMERANG);
+
+            getOrCreateTagBuilder(ConventionalItemTags.MELEE_WEAPON_TOOLS).add(AmarongItems.AMARONG_BOOMERANG);
+            getOrCreateTagBuilder(ConventionalItemTags.MELEE_WEAPON_TOOLS).add(AmarongItems.AMARONG_STAFF);
+
+            getOrCreateTagBuilder(ConventionalItemTags.RANGED_WEAPON_TOOLS).add(AmarongItems.SOMEWHAT_A_DUCK);
+            getOrCreateTagBuilder(ConventionalItemTags.RANGED_WEAPON_TOOLS).add(AmarongItems.TICKET_LAUNCHER);
+
             getOrCreateTagBuilder(AmarongTags.AmarongItemTags.RAINBOW_CORE_GENERATORS).add(Items.GLOW_INK_SAC);
 
             getOrCreateTagBuilder(AmarongTags.AmarongItemTags.TICKET_LAUNCHER_ENCHANTABLE).add(AmarongItems.TICKET_LAUNCHER);
@@ -49,6 +60,12 @@ public class AmarongTagGenerator {
             getOrCreateTagBuilder(AmarongTags.AmarongItemTags.DUCK_ENCHANTABLE).add(AmarongItems.SOMEWHAT_A_DUCK);
             getOrCreateTagBuilder(AmarongTags.AmarongItemTags.HAMMER_ENCHANTABLE).add(AmarongItems.AMARONG_HAMMER);
             getOrCreateTagBuilder(ItemTags.MACE_ENCHANTABLE).add(AmarongItems.AMARONG_HAMMER);
+
+            getOrCreateTagBuilder(ConventionalItemTags.ENCHANTABLES).addTag(AmarongTags.AmarongItemTags.TICKET_LAUNCHER_ENCHANTABLE);
+            getOrCreateTagBuilder(ConventionalItemTags.ENCHANTABLES).addTag(AmarongTags.AmarongItemTags.VERYLONGSWORD_ENCHANTABLE);
+            getOrCreateTagBuilder(ConventionalItemTags.ENCHANTABLES).addTag(AmarongTags.AmarongItemTags.DUCK_ENCHANTABLE);
+            getOrCreateTagBuilder(ConventionalItemTags.ENCHANTABLES).addTag(AmarongTags.AmarongItemTags.HAMMER_ENCHANTABLE);
+
             getOrCreateTagBuilder(ItemTags.PICKAXES).add(AmarongItems.AMARONG_HAMMER);
             getOrCreateTagBuilder(AmarongTags.AmarongItemTags.TWIRL_DAMAGE).add(AmarongItems.AMARONG_HAMMER);
             Registries.ITEM.getKey(AmarongItems.AMARONG_HAMMER).ifPresent((registryKey) -> {

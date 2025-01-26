@@ -1,7 +1,5 @@
 package survivalblock.amarong.common.compat.config;
 
-import net.minecraft.client.gui.screen.Screen;
-
 public class AmarongConfig {
 
     public static final class Defaults {
@@ -10,6 +8,8 @@ public class AmarongConfig {
         public static final boolean NO_KALEIDOSCOPE_ZOOM = false;
         public static final float BOOMERANG_SPIN_MULTIPLIER = 12;
         public static final float STAFF_ROTATION_MULTIPLIER = 1.5f;
+        public static final BeaconBeamDebugMode DEBUG_BEACON_BEAMS = BeaconBeamDebugMode.NEVER;
+        public static final int MAX_BEACON_BEAM_ITERATIONS = 256;
     }
 
     public static boolean verboseLogging() {
@@ -32,9 +32,12 @@ public class AmarongConfig {
         return Defaults.STAFF_ROTATION_MULTIPLIER;
     }
 
-    @SuppressWarnings("unused")
-    public static Screen create(Screen parent) {
-        return null;
+    public static BeaconBeamDebugMode debugBeaconBeams() {
+        return Defaults.DEBUG_BEACON_BEAMS;
+    }
+
+    public static int maxBeaconBeamIterations() {
+        return Defaults.MAX_BEACON_BEAM_ITERATIONS;
     }
 
     public static boolean load() {

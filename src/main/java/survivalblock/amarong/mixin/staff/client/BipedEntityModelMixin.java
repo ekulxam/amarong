@@ -10,12 +10,12 @@ import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import survivalblock.amarong.common.item.AmarongStaffItem;
 
-@Debug(export = true)
 @Mixin(BipedEntityModel.class)
 public class BipedEntityModelMixin {
 
@@ -44,7 +44,7 @@ public class BipedEntityModelMixin {
         if (!(stack.getItem() instanceof AmarongStaffItem)) {
             return original;
         }
-        return original - 0.85f;
+        return amarong$modifyArmStaffPitch(original);
     }
 
     @ModifyExpressionValue(method = "positionLeftArm", at = @At(value = "FIELD", target = "Lnet/minecraft/client/model/ModelPart;pitch:F", ordinal = 0, opcode = Opcodes.GETFIELD))
@@ -56,6 +56,11 @@ public class BipedEntityModelMixin {
         if (!(stack.getItem() instanceof AmarongStaffItem)) {
             return original;
         }
-        return original - 0.85f;
+        return amarong$modifyArmStaffPitch(original);
+    }
+
+    @Unique
+    private float amarong$modifyArmStaffPitch(float original) {
+        return original - 0.825f;
     }
 }

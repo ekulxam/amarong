@@ -37,7 +37,6 @@ import org.jetbrains.annotations.Nullable;
 import survivalblock.amarong.common.init.AmarongDataComponentTypes;
 import survivalblock.amarong.common.init.AmarongTags;
 import survivalblock.amarong.mixin.staff.ItemUsageContextAccessor;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.item.TwoHandedItem;
 
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +55,10 @@ public class AmarongStaffItem extends Item {
 
     public ItemStack getItemStackFromComponents(ItemStack stack) {
         return stack.atmospheric_api$getOrCreate(AmarongDataComponentTypes.STAFF_STACK, ItemStack.EMPTY);
+    }
+
+    public ItemStack getStaffStack(ItemStack stack) {
+        return stack.getOrDefault(AmarongDataComponentTypes.STAFF_STACK, ItemStack.EMPTY);
     }
 
     public void onItemEntityDestroyed(ItemEntity entity) {
@@ -97,15 +100,15 @@ public class AmarongStaffItem extends Item {
     }
 
     public boolean isItemBarVisible(ItemStack stack) {
-        return this.getItemStackFromComponents(stack).isItemBarVisible();
+        return this.getStaffStack(stack).isItemBarVisible();
     }
 
     public int getItemBarStep(ItemStack stack) {
-        return this.getItemStackFromComponents(stack).getItemBarStep();
+        return this.getStaffStack(stack).getItemBarStep();
     }
 
     public int getItemBarColor(ItemStack stack) {
-        return this.getItemStackFromComponents(stack).getItemBarColor();
+        return this.getStaffStack(stack).getItemBarColor();
     }
 
     public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player) {
@@ -182,11 +185,11 @@ public class AmarongStaffItem extends Item {
 
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         super.appendTooltip(stack, context, tooltip, type);
-        tooltip.add(this.getItemStackFromComponents(stack).getName());
+        tooltip.add(this.getStaffStack(stack).getName());
     }
 
     public boolean hasGlint(ItemStack stack) {
-        return this.getItemStackFromComponents(stack).hasGlint();
+        return this.getStaffStack(stack).hasGlint();
     }
 
     @SuppressWarnings("unused")
@@ -243,7 +246,7 @@ public class AmarongStaffItem extends Item {
 
         @Override
         public Set<ComponentType<?>> getTypes() {
-            Set<ComponentType<?>> set = Sets.union(original.getTypes(), other.getTypes());;
+            Set<ComponentType<?>> set = Sets.union(original.getTypes(), other.getTypes());
             return set.stream().filter(this::contains).collect(Collectors.toSet());
         }
 

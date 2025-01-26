@@ -1,9 +1,13 @@
 package survivalblock.amarong.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HeavyCoreBlock;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
@@ -19,8 +23,15 @@ import survivalblock.amarong.common.init.AmarongTags;
 
 public class AmarongCoreBlock extends HeavyCoreBlock implements BlockEntityProvider {
 
+    public static final MapCodec<HeavyCoreBlock> CODEC = createCodec(AmarongCoreBlock::new);
+
     public AmarongCoreBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public MapCodec<HeavyCoreBlock> getCodec() {
+        return CODEC;
     }
 
     @Nullable
@@ -28,7 +39,7 @@ public class AmarongCoreBlock extends HeavyCoreBlock implements BlockEntityProvi
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new AmarongCoreBlockEntity(pos, state);
     }
-    
+
     @Override
     protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         if (world.isClient()) {

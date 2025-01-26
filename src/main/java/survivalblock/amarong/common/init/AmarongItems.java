@@ -51,7 +51,7 @@ public class AmarongItems {
             .attributeModifiers(AmarongVerylongswordItem.createAttributeModifiers(4.0F, 1.6F, AMARONG_TOOL_REACH, AMARONG_TOOL_REACH))
     ));
     public static final Item AMARONG_STAFF = registerItem("amarong_staff", new AmarongStaffItem(new Item.Settings().maxCount(1).component(AmarongDataComponentTypes.STAFF_STACK, ItemStack.EMPTY)
-            .attributeModifiers(AmarongStaffItem.createAttributeModifiers(AMARONG_TOOL_REACH * 4, AMARONG_TOOL_REACH * 3))
+            .attributeModifiers(AmarongStaffItem.createAttributeModifiers(8f, 7.6f))
     ));
 
     private static Item registerItem(String name, Item item) {

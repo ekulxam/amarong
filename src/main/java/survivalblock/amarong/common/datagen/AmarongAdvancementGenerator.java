@@ -14,7 +14,6 @@ import net.minecraft.predicate.entity.PlayerPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import survivalblock.amarong.common.Amarong;
 import survivalblock.amarong.common.init.AmarongBlocks;
 import survivalblock.amarong.common.init.AmarongItems;
@@ -27,15 +26,14 @@ public class AmarongAdvancementGenerator extends FabricAdvancementProvider {
         super(output, registryLookup);
     }
 
-    @SuppressWarnings("removal")
     @Override
     public void generateAdvancement(RegistryWrapper.WrapperLookup registryLookup, Consumer<AdvancementEntry> consumer) {
-        AdvancementEntry obtainCore = Advancement.Builder.create().parent(Identifier.of("adventure/root"))
+        AdvancementEntry obtainCore = Advancement.Builder.create()
                 .display(
                         AmarongItems.AMARONG_CORE,
                         Text.translatable("advancements.amarong.obtain_core.title"),
                         Text.translatable("advancements.amarong.obtain_core.description"),
-                        null, // children to parent advancements don't need a background set
+                        Amarong.id("textures/gui/advancements/backgrounds/amethyst_copper.png"),
                         AdvancementFrame.TASK,
                         true,
                         true,
@@ -61,7 +59,7 @@ public class AmarongAdvancementGenerator extends FabricAdvancementProvider {
                         AmarongItems.AMARONG_VERYLONGSWORD,
                         Text.translatable("advancements.amarong.obtain_verylongsword.title"),
                         Text.translatable("advancements.amarong.obtain_verylongsword.description"),
-                        null, // children to parent advancements don't need a background set
+                        null,
                         AdvancementFrame.TASK,
                         true,
                         true,
@@ -74,7 +72,7 @@ public class AmarongAdvancementGenerator extends FabricAdvancementProvider {
                         AmarongItems.TICKET_LAUNCHER,
                         Text.translatable("advancements.amarong.when_tickets_fly.title"),
                         Text.translatable("advancements.amarong.when_tickets_fly.description"),
-                        null, // children to parent advancements don't need a background set
+                        null,
                         AdvancementFrame.TASK,
                         true,
                         true,
@@ -87,7 +85,7 @@ public class AmarongAdvancementGenerator extends FabricAdvancementProvider {
                         AmarongItems.KALEIDOSCOPE,
                         Text.translatable("advancements.amarong.spider.title"),
                         Text.translatable("advancements.amarong.spider.description"),
-                        null, // children to parent advancements don't need a background set
+                        null,
                         AdvancementFrame.TASK,
                         true,
                         true,
@@ -96,12 +94,12 @@ public class AmarongAdvancementGenerator extends FabricAdvancementProvider {
                 .rewards(AdvancementRewards.Builder.experience(25))
                 .criterion("spider", createLookingAtEntityUsing(EntityType.SPIDER, AmarongItems.KALEIDOSCOPE))
                 .build(Amarong.id("spider"));
-        AdvancementEntry kaleidoscopeCreeper = Advancement.Builder.create().parent(kaleidoscopeSpider)
+        AdvancementEntry kaleidoscopeCreeper = Advancement.Builder.create().parent(useKaleidoscope)
                 .display(
                         AmarongItems.KALEIDOSCOPE,
                         Text.translatable("advancements.amarong.creeper.title"),
                         Text.translatable("advancements.amarong.creeper.description"),
-                        null, // children to parent advancements don't need a background set
+                        null,
                         AdvancementFrame.TASK,
                         true,
                         true,
@@ -110,12 +108,12 @@ public class AmarongAdvancementGenerator extends FabricAdvancementProvider {
                 .rewards(AdvancementRewards.Builder.experience(50))
                 .criterion("creeper", createLookingAtEntityUsing(EntityType.CREEPER, AmarongItems.KALEIDOSCOPE))
                 .build(Amarong.id("creeper"));
-        AdvancementEntry kaleidoscopeEnderman = Advancement.Builder.create().parent(kaleidoscopeCreeper)
+        AdvancementEntry kaleidoscopeEnderman = Advancement.Builder.create().parent(useKaleidoscope)
                 .display(
                         AmarongItems.KALEIDOSCOPE,
                         Text.translatable("advancements.amarong.invert.title"),
                         Text.translatable("advancements.amarong.invert.description"),
-                        null, // children to parent advancements don't need a background set
+                        null,
                         AdvancementFrame.CHALLENGE,
                         true,
                         true,
@@ -129,7 +127,7 @@ public class AmarongAdvancementGenerator extends FabricAdvancementProvider {
                         AmarongItems.AMARONG_HAMMER,
                         Text.translatable("advancements.amarong.hammer_time.title"),
                         Text.translatable("advancements.amarong.hammer_time.description"),
-                        null, // children to parent advancements don't need a background set
+                        null,
                         AdvancementFrame.CHALLENGE,
                         true,
                         true,

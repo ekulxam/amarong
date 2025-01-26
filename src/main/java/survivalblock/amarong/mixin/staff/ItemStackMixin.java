@@ -61,6 +61,6 @@ public abstract class ItemStackMixin implements ComponentHolder {
         if (!(this.getItem() instanceof AmarongStaffItem staff)) {
             return;
         }
-        cir.setReturnValue(staff.getItemStackFromComponents((ItemStack) (Object) this).getRarity());
+        cir.setReturnValue(staff.getStaffStack((ItemStack) (Object) this).getRarity());
     }
 }

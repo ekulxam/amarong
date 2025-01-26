@@ -25,7 +25,7 @@ public class AmarongDataComponentTypes {
         Registry.register(Registries.DATA_COMPONENT_TYPE, Amarong.id("tickets"), TICKETS);
         Registry.register(Registries.DATA_COMPONENT_TYPE, Amarong.id("shader_type"), SHADER_TYPE);
         Registry.register(Registries.DATA_COMPONENT_TYPE, Amarong.id("verylongsword_charge"), VERYLONGSWORD_CHARGE);
-        Registry.register(Registries.DATA_COMPONENT_TYPE, Amarong.id("pedestal_stack"), STAFF_STACK);
+        Registry.register(Registries.DATA_COMPONENT_TYPE, Amarong.id("staff_stack"), STAFF_STACK);
 
         // secret / unobtainable
         Registry.register(Registries.DATA_COMPONENT_TYPE, Amarong.id("retains_charge"), RETAINS_CHARGE);

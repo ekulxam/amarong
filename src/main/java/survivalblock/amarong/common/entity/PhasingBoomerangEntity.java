@@ -49,7 +49,7 @@ public class PhasingBoomerangEntity extends PersistentProjectileEntity {
     }
 
     public PhasingBoomerangEntity(LivingEntity owner, World world, ItemStack stack, int slot) {
-        super(AmarongEntityTypes.BOOMERANG, owner, world, stack, null);
+        super(AmarongEntityTypes.BOOMERANG, owner, world, stack, stack.copy());
         this.slot = slot;
         this.getBoomerangComponent().setEnchanted(stack.hasGlint());
     }

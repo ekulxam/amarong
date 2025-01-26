@@ -123,4 +123,37 @@ public class AmarongRecipeGenerator extends FabricRecipeProvider {
                 .offerTo(exporter);
         ComplexRecipeJsonBuilder.create(KaleidoscopeShaderTypeRecipe::new).offerTo(exporter, "kaleidoscope_shader_type");
     }
+
+    public static class EasyCoreDuplicationRecipeGenerator extends FabricRecipeProvider {
+
+        public EasyCoreDuplicationRecipeGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, registriesFuture);
+        }
+
+        @Override
+        public void generate(RecipeExporter exporter) {
+            ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, AmarongItems.AMARONG_CORE, 2).pattern("xvx").pattern("vmv").pattern("xvx")
+                    .input('x', Items.AMETHYST_BLOCK)
+                    .input('v', Items.COPPER_BLOCK)
+                    .input('m', AmarongItems.AMARONG_CORE)
+                    .criterion(FabricRecipeProvider.hasItem(Items.COPPER_BLOCK),
+                            FabricRecipeProvider.conditionsFromItem(Items.COPPER_BLOCK))
+                    .criterion(FabricRecipeProvider.hasItem(Items.AMETHYST_BLOCK),
+                            FabricRecipeProvider.conditionsFromItem(Items.AMETHYST_BLOCK))
+                    .criterion(FabricRecipeProvider.hasItem(AmarongItems.AMARONG_CORE),
+                            FabricRecipeProvider.conditionsFromItem(AmarongItems.AMARONG_CORE))
+                    .offerTo(exporter, "amarong_core_inverted_duplication");
+            ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, AmarongItems.AMARONG_CORE, 2).pattern("xvx").pattern("vmv").pattern("xvx")
+                    .input('v', Items.AMETHYST_BLOCK)
+                    .input('x', Items.COPPER_BLOCK)
+                    .input('m', AmarongItems.AMARONG_CORE)
+                    .criterion(FabricRecipeProvider.hasItem(Items.COPPER_BLOCK),
+                            FabricRecipeProvider.conditionsFromItem(Items.COPPER_BLOCK))
+                    .criterion(FabricRecipeProvider.hasItem(Items.AMETHYST_BLOCK),
+                            FabricRecipeProvider.conditionsFromItem(Items.AMETHYST_BLOCK))
+                    .criterion(FabricRecipeProvider.hasItem(AmarongItems.AMARONG_CORE),
+                            FabricRecipeProvider.conditionsFromItem(AmarongItems.AMARONG_CORE))
+                    .offerTo(exporter, "amarong_core_duplication");
+        }
+    }
 }

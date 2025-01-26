@@ -1,11 +1,13 @@
 package survivalblock.amarong.common;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import survivalblock.amarong.common.block.AmarongCoreBlockEntity;
@@ -16,9 +18,10 @@ import java.awt.*;
 
 public class AmarongUtil {
 
+    public static final Identifier EASY_CORE_DUPLICATION_PACK = Amarong.id("easy_core_duplication_pack");
+
     public static boolean increaseThrowablePotionVelocity = false;
 
-    // this should probably be in AmarongClientUtil because colors but whatever, tick is server and client
     private static final Color TRANS_LIGHT_BLUE = new Color(91, 205, 250);
     private static final Color TRANS_PINK = new Color(245, 169, 184);
     public static final Color FULL_WHITE = new Color(255, 255, 255);

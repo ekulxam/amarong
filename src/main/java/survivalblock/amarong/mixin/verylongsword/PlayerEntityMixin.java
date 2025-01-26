@@ -30,7 +30,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Shadow public abstract ItemCooldownManager getItemCooldownManager();
 
     @Unique
-    private float prevCooldown;
+    private float amarong$prevCooldown;
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -38,13 +38,13 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;getAttackCooldownProgress(F)F", ordinal = 0))
     private void saveBeforeRefresh(Entity target, CallbackInfo ci){
-        this.prevCooldown = this.getAttackCooldownProgress(0.0f);
+        this.amarong$prevCooldown = this.getAttackCooldownProgress(0.0f);
     }
 
     @ModifyArg(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", ordinal = 0), index = 1)
     private float guillotine(float value, @Local(ordinal = 0, argsOnly = true) Entity target){
         ItemStack stack = this.getWeaponStack();
-        if (stack.isOf(AmarongItems.AMARONG_VERYLONGSWORD) && !this.getItemCooldownManager().isCoolingDown(stack.getItem()) && prevCooldown >= 0.8) {
+        if (stack.isOf(AmarongItems.AMARONG_VERYLONGSWORD) && !this.getItemCooldownManager().isCoolingDown(stack.getItem()) && amarong$prevCooldown >= 0.8) {
             int newValue = Math.min(AmarongVerylongswordItem.getMaxCharge(stack), AmarongVerylongswordItem.checkForReset(stack) + 1);
             stack.set(AmarongDataComponentTypes.VERYLONGSWORD_CHARGE, newValue);
         }

@@ -13,6 +13,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.particle.SonicBoomParticle;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.text.Text;
+import survivalblock.amarong.client.compat.config.AmarongConfigScreen;
 import survivalblock.amarong.client.render.StaffTransformationsManager;
 import survivalblock.amarong.client.render.entity.FlyingTicketEntityRenderer;
 import survivalblock.amarong.client.render.entity.PhasingBoomerangEntityRenderer;
@@ -49,6 +50,7 @@ public class AmarongClient implements ClientModInitializer {
 			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.SMOL_VERYLONGSWORD_PACK, modContainer, Text.translatable("resourcePack.amarong.smolverylongsword.name"), ResourcePackActivationType.NORMAL);
 			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.OLD_TICKET_LAUNCHER_PACK, modContainer, Text.translatable("resourcePack.amarong.oldticketlauncher.name"), ResourcePackActivationType.NORMAL);
 			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.AMETHYST_HANDLE_TICKET_LAUNCHER_PACK, modContainer, Text.translatable("resourcePack.amarong.amethysthandleticketlauncher.name"), ResourcePackActivationType.DEFAULT_ENABLED);
+			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.OLD_CHUNK_AND_SHEET, modContainer, Text.translatable("resourcePack.amarong.oldchunkandsheet.name"), ResourcePackActivationType.NORMAL);
 			ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(STAFF_TRANSFORMATIONS_MANAGER);
 		});
 
@@ -59,20 +61,8 @@ public class AmarongClient implements ClientModInitializer {
 		//noinspection CodeBlock2Expr
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
 			dispatcher.register(ClientCommandManager.literal("amarongconfig").executes(context -> {
-				if (!Amarong.shouldDoConfig) {
-					context.getSource().sendFeedback(Text.stringifiedTranslatable("commands.amarongconfig.noyacl"));
-					return 0;
-				}
-				if (!Amarong.configLoaded) {
-					context.getSource().sendFeedback(Text.stringifiedTranslatable("commands.amarongconfig.fail"));
-					return 0;
-				}
 				MinecraftClient client = context.getSource().getClient();
-				Screen configScreen = AmarongConfig.create(null);
-				if (configScreen == null) {
-					context.getSource().sendFeedback(Text.stringifiedTranslatable("commands.amarongconfig.fail"));
-					return 0;
-				}
+				Screen configScreen = new AmarongConfigScreen(null);
 				client.send(() -> client.setScreen(configScreen));
 				return 1;
 			}));

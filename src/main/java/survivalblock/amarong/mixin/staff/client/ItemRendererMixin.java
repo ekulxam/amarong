@@ -35,7 +35,7 @@ public abstract class ItemRendererMixin {
         if (!(stack.getItem() instanceof AmarongStaffItem staff)) {
             return;
         }
-        ItemStack otherStack = staff.getItemStackFromComponents(stack);
+        ItemStack otherStack = staff.getStaffStack(stack);
         if (otherStack == null || otherStack.isEmpty()) {
             return;
         }

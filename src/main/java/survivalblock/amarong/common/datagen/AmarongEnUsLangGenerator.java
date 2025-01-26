@@ -51,12 +51,15 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("item.amarong.somewhat_a_duck.water", "Water: %s / %s");
         translationBuilder.add("item.amarong.amarong_kaleidoscope.random", "Random");
 
-        // resource packs
+        // packs
         translationBuilder.add("resourcePack.amarong.nokaleidoscopeoverlay.name", "No Kaleidoscope Overlay");
         translationBuilder.add("resourcePack.amarong.nokaleidoscopezoom.name", "No Kaleidoscope Zoom");
         translationBuilder.add("resourcePack.amarong.smolverylongsword.name", "Smol Verylongsword");
         translationBuilder.add("resourcePack.amarong.oldticketlauncher.name", "Old Ticket Launcher");
         translationBuilder.add("resourcePack.amarong.amethysthandleticketlauncher.name", "Amethyst Handle Ticket Launcher");
+        translationBuilder.add("resourcePack.amarong.oldchunkandsheet.name", "Old Chunk and Sheet Textures");
+
+        translationBuilder.add("dataPack.amarong.easy_core_duplication_pack.name", "Easy Amarong Core Duplication");
 
         // advancements
         translationBuilder.add("advancements.amarong.use_kaleidoscope.title", "A World of Color");
@@ -137,19 +140,29 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("minecraft.shaders/post/spider.json", "Minecraft - Spider");
 
         // config
-        translationBuilder.add("amarong.yacl.category.main", "Amarong");
+        translationBuilder.add("amarong.config.title", "Amarong Config");
+        translationBuilder.add("amarong.config.resourcepack.title", "Amarong Resource Pack Config");
+
+        translationBuilder.add("amarong.yacl.category.main", "Amarong Config (Powered by YACL)");
         translationBuilder.add("amarong.yacl.category.main.tooltip", "Config");
         translationBuilder.add("amarong.yacl.group.client", "Client");
         translationBuilder.add("amarong.yacl.option.boolean.verboseLogging", "Verbose Logging");
-        translationBuilder.add("amarong.yacl.option.boolean.verboseLogging.desc", "Logs more information, such as kaleidoscope shaders");
+        translationBuilder.add("amarong.yacl.option.boolean.verboseLogging.desc", "Logs more information, such as kaleidoscope shaders.");
         translationBuilder.add("amarong.yacl.option.boolean.twoHandedVerylongsword", "Two-Handed Verylongsword");
-        translationBuilder.add("amarong.yacl.option.boolean.twoHandedVerylongsword.desc", "Amarong Verylongsword is held with both hands");
+        translationBuilder.add("amarong.yacl.option.boolean.twoHandedVerylongsword.desc", "Amarong Verylongsword is held with both hands.");
         translationBuilder.add("amarong.yacl.option.boolean.noKaleidoscopeZoom", "No Kaleidoscope Zoom");
-        translationBuilder.add("amarong.yacl.option.boolean.noKaleidoscopeZoom.desc", "Don't zoom in while using a kaleidoscope");
+        translationBuilder.add("amarong.yacl.option.boolean.noKaleidoscopeZoom.desc", "Don't zoom in while using a kaleidoscope.");
         translationBuilder.add("amarong.yacl.option.float.boomerangSpinMultiplier", "Boomerang Spin Multiplier");
-        translationBuilder.add("amarong.yacl.option.float.boomerangSpinMultiplier.desc", "This value controls how fast an Amarong Boomerang should spin");
+        translationBuilder.add("amarong.yacl.option.float.boomerangSpinMultiplier.desc", "This value controls how fast an Amarong Boomerang should spin.");
         translationBuilder.add("amarong.yacl.option.float.staffRotationMultiplier", "Staff Rotation Multiplier");
-        translationBuilder.add("amarong.yacl.option.float.staffRotationMultiplier.desc", "This value controls how fast the item rendered in an Amarong Staff should spin");
+        translationBuilder.add("amarong.yacl.option.float.staffRotationMultiplier.desc", "This value controls how fast the item rendered in an Amarong Staff should spin.");
+        translationBuilder.add("amarong.yacl.option.enum.debugBeaconBeams", "Beacon Beam Debug Mode");
+        translationBuilder.add("amarong.yacl.option.enum.debugBeaconBeams.desc", "Controls when Amarong should log the world time when a beacon's beam segments are set for rendering.");
+        translationBuilder.add("amarong.yacl.option.enum.debugBeaconBeams.never", "NEVER");
+        translationBuilder.add("amarong.yacl.option.enum.debugBeaconBeams.always", "ALWAYS");
+        translationBuilder.add("amarong.yacl.option.enum.debugBeaconBeams.abnormal_only", "ONLY FOR ABNORMALITIES");
+        translationBuilder.add("amarong.yacl.option.integer.maxBeaconBeamIterations", "Max Beacon Beam Iterations");
+        translationBuilder.add("amarong.yacl.option.integer.maxBeaconBeamIterations.desc", "Controls the maximum number of iterations in the loop in the tick method of the beacon block entity. Setting this value too low may affect the smoothness of the color change of the rainbow beacon beam created by the Amarong Core if the beam intersects (transparent) blocks.");
 
         // damage types
         translationBuilder.add("death.attack.amarong.flying_ticket_hit", "%1$s was shot by %2$s with flying tickets");
@@ -166,7 +179,7 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("death.attack.amarong.boomerang_hit.item", "%2$s used %3$s to shot %1$s with an Amarong Boomerang");
 
         // command
-        translationBuilder.add("commands.amarongconfig.noyacl", "Unable to generate Amarong config screen. Do you have YACL installed?");
-        translationBuilder.add("commands.amarongconfig.fail", "Unable to open Amarong config screen");
+        translationBuilder.add("commands.amarongconfig.noyacl", "Unable to generate Amarong YACL config screen. Do you have YACL installed?");
+        translationBuilder.add("commands.amarongconfig.fail", "Unable to open Amarong YACL config screen");
     }
 }

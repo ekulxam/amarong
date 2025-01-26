@@ -1,43 +1,36 @@
 package survivalblock.amarong.client.render;
 
-import com.google.gson.JsonParseException;
-import com.google.gson.internal.Streams;
-import com.google.gson.stream.JsonReader;
-import com.mojang.datafixers.util.Pair;
-import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.Codec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
-import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceFinder;
-import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
 import net.minecraft.util.profiler.Profiler;
 import org.jetbrains.annotations.Nullable;
 import survivalblock.amarong.common.Amarong;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.resource.AtmosphericResourceReader;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-import java.util.stream.Collectors;
 
 @Environment(EnvType.CLIENT)
-public class StaffTransformationsManager implements IdentifiableResourceReloadListener {
+public class StaffTransformationsManager extends AtmosphericResourceReader<AmarongStaffTransformation> {
 
     public static final String STAFF_TRANSFORMATIONS_DIRECTORY = "amarong_staff_transformations";
-    public static final ResourceFinder TRANSFORMATIONS_FINDER = ResourceFinder.json(STAFF_TRANSFORMATIONS_DIRECTORY);
 
     private Map<Item, AmarongStaffTransformation> transformations = new HashMap<>(256);
 
     public StaffTransformationsManager() {
+        this("Failed to load amarong staff transformation {}",
+                AmarongStaffTransformation.CODEC,
+                ResourceFinder.json(STAFF_TRANSFORMATIONS_DIRECTORY));
+    }
+
+    protected StaffTransformationsManager(String errorMessage, Codec<AmarongStaffTransformation> codec, ResourceFinder resourceFinder) {
+        super(errorMessage, codec, resourceFinder);
     }
 
     public AmarongStaffTransformation getTransformation(ItemStack stack) {
@@ -57,16 +50,7 @@ public class StaffTransformationsManager implements IdentifiableResourceReloadLi
         return staffTransformations.get(id);
     }
 
-    @Override
-    public CompletableFuture<Void> reload(Synchronizer synchronizer, ResourceManager manager, Profiler prepareProfiler, Profiler applyProfiler, Executor prepareExecutor, Executor applyExecutor) {
-        prepareProfiler.startTick();
-        CompletableFuture<Map<Identifier, AmarongStaffTransformation>> completableFuture = reloadTransformations(manager, prepareExecutor);
-        return completableFuture
-                .thenCompose(synchronizer::whenPrepared)
-                .thenAcceptAsync(result -> this.upload(result, applyProfiler), applyExecutor);
-    }
-
-    private void upload(Map<Identifier, AmarongStaffTransformation> staffTransformations, Profiler profiler) {
+    protected void upload(Map<Identifier, AmarongStaffTransformation> staffTransformations, Profiler profiler) {
         profiler.startTick();
         profiler.push("upload");
         Map<Item, AmarongStaffTransformation> hashMap = new HashMap<>();
@@ -80,45 +64,6 @@ public class StaffTransformationsManager implements IdentifiableResourceReloadLi
         this.transformations = hashMap;
         profiler.pop();
         profiler.endTick();
-    }
-
-    // what did I just create
-    // I love it when I just mash together a bunch of code
-    private CompletableFuture<Map<Identifier, AmarongStaffTransformation>> reloadTransformations(ResourceManager resourceManager, Executor executor) {
-        return CompletableFuture.supplyAsync(() -> TRANSFORMATIONS_FINDER.findResources(resourceManager), executor)
-                .thenCompose(
-                        staffTransformations -> {
-                            List<CompletableFuture<Pair<Identifier, AmarongStaffTransformation>>> list = new ArrayList<>(staffTransformations.size());
-
-                            for (Map.Entry<Identifier, Resource> entry : staffTransformations.entrySet()) {
-                                list.add(CompletableFuture.supplyAsync(() -> {
-                                    try {
-                                        JsonReader reader = new JsonReader(entry.getValue().getReader());
-                                        reader.setLenient(false);
-                                        Pair<Identifier, AmarongStaffTransformation> var2x;
-                                        try {
-                                            var2x = Pair.of(entry.getKey(), AmarongStaffTransformation.CODEC.parse(JsonOps.INSTANCE, Streams.parse(reader)).getOrThrow(JsonParseException::new));
-                                        } catch (Throwable var5) {
-                                            try {
-                                                reader.close();
-                                            } catch (Throwable var4x) {
-                                                var5.addSuppressed(var4x);
-                                            }
-
-                                            throw var5;
-                                        }
-                                        reader.close();
-                                        return var2x;
-                                    } catch (Exception var6) {
-                                        Amarong.LOGGER.error("Failed to load staff transformation {}", entry.getKey(), var6);
-                                        return null;
-                                    }
-                                }, executor));
-                            }
-                            return Util.combineSafe(list)
-                                    .thenApply(staffTransformationsx -> staffTransformationsx.stream().filter(Objects::nonNull).collect(Collectors.toUnmodifiableMap(Pair::getFirst, Pair::getSecond)));
-                        }
-                );
     }
 
     @Override
