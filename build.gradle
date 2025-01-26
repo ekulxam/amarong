@@ -5,7 +5,7 @@ plugins {
 
 version = project.mod_version
 group = project.maven_group
-atmospheric_api_tag = project.atmospheric_api_tag;
+atmospheric_api_tag = project.atmospheric_api_tag
 
 base {
 	archivesName = project.archives_base_name
@@ -48,7 +48,9 @@ repositories {
 }
 
 fabricApi {
-	configureDataGeneration()
+	configureDataGeneration {
+		modId = "amarong"
+	}
 }
 
 dependencies {
@@ -81,11 +83,11 @@ dependencies {
 	//modRuntimeOnly "maven.modrinth:wowozela:${project.wowozela_version}"
 	//modRuntimeOnly "maven.modrinth:beam-be-gone:${project.beam_be_gone_version}"
 
-	modRuntimeOnly "maven.modrinth:scattered-shards:${project.scattered_shards_version}"
-	modRuntimeOnly "io.github.cottonmc:LibGui:${project.libgui_version}"
-	modRuntimeOnly "me.lucko:fabric-permissions-api:${project.fabric_permissions_version}"
+	//modRuntimeOnly "maven.modrinth:scattered-shards:${project.scattered_shards_version}"
+	//modRuntimeOnly "io.github.cottonmc:LibGui:${project.libgui_version}"
+	//modRuntimeOnly "me.lucko:fabric-permissions-api:${project.fabric_permissions_version}"
 	// modRuntimeOnly "maven.modrinth:crunchy-crunchy-advancements:${project.crunchy_advancements_version}"
-	runtimeOnly "folk.sisby:kaleido-config:${project.kaleido_config_version}"
+	//runtimeOnly "folk.sisby:kaleido-config:${project.kaleido_config_version}"
 }
 
 processResources {

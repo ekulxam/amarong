@@ -1,3 +1,10 @@
-Amarong 1.1.4+1.21.1
-- Fixed bug where switching to creative mode after throwing a boomerang would not add it to your inventory
-- Fixed water streams being able to put out fires when players were in adventure mode
+Amarong 1.2.0+1.21.1
+- Fixed a longstanding bug where placing transparent blocks that intersected with a rainbow beacon beam (from an Amarong Core) would affect the smoothness of the color change
+  - Added a config option to configure this in case performance issues occur
+  - Added a config option to debug beacon tick
+- Amarong now has a separate advancement tab
+- Added the Amarong Staff
+- Retextured the Amarong Chunk and Amarong Sheet
+- Prefixed Uniques with the mod id
+- Amarong Boomerang can now be enchanted with sharpness and other sword enchantments
+- Update README

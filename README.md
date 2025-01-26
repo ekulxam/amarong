@@ -16,8 +16,9 @@ Originally created for ModFest</br>
 - Amarong Kaleidoscope : Extension of the spyglass, and the main reason this mod exists. In Random mode, applies a random shader on-use. Put in a crafting table (special recipe) to get a version that only applies one shader. Repeating this recipe multiple times results in cycling through the different shaders.
 - Amarong Hammer : A mace, but it's made with an Amarong Core. It currently has no crafting recipe. Doubles as a pickaxe, and can be enchanted with all Mace enchantments. When the [Twirling](https://modrinth.com/mod/twirl) enchantment is on this item, and it is being used, the hammer will hit entities within two blocks of the user. Damage scales based on the level of Twirling.
 - Amarong Boomerang : A throwable sword that will return to the user. The boomerang spawned on use will travel for a few seconds and then reverse direction. It can phase through walls (has noClip) and damage entities while traveling or returning. The boomerang will attempt to return to the inventory slot where it was thrown from.
+- Amarong Staff : Increases reach and retains the attributes of the equipped item. Right-click in inventory to take/put the item on the staff. Allows blocks to be equipped and placed from further away.
 
-Comes with EMI integration (for the Kaleidoscope recipes) because I couldn't be bothered to add support for JEI and REI (I'll might get around to it later, who knows?)
+Comes with EMI integration (for the Kaleidoscope recipes) because I couldn't be bothered to add support for JEI and REI (I might get around to it later, who knows?)
 
 ### Enchantments:
 - Pnuematic : Ticket Launcher enchantment. Allows the ticket launcher to shoot wind charges when wind charges are in the offhand. Does not consume any tickets.
@@ -36,8 +37,12 @@ Comes with EMI integration (for the Kaleidoscope recipes) because I couldn't be 
   - twoHandedVerylongsword
   - noKaleidoscopeZoom
   - boomerangSpinMultiplier
+  - staffRotationMultiplier
+  - debugBeaconBeams
+  - maxBeaconBeamIterations
 - Resource Packs
   - nokaleidoscopeoverlay - Removes the rendering of the scope from kaleidoscopes.
   - smolverylongsword - Makes the Verylongsword always use the inventory texture.
   - oldticketlauncher - Uses the old Ticket Launcher texture/model.
   - amethysthandleticketlauncher - Makes the Ticket Launcher use an amethyst handle instead of a copper one (or the old solid black one). Loaded by default.
+  - oldchunkandsheet - Uses the old Amarong Chunk and Amarong Sheet textures
