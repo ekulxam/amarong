@@ -6,8 +6,6 @@
   "mixins": [
     "boomerang.PersistentProjectileEntityMixin",
     "boomerang.ProjectileEntityAccessor",
-    "coreblock.BeaconBlockEntityAccessor",
-    "coreblock.BeaconBlockEntityAccessor$BeamSegmentAccessor",
     "coreblock.BeaconBlockEntityMixin",
     "duck.LivingEntityMixin",
     "staff.ItemStackMixin",
@@ -25,6 +23,7 @@
   },
   "client": [
     "compat.config.AmarongConfigMixin",
+    "compat.config.client.AmarongConfigScreenMixin",
     "compat.twirl.client.ClientPlayerEntityMixin",
     "kaleidoscope.client.GameRendererMixin",
     "staff.client.BipedEntityModelMixin",
