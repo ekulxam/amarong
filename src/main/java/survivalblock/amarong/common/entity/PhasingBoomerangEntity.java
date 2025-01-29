@@ -215,12 +215,17 @@ public class PhasingBoomerangEntity extends PersistentProjectileEntity {
         World world = this.getWorld();
         RegistryEntry.Reference<DamageType> reference = world.atmospheric_api$getEntryFromKey(RegistryKeys.DAMAGE_TYPE, AmarongDamageTypes.BOOMERANG_HIT);
         DamageSource damageSource = new DamageSource(reference, this, isOwnerNull ? this : owner);
+        ServerWorld serverWorld = null;
+        if (this.getWeaponStack() != null && this.getWorld() instanceof ServerWorld) {
+            serverWorld = (ServerWorld) world;
+            damage = EnchantmentHelper.getDamage(serverWorld, this.getWeaponStack(), entity, damageSource, (float) damage);
+        }
         if (entity.damage(damageSource, (float) damage)) {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;
             }
 
-            if (this.getWorld() instanceof ServerWorld serverWorld) {
+            if (serverWorld != null) {
                 EnchantmentHelper.onTargetDamaged(serverWorld, entity, damageSource, this.getWeaponStack());
             }
 

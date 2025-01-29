@@ -26,10 +26,12 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add(AmarongItems.SOMEWHAT_A_DUCK, "Handheld Duck");
         translationBuilder.add(AmarongItems.TICKET_LAUNCHER, "Amarong Ticket Launcher");
         translationBuilder.add(AmarongItems.AMARONG_HAMMER, "Amarong Hammer");
-        translationBuilder.add(AmarongBlocks.AMARONG_CORE, "Amarong Core");
         translationBuilder.add(AmarongItems.AMARONG_BOOMERANG, "Amarong Boomerang");
         translationBuilder.add(AmarongItems.AMARONG_STAFF, "Amarong Staff");
         translationBuilder.add("amarong.itemGroup.amarong_group", "Amarong");
+
+        // block
+        translationBuilder.add(AmarongBlocks.AMARONG_CORE, "Amarong Core");
 
         // entity types
         translationBuilder.add(AmarongEntityTypes.FLYING_TICKET, "Flying Ticket");
@@ -40,6 +42,7 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         // gamerules
         translationBuilder.add("gamerule.amarong:flyingTicketsDrop", "Amarong - Flying Tickets drop themselves on being discarded");
         translationBuilder.add("gamerule.amarong:boomerangDamage", "Amarong - Boomerang Damage");
+        translationBuilder.add("amarong:verylongswordPassiveCharge", "Amarong - Allow Verylongswords to passively build charge in inventory");
 
         // subtitles
         translationBuilder.add("subtitles.amarong.item.duck_squeezed", "Duck squeaks");
@@ -71,11 +74,11 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("advancements.amarong.when_tickets_fly.title", "When Tickets Fly");
         translationBuilder.add("advancements.amarong.when_tickets_fly.description", "Fire a Flying Ticket from an Amarong Ticket Launcher");
         translationBuilder.add("advancements.amarong.spider.title", "S p i d e r");
-        translationBuilder.add("advancements.amarong.spider.description", "Look at a spider with a kaleidoscope");
-        translationBuilder.add("advancements.amarong.creeper.title", "§aCreeper");
-        translationBuilder.add("advancements.amarong.creeper.description", "Look at a creeper with a kaleidoscope");
-        translationBuilder.add("advancements.amarong.invert.title", "§0Invert");
-        translationBuilder.add("advancements.amarong.invert.description", "Look at an enderman with a kaleidoscope");
+        translationBuilder.add("advancements.amarong.spider.description", "Look at a spider with a spider shader kaleidoscope");
+        translationBuilder.add("advancements.amarong.creeper.title", "Creeper");
+        translationBuilder.add("advancements.amarong.creeper.description", "Look at a creeper with a creeper shader kaleidoscope");
+        translationBuilder.add("advancements.amarong.invert.title", "Invert");
+        translationBuilder.add("advancements.amarong.invert.description", "Look at an enderman with an invert shader kaleidoscope");
         translationBuilder.add("advancements.amarong.hammer_time.title", "It's Hammer Time!");
         translationBuilder.add("advancements.amarong.hammer_time.description", "Obtain an Amarong Hammer");
 

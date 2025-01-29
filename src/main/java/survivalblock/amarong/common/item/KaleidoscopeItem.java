@@ -17,6 +17,10 @@ import java.util.List;
 
 public class KaleidoscopeItem extends SpyglassItem implements IAmASpyglassItem {
 
+    public static final Identifier INVERT = Identifier.ofVanilla("shaders/post/invert.json");
+    public static final Identifier CREEPER = Identifier.ofVanilla("shaders/post/creeper.json");
+    public static final Identifier SPIDER = Identifier.ofVanilla("shaders/post/spider.json");
+
     public static final ArrayList<Identifier> SUPER_SECRET_SETTING_PROGRAMS = new ArrayList<>(List.of(
             Identifier.ofVanilla("shaders/post/notch.json"),
             Identifier.ofVanilla("shaders/post/fxaa.json"),
@@ -27,7 +31,7 @@ public class KaleidoscopeItem extends SpyglassItem implements IAmASpyglassItem {
             Identifier.ofVanilla("shaders/post/color_convolve.json"),
             Identifier.ofVanilla("shaders/post/deconverge.json"),
             Identifier.ofVanilla("shaders/post/flip.json"),
-            Identifier.ofVanilla("shaders/post/invert.json"),
+            INVERT,
             Identifier.ofVanilla("shaders/post/ntsc.json"),
             Identifier.ofVanilla("shaders/post/outline.json"),
             Identifier.ofVanilla("shaders/post/phosphor.json"),
@@ -40,8 +44,8 @@ public class KaleidoscopeItem extends SpyglassItem implements IAmASpyglassItem {
             Identifier.ofVanilla("shaders/post/wobble.json"),
             Identifier.ofVanilla("shaders/post/blobs.json"),
             Identifier.ofVanilla("shaders/post/antialias.json"),
-            Identifier.ofVanilla("shaders/post/creeper.json"),
-            Identifier.ofVanilla("shaders/post/spider.json")));
+            CREEPER,
+            SPIDER));
 
     public static final Identifier KALEIDOSCOPE_SCOPE = Amarong.id("textures/misc/kaleidoscope_scope.png");
 

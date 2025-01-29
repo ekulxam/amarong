@@ -9,14 +9,19 @@ import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.advancement.criterion.UsingItemCriterion;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraft.predicate.ComponentPredicate;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.entity.PlayerPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import survivalblock.amarong.common.Amarong;
 import survivalblock.amarong.common.init.AmarongBlocks;
+import survivalblock.amarong.common.init.AmarongDataComponentTypes;
 import survivalblock.amarong.common.init.AmarongItems;
+import survivalblock.amarong.common.item.KaleidoscopeItem;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
@@ -92,12 +97,12 @@ public class AmarongAdvancementGenerator extends FabricAdvancementProvider {
                         true
                 )
                 .rewards(AdvancementRewards.Builder.experience(25))
-                .criterion("spider", createLookingAtEntityUsing(EntityType.SPIDER, AmarongItems.KALEIDOSCOPE))
+                .criterion("spider", createLookingAtEntityUsingKaleidoscope(EntityType.SPIDER, KaleidoscopeItem.SPIDER))
                 .build(Amarong.id("spider"));
         AdvancementEntry kaleidoscopeCreeper = Advancement.Builder.create().parent(useKaleidoscope)
                 .display(
                         AmarongItems.KALEIDOSCOPE,
-                        Text.translatable("advancements.amarong.creeper.title"),
+                        Text.translatable("advancements.amarong.creeper.title").formatted(Formatting.GREEN),
                         Text.translatable("advancements.amarong.creeper.description"),
                         null,
                         AdvancementFrame.TASK,
@@ -106,12 +111,12 @@ public class AmarongAdvancementGenerator extends FabricAdvancementProvider {
                         true
                 )
                 .rewards(AdvancementRewards.Builder.experience(50))
-                .criterion("creeper", createLookingAtEntityUsing(EntityType.CREEPER, AmarongItems.KALEIDOSCOPE))
+                .criterion("creeper", createLookingAtEntityUsingKaleidoscope(EntityType.CREEPER, KaleidoscopeItem.CREEPER))
                 .build(Amarong.id("creeper"));
         AdvancementEntry kaleidoscopeEnderman = Advancement.Builder.create().parent(useKaleidoscope)
                 .display(
                         AmarongItems.KALEIDOSCOPE,
-                        Text.translatable("advancements.amarong.invert.title"),
+                        Text.translatable("advancements.amarong.invert.title").formatted(Formatting.BLACK),
                         Text.translatable("advancements.amarong.invert.description"),
                         null,
                         AdvancementFrame.CHALLENGE,
@@ -120,7 +125,7 @@ public class AmarongAdvancementGenerator extends FabricAdvancementProvider {
                         true
                 )
                 .rewards(AdvancementRewards.Builder.experience(100))
-                .criterion("invert", createLookingAtEntityUsing(EntityType.ENDERMAN, AmarongItems.KALEIDOSCOPE))
+                .criterion("invert", createLookingAtEntityUsingKaleidoscope(EntityType.ENDERMAN, KaleidoscopeItem.INVERT))
                 .build(Amarong.id("invert"));
         AdvancementEntry hammerTime = Advancement.Builder.create().parent(obtainCore)
                 .display(
@@ -145,14 +150,26 @@ public class AmarongAdvancementGenerator extends FabricAdvancementProvider {
         consumer.accept(hammerTime);
     }
 
-
-
     @SuppressWarnings("SameParameterValue")
     private static AdvancementCriterion<UsingItemCriterion.Conditions> createUsing(Item item) {
-        return UsingItemCriterion.Conditions.create(EntityPredicate.Builder.create().typeSpecific(PlayerPredicate.Builder.create().build()), ItemPredicate.Builder.create().items(item));
+        return UsingItemCriterion.Conditions.create(
+                EntityPredicate.Builder.create().typeSpecific(
+                        PlayerPredicate.Builder.create().build()),
+                ItemPredicate.Builder.create().items(item));
     }
 
-    private static AdvancementCriterion<UsingItemCriterion.Conditions> createLookingAtEntityUsing(EntityType<?> entity, Item item) {
-        return UsingItemCriterion.Conditions.create(EntityPredicate.Builder.create().typeSpecific(PlayerPredicate.Builder.create().lookingAt(EntityPredicate.Builder.create().type(entity)).build()), ItemPredicate.Builder.create().items(item));
+    @SuppressWarnings("SameParameterValue")
+    private static AdvancementCriterion<UsingItemCriterion.Conditions> createLookingAtEntityUsingKaleidoscope(EntityType<?> entity, Item item, Identifier kaleidoscopeShaderId) {
+        return UsingItemCriterion.Conditions.create(
+                EntityPredicate.Builder.create().typeSpecific(
+                        PlayerPredicate.Builder.create().lookingAt(
+                                EntityPredicate.Builder.create().type(entity)).build()),
+                ItemPredicate.Builder.create().items(item)
+                        .component(ComponentPredicate.builder().add(
+                                AmarongDataComponentTypes.SHADER_TYPE, kaleidoscopeShaderId).build()));
+    }
+
+    private static AdvancementCriterion<UsingItemCriterion.Conditions> createLookingAtEntityUsingKaleidoscope(EntityType<?> entity, Identifier kaleidoscopeShaderId) {
+        return createLookingAtEntityUsingKaleidoscope(entity, AmarongItems.KALEIDOSCOPE, kaleidoscopeShaderId);
     }
 }

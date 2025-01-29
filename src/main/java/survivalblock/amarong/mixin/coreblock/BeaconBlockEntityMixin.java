@@ -85,12 +85,4 @@ public class BeaconBlockEntityMixin {
         }
         Amarong.LOGGER.info("Beam segments set! World time was {}, prevTime was {}, difference was {}", time, amarong$prevWorldTime, difference);
     }
-
-    /*
-    @ModifyExpressionValue(method = "tick", at = @At(value = "FIELD", target = "Lnet/minecraft/block/entity/BeaconBlockEntity;minY:I", opcode = Opcodes.GETFIELD))
-    private int alwaysAllowChangeForCore(int original) {
-
-        return original;
-    }
-     */
 }

@@ -11,6 +11,8 @@ public class AmarongGameRules {
             GameRuleRegistry.register("amarong:flyingTicketsDrop", GameRules.Category.MISC, GameRuleFactory.createBooleanRule(true));
     public static final GameRules.Key<DoubleRule> BOOMERANG_DAMAGE =
             GameRuleRegistry.register("amarong:boomerangDamage", GameRules.Category.MISC, GameRuleFactory.createDoubleRule(4.0F, 0.01F, Float.MAX_VALUE));
+    public static final GameRules.Key<GameRules.BooleanRule> VERYLONGSWORD_PASSIVE_CHARGE =
+            GameRuleRegistry.register("amarong:verylongswordPassiveCharge", GameRules.Category.MISC, GameRuleFactory.createBooleanRule(true));
 
     public static void init() {
 

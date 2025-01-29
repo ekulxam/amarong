@@ -2,6 +2,7 @@ package survivalblock.amarong.common.init;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.block.Block;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.BlockItem;
@@ -102,10 +103,9 @@ public class AmarongItems {
                     reference.set(enchantmentReference);
                 }
             });
-            Objects.requireNonNull(reference.get());
-            RegistryEntry<Enchantment> enchantmentEntry = reference.get();
+            RegistryEntry<Enchantment> enchantmentEntry = Objects.requireNonNull(reference.get());
             if (enchantmentEntry.value().isAcceptableItem(stack)) {
-                stack.addEnchantment(reference.get(), reference.get().value().getMaxLevel());
+                stack.addEnchantment(enchantmentEntry, enchantmentEntry.value().getMaxLevel());
                 if (item.equals(AMARONG_VERYLONGSWORD)) {
                     stack.set(AmarongDataComponentTypes.VERYLONGSWORD_CHARGE, AmarongVerylongswordItem.getMaxCharge(stack));
                 } else if (item.equals(SOMEWHAT_A_DUCK)) {

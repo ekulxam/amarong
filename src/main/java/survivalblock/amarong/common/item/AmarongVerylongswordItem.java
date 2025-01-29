@@ -1,17 +1,15 @@
 package survivalblock.amarong.common.item;
 
-import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -20,6 +18,7 @@ import survivalblock.amarong.common.component.VerylongswordComponent;
 import survivalblock.amarong.common.entity.RailgunEntity;
 import survivalblock.amarong.common.init.AmarongDataComponentTypes;
 import survivalblock.amarong.common.init.AmarongEntityComponents;
+import survivalblock.amarong.common.init.AmarongGameRules;
 import survivalblock.amarong.common.init.AmarongTags;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.item.AlternateModelItem;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.item.TwoHandedItem;
@@ -33,6 +32,9 @@ public class AmarongVerylongswordItem extends SwordItem implements TwoHandedItem
 
     public static final Color RAILGUN_COLOR = new Color(224, 122, 83);
     public static final Color OBSCURE_COLOR = new Color(176, 174, 241);
+
+    public static final int RAILGUN_RGB = RAILGUN_COLOR.getRGB();
+    public static final int OBSCURE_RGB = OBSCURE_COLOR.getRGB();
 
     public AmarongVerylongswordItem(ToolMaterial toolMaterial, AmarongToolMaterial.Configuration configuration) {
         super(toolMaterial, configuration);
@@ -90,9 +92,9 @@ public class AmarongVerylongswordItem extends SwordItem implements TwoHandedItem
     @Override
     public int getItemBarColor(ItemStack stack) {
         if (EnchantmentHelper.hasAnyEnchantmentsIn(stack, AmarongTags.AmarongEnchantmentTags.RAILGUN_EFFECT)) {
-            return RAILGUN_COLOR.getRGB();
+            return RAILGUN_RGB;
         } else if (EnchantmentHelper.hasAnyEnchantmentsIn(stack, AmarongTags.AmarongEnchantmentTags.OBSCURE_EFFECT)) {
-            return OBSCURE_COLOR.getRGB();
+            return OBSCURE_RGB;
         }
         return 0;
     }
@@ -126,5 +128,35 @@ public class AmarongVerylongswordItem extends SwordItem implements TwoHandedItem
     @Override
     public TwoHandedRenderType getTwoHandedRenderType(ItemStack stack) {
         return TwoHandedRenderType.LONGSWORD;
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        if (world.isClient()) {
+            return;
+        }
+        if (!(entity instanceof PlayerEntity)) {
+            return;
+        }
+        if (!world.getGameRules().getBoolean(AmarongGameRules.VERYLONGSWORD_PASSIVE_CHARGE)) {
+            return;
+        }
+        int ticks = 60 * (selected ? 1 : 3); // charge slower when not selected
+        if (world.getTime() % ticks == 0) {
+            int maxCharge = getMaxCharge(stack);
+            if (maxCharge <= 0) {
+                return;
+            }
+            int charge = checkForReset(stack) + 1;
+            if (charge > maxCharge) {
+                return;
+            }
+            stack.set(AmarongDataComponentTypes.VERYLONGSWORD_CHARGE, charge);
+        }
+    }
+
+    @Override
+    public boolean allowComponentsUpdateAnimation(PlayerEntity player, Hand hand, ItemStack oldStack, ItemStack newStack) {
+        return checkForReset(newStack) <= checkForReset(oldStack);
     }
 }

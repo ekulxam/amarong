@@ -154,12 +154,12 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
 
     private float getPlayerDamage() {
         if (this.stack == null || this.stack.isEmpty()) {
-            return 10;
+            return 12.5f;
         }
         if (AmarongUtil.shouldRetainCharge(this.stack)) {
             return 20;
         }
-        return 10;
+        return 12.5f;
     }
 
 
