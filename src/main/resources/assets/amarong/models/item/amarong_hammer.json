@@ -51,6 +51,12 @@
 		},
 		"fixed": {
 			"translation": [0, -2.5, 0]
+		},
+		"firstperson_righthand": {
+			"scale": [ 0.875, 0.875, 0.875 ]
+		},
+		"firstperson_lefthand": {
+			"scale": [ 0.875, 0.875, 0.875 ]
 		}
 	}
 }
