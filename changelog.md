@@ -1,11 +1,7 @@
-Amarong 1.2.0+1.21.1
-- Fixed a longstanding bug where placing transparent blocks that intersected with a rainbow beacon beam (from an Amarong Core) would affect the smoothness of the color change
-  - Added a config option to configure this in case performance issues occur
-  - Added a config option to debug beacon tick
-- Amarong now has a separate advancement tab
-- Added the Amarong Staff
-- Retextured the Amarong Chunk and Amarong Sheet
-- Prefixed Uniques with the mod id
-- Amarong Boomerang can now be enchanted with sharpness and other sword enchantments
-- Added the Easy Core Duplication datapack for people who would like to obtain multiple Amarong Cores more efficiently without farming withers
-- Update README
+Amarong 1.2.1+1.21.1
+- Added a gamerule to enable passive charge for the verylongsword
+- Buffed railcannon damage (10 -> 12.5)
+- Allow damage enchantments such as Sharpness to modify the boomerang's projectile damage
+- Changed the map color of the Amarong Core to orange
+- (Bugfix) Dropping a kaleidoscope or switching between kaleidoscopes now resets the shader
+- Kaleidoscope Entity advancements now require the player to be using the correct shader kaleidoscope
