@@ -32,6 +32,7 @@ Comes with EMI integration (for the Kaleidoscope recipes) because I couldn't be 
 - Gamerules
   - amarong:flyingTicketsDrop - Controls whether Flying Tickets drop themselves upon impact
   - amarong:boomerangDamage - Controls the damage per hit of an Amarong Boomerang
+  - amarong:verylongswordPassiveCharge - Controls whether verylongswords passively gain charge in a player's inventory
 - YACL (YetAnotherConfigLib) Client Config
   - verboseLogging
   - twoHandedVerylongsword
