@@ -1,8 +1,9 @@
-Amarong 1.2.1+1.21.1
-- Added a gamerule to enable passive charge for the verylongsword
-- Buffed railcannon damage (10 -> 12.5)
-- Allow damage enchantments such as Sharpness to modify the boomerang's projectile damage
-- Changed the map color of the Amarong Core to orange
-- (Bugfix) Dropping a kaleidoscope or switching between kaleidoscopes now resets the shader
-- Kaleidoscope Entity advancements now require the player to be using the correct shader kaleidoscope
-- Slightly scaled down the Amarong Hammer model in first person
+Amarong 1.2.2+1.21.1
+- Altered Amarong Hammer smash attack sounds
+- Verylongsword item bar now pulses slightly when fully charged
+- Add attribution for sound because I forgot (sorry)
+- Entering obscure now spawns particles around your location if the gamerule amarong:obscure_spawns_particles is true
+- Added recipe for the Amarong Hammer (can be disabled by disabling the Amarong Hammer Recipe datapack)
+- Removed the Vault enchantment
+- The Pneumatic and Particle Accelerator enchantments are no longer treasure enchantments
+- The Ticket Launcher is now enchantable (oops)

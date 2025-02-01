@@ -47,3 +47,6 @@ Comes with EMI integration (for the Kaleidoscope recipes) because I couldn't be 
   - oldticketlauncher - Uses the old Ticket Launcher texture/model.
   - amethysthandleticketlauncher - Makes the Ticket Launcher use an amethyst handle instead of a copper one (or the old solid black one). Loaded by default.
   - oldchunkandsheet - Uses the old Amarong Chunk and Amarong Sheet textures
+
+### Attribution/Credits:
+- Duck Squeak Sound: https://freesound.org/people/DANMITCH3LL/sounds/232017/
