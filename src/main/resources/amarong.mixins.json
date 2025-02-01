@@ -8,6 +8,7 @@
     "boomerang.ProjectileEntityAccessor",
     "coreblock.BeaconBlockEntityMixin",
     "duck.LivingEntityMixin",
+    "hammer.MaceItemMixin",
     "staff.ItemStackMixin",
     "staff.ItemUsageContextAccessor",
     "ticketlauncher.ExperienceBottleItemMixin",
@@ -28,6 +29,9 @@
     "kaleidoscope.client.GameRendererMixin",
     "staff.client.BipedEntityModelMixin",
     "staff.client.ItemRendererMixin",
+    "verylongsword.client.AmarongVerylongswordItemMixin",
+    "verylongsword.client.GlowParticleMixin",
+    "verylongsword.client.GlowParticleMixin$GlowFactoryMixin",
     "verylongsword.client.PlayerEntityRendererMixin"
   ]
 }
