@@ -1,0 +1,12 @@
+{
+  "added": [
+    "amarong:amarong_core",
+    "amarong:amarong_chunk",
+    "amarong:amarong_sheet",
+    "amarong:amarong_kaleidoscope",
+    "amarong:amarong_ticket_dispenser",
+    "amarong:amarong_verylongsword",
+    "amarong:amarong_boomerang",
+    "amarong:amarong_hammer"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "required": true,
+  "package": "survivalblock.amarong.mixin",
+  "plugin": "survivalblock.amarong.common.compat.AmarongMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "boomerang.PersistentProjectileEntityMixin",
+    "boomerang.ProjectileEntityAccessor",
+    "coreblock.BeaconBlockEntityMixin",
+    "duck.LivingEntityMixin",
+    "hammer.MaceItemMixin",
+    "staff.ItemStackMixin",
+    "staff.ItemUsageContextAccessor",
+    "ticketlauncher.ExperienceBottleItemMixin",
+    "ticketlauncher.TerrificTrinketsApiMixin",
+    "ticketlauncher.ThrowablePotionItemMixin",
+    "verylongsword.EntityAttributesMixin",
+    "verylongsword.EntityMixin",
+    "verylongsword.LivingEntityMixin",
+    "verylongsword.PlayerEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "compat.config.AmarongConfigMixin",
+    "compat.config.client.AmarongConfigScreenMixin",
+    "compat.twirl.client.ClientPlayerEntityMixin",
+    "kaleidoscope.client.GameRendererMixin",
+    "staff.client.BipedEntityModelMixin",
+    "staff.client.ItemRendererMixin",
+    "verylongsword.client.AmarongVerylongswordItemMixin",
+    "verylongsword.client.GlowParticleMixin",
+    "verylongsword.client.GlowParticleMixin$GlowFactoryMixin",
+    "verylongsword.client.PlayerEntityRendererMixin"
+  ]
+}
