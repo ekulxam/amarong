@@ -52,6 +52,7 @@ public class Amarong implements ModInitializer {
 
 	private static void registerBuiltinDataPacks(ModContainer modContainer) {
 		AtmosphericResourceManagerHelper.registerBuiltinDataPack(AmarongUtil.EASY_CORE_DUPLICATION_PACK, modContainer, Text.translatable("dataPack.amarong.easy_core_duplication_pack.name"), ResourcePackActivationType.NORMAL);
+		AtmosphericResourceManagerHelper.registerBuiltinDataPack(AmarongUtil.AMARONG_HAMMER_RECIPE_PACK, modContainer, Text.translatable("dataPack.amarong.amarong_hammer_recipe_pack.name"), ResourcePackActivationType.DEFAULT_ENABLED);
 	}
 
 	public static Identifier id(String path) {

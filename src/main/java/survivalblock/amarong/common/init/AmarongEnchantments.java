@@ -21,7 +21,6 @@ public class AmarongEnchantments {
     public static final RegistryKey<Enchantment> PARTICLE_ACCELERATOR = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("particle_accelerator"));
     public static final RegistryKey<Enchantment> PNEUMATIC = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("pneumatic"));
     public static final RegistryKey<Enchantment> RAILGUN = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("railgun"));
-    public static final RegistryKey<Enchantment> VAULT = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("vault"));
 
     public static ImmutableMap<RegistryKey<Enchantment>, Enchantment> asEnchantments(RegistryEntryLookupContainer container) {
         Map<RegistryKey<Enchantment>, Enchantment> enchantments = new HashMap<>();
@@ -75,14 +74,6 @@ public class AmarongEnchantments {
                         AttributeModifierSlot.MAINHAND))
                 .exclusiveSet(enchantmentRegistryEntryLookup.getOrThrow(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_VERYLONGSWORD))
                 .build(RAILGUN.getValue()));
-        enchantments.put(VAULT, Enchantment.builder(Enchantment.definition(
-                itemRegistryEntryLookup.getOrThrow(AmarongTags.AmarongItemTags.HAMMER_ENCHANTABLE),
-                        1,
-                        1,
-                        Enchantment.constantCost(1),
-                        Enchantment.constantCost(100),
-                        1,
-                        AttributeModifierSlot.MAINHAND)).build(VAULT.getValue()));
         return ImmutableMap.copyOf(enchantments);
     }
 

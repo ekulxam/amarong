@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
 import survivalblock.amarong.common.init.AmarongBlocks;
 import survivalblock.amarong.common.init.AmarongEntityTypes;
+import survivalblock.amarong.common.init.AmarongGameRules;
 import survivalblock.amarong.common.init.AmarongItems;
 import survivalblock.amarong.common.init.AmarongTags;
 
@@ -40,9 +41,10 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add(AmarongEntityTypes.BOOMERANG, "Amarong Boomerang");
 
         // gamerules
-        translationBuilder.add("gamerule.amarong:flyingTicketsDrop", "Amarong - Flying Tickets drop themselves on being discarded");
-        translationBuilder.add("gamerule.amarong:boomerangDamage", "Amarong - Boomerang Damage");
-        translationBuilder.add("amarong:verylongswordPassiveCharge", "Amarong - Allow Verylongswords to passively build charge in inventory");
+        translationBuilder.add(AmarongGameRules.FLYING_TICKETS_DROP.getTranslationKey(), "Amarong - Flying Tickets drop themselves on being discarded");
+        translationBuilder.add(AmarongGameRules.BOOMERANG_DAMAGE.getTranslationKey(), "Amarong - Boomerang Damage");
+        translationBuilder.add(AmarongGameRules.VERYLONGSWORD_PASSIVE_CHARGE.getTranslationKey(), "Amarong - Allow Verylongswords to passively build charge in inventory");
+        translationBuilder.add(AmarongGameRules.OBSCURE_SPAWNS_PARTICLES.getTranslationKey(), "Amarong - Entering Obscure Spawns Particles");
 
         // subtitles
         translationBuilder.add("subtitles.amarong.item.duck_squeezed", "Duck squeaks");
@@ -63,6 +65,7 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("resourcePack.amarong.oldchunkandsheet.name", "Old Chunk and Sheet Textures");
 
         translationBuilder.add("dataPack.amarong.easy_core_duplication_pack.name", "Easy Amarong Core Duplication");
+        translationBuilder.add("dataPack.amarong.amarong_hamer_recipe_pack.name", "Amarong Hammer Recipe");
 
         // advancements
         translationBuilder.add("advancements.amarong.use_kaleidoscope.title", "A World of Color");
@@ -93,8 +96,6 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("enchantment.amarong.railgun.desc", "Use the Amarong Verylongsword when fully charged to fire off a railcannon.");
         translationBuilder.add("enchantment.amarong.capacity", "Capacity");
         translationBuilder.add("enchantment.amarong.capacity.desc", "Increases the amount of water a handheld duck can hold.");
-        translationBuilder.add("enchantment.amarong.vault", "Vault");
-        translationBuilder.add("enchantment.amarong.vault.desc", "Use the hammer to gain a boost in upwards velocity.");
 
         // item tags
         translationBuilder.add(AmarongTags.AmarongItemTags.RAINBOW_CORE_GENERATORS, "Rainbow Core Generators");
@@ -112,7 +113,6 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add(AmarongTags.AmarongEnchantmentTags.OBSCURE_EFFECT, "Obscure Effect");
         translationBuilder.add(AmarongTags.AmarongEnchantmentTags.RAILGUN_EFFECT, "Railgun Effect");
         translationBuilder.add(AmarongTags.AmarongEnchantmentTags.CAPACITY_EFFECT, "Capacity Effect");
-        translationBuilder.add(AmarongTags.AmarongEnchantmentTags.VAULT_EFFECT, "Vault Effect");
         translationBuilder.add(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_VERYLONGSWORD, "Exclusive Set - Verylongsword");
         translationBuilder.add(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_TICKET_LAUNCHER, "Exclusive Set - Ticket Launcher");
 

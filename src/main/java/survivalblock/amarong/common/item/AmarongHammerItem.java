@@ -8,6 +8,8 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
@@ -31,6 +33,11 @@ public class AmarongHammerItem extends MiningToolItem {
     @Override
     public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         Items.MACE.postDamageEntity(stack, target, attacker);
+        World world = attacker.getWorld();
+        if (!world.isClient()) {
+            Vec3d pos = attacker.getPos();
+            world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.BLOCKS, 1.0F,  0.1F + world.random.nextFloat() * 1.2F);
+        }
     }
 
     @Override
@@ -46,14 +53,6 @@ public class AmarongHammerItem extends MiningToolItem {
                 user.setCurrentHand(hand);
                 return TypedActionResult.success(stack);
             }
-        }
-        if (EnchantmentHelper.hasAnyEnchantmentsIn(stack, AmarongTags.AmarongEnchantmentTags.VAULT_EFFECT)) {
-            Vec3d current = user.getVelocity();
-            user.setVelocity(current.getX(), Math.max(0, current.getY()) + 2.5, current.getZ());
-            if (!world.isClient()) {
-                user.getItemCooldownManager().set(this, 200);
-            }
-            return TypedActionResult.success(stack, world.isClient());
         }
         return super.use(world, user, hand);
     }

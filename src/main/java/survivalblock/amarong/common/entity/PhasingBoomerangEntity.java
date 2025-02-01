@@ -158,7 +158,7 @@ public class PhasingBoomerangEntity extends PersistentProjectileEntity {
                 }
                 return inventory.insertStack(this.asItemStack());
             } catch (ArrayIndexOutOfBoundsException e) {
-                Amarong.LOGGER.error("An error occured when picking up an Amarong Boomerang!", e);
+                Amarong.LOGGER.error("An error occurred when picking up an Amarong Boomerang!", e);
                 return inventory.insertStack(this.asItemStack());
             }
         }

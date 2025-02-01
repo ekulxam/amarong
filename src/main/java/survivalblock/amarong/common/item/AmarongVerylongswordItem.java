@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -19,6 +20,7 @@ import survivalblock.amarong.common.entity.RailgunEntity;
 import survivalblock.amarong.common.init.AmarongDataComponentTypes;
 import survivalblock.amarong.common.init.AmarongEntityComponents;
 import survivalblock.amarong.common.init.AmarongGameRules;
+import survivalblock.amarong.common.init.AmarongParticleTypes;
 import survivalblock.amarong.common.init.AmarongTags;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.item.AlternateModelItem;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.item.TwoHandedItem;
@@ -31,10 +33,15 @@ import static survivalblock.amarong.common.item.AmarongToolMaterial.BASE_ENTITY_
 public class AmarongVerylongswordItem extends SwordItem implements TwoHandedItem, AlternateModelItem {
 
     public static final Color RAILGUN_COLOR = new Color(224, 122, 83);
+    public static final Color RAILGUN_PULSE_COLOR = new Color(224, 196, 83);
+
     public static final Color OBSCURE_COLOR = new Color(176, 174, 241);
+    public static final Color OBSCURE_PULSE_COLOR = new Color(241, 174, 212);
 
     public static final int RAILGUN_RGB = RAILGUN_COLOR.getRGB();
     public static final int OBSCURE_RGB = OBSCURE_COLOR.getRGB();
+    public static final int RAILGUN_PULSE_RGB = RAILGUN_PULSE_COLOR.getRGB();
+    public static final int OBSCURE_PULSE_RGB = OBSCURE_PULSE_COLOR.getRGB();
 
     public AmarongVerylongswordItem(ToolMaterial toolMaterial, AmarongToolMaterial.Configuration configuration) {
         super(toolMaterial, configuration);
@@ -64,6 +71,13 @@ public class AmarongVerylongswordItem extends SwordItem implements TwoHandedItem
                         user.getItemCooldownManager().set(this, retainsCharge ? 5 : RailgunEntity.FIRING_TICKS);
                     } else {
                         verylongswordComponent.enterObscure();
+                        if (!retainsCharge && world instanceof ServerWorld serverWorld && serverWorld.getGameRules().getBoolean(AmarongGameRules.OBSCURE_SPAWNS_PARTICLES)) {
+                            float height = user.getHeight();
+                            final float deltaXZ = user.getWidth() * 0.5F * 1.5F;
+                            serverWorld.spawnParticles(AmarongParticleTypes.OBSCURE_GLOW,
+                                    user.getX(), user.getY() + (height * 0.5), user.getZ(),
+                                    48, deltaXZ, height, deltaXZ, 0);
+                        }
                         user.getItemCooldownManager().set(this, VerylongswordComponent.OBSCURE);
                     }
                     if (!retainsCharge) {

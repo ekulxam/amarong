@@ -156,4 +156,26 @@ public class AmarongRecipeGenerator extends FabricRecipeProvider {
                     .offerTo(exporter, "amarong_core_duplication");
         }
     }
+
+    public static class AmarongHammerRecipeGenerator extends FabricRecipeProvider {
+
+        public AmarongHammerRecipeGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, registriesFuture);
+        }
+
+        @Override
+        public void generate(RecipeExporter exporter) {
+            ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, AmarongItems.AMARONG_HAMMER).pattern("  X").pattern(" # ").pattern("/  ")
+                    .input('/', Items.STICK)
+                    .input('#', Items.MACE)
+                    .input('X', AmarongItems.AMARONG_CORE)
+                    .criterion(FabricRecipeProvider.hasItem(Items.STICK),
+                            FabricRecipeProvider.conditionsFromItem(Items.STICK))
+                    .criterion(FabricRecipeProvider.hasItem(Items.MACE),
+                            FabricRecipeProvider.conditionsFromItem(Items.MACE))
+                    .criterion(FabricRecipeProvider.hasItem(AmarongItems.AMARONG_CORE),
+                            FabricRecipeProvider.conditionsFromItem(AmarongItems.AMARONG_CORE))
+                    .offerTo(exporter);
+        }
+    }
 }

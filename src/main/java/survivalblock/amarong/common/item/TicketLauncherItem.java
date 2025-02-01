@@ -138,4 +138,14 @@ public class TicketLauncherItem extends Item {
         int tickets = checkForReset(stack);
         tooltip.add(Text.translatable("tooltip.terrifictickets.ticket_display", tickets).formatted(Formatting.GRAY));
     }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return stack.getMaxCount() == 1;
+    }
+
+    @Override
+    public int getEnchantability() {
+        return 1;
+    }
 }

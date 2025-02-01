@@ -11,11 +11,13 @@ import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.particle.GlowParticle;
 import net.minecraft.client.particle.SonicBoomParticle;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.text.Text;
 import survivalblock.amarong.client.compat.config.AmarongConfigScreen;
+import survivalblock.amarong.client.particle.ObscureGlowParticleFactory;
 import survivalblock.amarong.client.render.StaffTransformationsManager;
 import survivalblock.amarong.client.render.entity.FlyingTicketEntityRenderer;
 import survivalblock.amarong.client.render.entity.PhasingBoomerangEntityRenderer;
@@ -41,7 +43,9 @@ public class AmarongClient implements ClientModInitializer {
 		EntityRendererRegistry.register(AmarongEntityTypes.RAILGUN, RailgunEntityRenderer::new);
 		EntityRendererRegistry.register(AmarongEntityTypes.BOOMERANG, PhasingBoomerangEntityRenderer::new);
 
-		ParticleFactoryRegistry.getInstance().register(AmarongParticleTypes.RAILGUN_PARTICLE, SonicBoomParticle.Factory::new);
+		ParticleFactoryRegistry particleFactoryRegistry = ParticleFactoryRegistry.getInstance();
+		particleFactoryRegistry.register(AmarongParticleTypes.RAILGUN_PARTICLE, SonicBoomParticle.Factory::new);
+		particleFactoryRegistry.register(AmarongParticleTypes.OBSCURE_GLOW, ObscureGlowParticleFactory::new);
 
 		AlternateItemModelRegistry.register(AmarongItems.AMARONG_VERYLONGSWORD, AmarongClientUtil.VERYLONGSWORD_INVENTORY);
 		AlternateItemModelRegistry.register(AmarongItems.AMARONG_BOOMERANG, AmarongClientUtil.BOOMERANG_INVENTORY);

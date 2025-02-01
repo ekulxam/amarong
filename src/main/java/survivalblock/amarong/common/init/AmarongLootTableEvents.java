@@ -29,15 +29,7 @@ public class AmarongLootTableEvents implements LootTableEvents.Modify {
         }
         RegistryWrapper.Impl<Enchantment> wrapper = registries.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
         LootPool.Builder builder = LootPool.builder();
-        if (TRIAL_CHAMBERS_SUPPLY_CHEST.equals(key)) {
-            builder.rolls(ConstantLootNumberProvider.create(1.0F))
-                    .with(ItemEntry.builder(Items.BOOK).weight(1)
-                            .apply(new SetEnchantmentsLootFunction.Builder().enchantment(wrapper.getOrThrow(AmarongEnchantments.PNEUMATIC), ConstantLootNumberProvider.create(1.0F)))
-                    ).with(ItemEntry.builder(Items.BOOK).weight(1)
-                            .apply(new SetEnchantmentsLootFunction.Builder().enchantment(wrapper.getOrThrow(AmarongEnchantments.PARTICLE_ACCELERATOR), ConstantLootNumberProvider.create(1.0F))))
-                    .with(EmptyEntry.builder().weight(18));
-            tableBuilder.pool(builder);
-        } else if (END_CITY_TREASURE_CHEST.equals(key)) {
+        if (END_CITY_TREASURE_CHEST.equals(key)) {
             builder.rolls(ConstantLootNumberProvider.create(1.0F))
                     .with(ItemEntry.builder(Items.BOOK).weight(1)
                             .apply(new SetEnchantmentsLootFunction.Builder().enchantment(wrapper.getOrThrow(AmarongEnchantments.OBSCURE), ConstantLootNumberProvider.create(1.0F))))

@@ -88,7 +88,6 @@ public class AmarongItems {
                     } else if (item.equals(SOMEWHAT_A_DUCK)) {
                         addEnchantedStack(item, displayContext, "amarong:capacity", entries);
                     } else if (item.equals(AMARONG_HAMMER)) {
-                        addEnchantedStack(item, displayContext, "amarong:vault", entries);
                         if (Amarong.twirl) addEnchantedStack(item, displayContext, "twirl:twirling", entries);
                     }
                 }

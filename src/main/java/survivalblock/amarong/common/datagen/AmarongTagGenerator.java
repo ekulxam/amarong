@@ -154,19 +154,16 @@ public class AmarongTagGenerator {
 
             getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.CAPACITY_EFFECT).add(AmarongEnchantments.CAPACITY);
 
-            getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.VAULT_EFFECT).add(AmarongEnchantments.VAULT);
-
             getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_TICKET_LAUNCHER).add(AmarongEnchantments.PNEUMATIC);
             getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_TICKET_LAUNCHER).add(AmarongEnchantments.PARTICLE_ACCELERATOR);
             getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_VERYLONGSWORD).add(AmarongEnchantments.OBSCURE);
             getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_VERYLONGSWORD).add(AmarongEnchantments.RAILGUN);
 
-            getOrCreateTagBuilder(EnchantmentTags.TREASURE).add(AmarongEnchantments.PNEUMATIC);
-            getOrCreateTagBuilder(EnchantmentTags.TREASURE).add(AmarongEnchantments.PARTICLE_ACCELERATOR);
+            getOrCreateTagBuilder(EnchantmentTags.NON_TREASURE).add(AmarongEnchantments.PNEUMATIC);
+            getOrCreateTagBuilder(EnchantmentTags.NON_TREASURE).add(AmarongEnchantments.PARTICLE_ACCELERATOR);
             getOrCreateTagBuilder(EnchantmentTags.TREASURE).add(AmarongEnchantments.OBSCURE);
             getOrCreateTagBuilder(EnchantmentTags.TREASURE).add(AmarongEnchantments.RAILGUN);
             getOrCreateTagBuilder(EnchantmentTags.NON_TREASURE).add(AmarongEnchantments.CAPACITY);
-            // no, I didn't forget about vault, but it's too weird to add to any tags, so I'll just pretend it doesn't exist here
 
             getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.POWER_LIKE).add(Enchantments.POWER);
 

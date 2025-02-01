@@ -43,8 +43,6 @@ public class AmarongTags {
 
         public static final TagKey<Enchantment> CAPACITY_EFFECT = TagKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("capacity_effect"));
 
-        public static final TagKey<Enchantment> VAULT_EFFECT = TagKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("vault_effect"));
-
         public static final TagKey<Enchantment> EXCLUSIVE_SET_TICKET_LAUNCHER = TagKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("exclusive_set/ticket_launcher"));
         public static final TagKey<Enchantment> EXCLUSIVE_SET_VERYLONGSWORD = TagKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("exclusive_set/verylongsword"));
 

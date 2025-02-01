@@ -29,6 +29,8 @@ public class AmarongDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(AmarongTagGenerator.AmarongEntityTypeTagGenerator::new);
 		FabricDataGenerator.Pack easyCoreDuplicationPack = FabricDataPackGenerator.createBuiltinDataPack(fabricDataGenerator, AmarongUtil.EASY_CORE_DUPLICATION_PACK);
 		easyCoreDuplicationPack.addProvider(AmarongRecipeGenerator.EasyCoreDuplicationRecipeGenerator::new);
+		FabricDataGenerator.Pack amarongCoreRecipePack = FabricDataPackGenerator.createBuiltinDataPack(fabricDataGenerator, AmarongUtil.AMARONG_HAMMER_RECIPE_PACK);
+		amarongCoreRecipePack.addProvider(AmarongRecipeGenerator.AmarongHammerRecipeGenerator::new);
 	}
 
 	@Override

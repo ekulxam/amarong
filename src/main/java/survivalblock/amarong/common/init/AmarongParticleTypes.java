@@ -8,9 +8,11 @@ import survivalblock.amarong.common.Amarong;
 
 public class AmarongParticleTypes {
     public static final SimpleParticleType RAILGUN_PARTICLE = FabricParticleTypes.simple();
+    public static final SimpleParticleType OBSCURE_GLOW = FabricParticleTypes.simple(true);
 
     public static void init() {
         Registry.register(Registries.PARTICLE_TYPE, Amarong.id("railgun_particle"), RAILGUN_PARTICLE);
+        Registry.register(Registries.PARTICLE_TYPE, Amarong.id("obscure_glow"), OBSCURE_GLOW);
     }
 
 }

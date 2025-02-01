@@ -13,6 +13,8 @@ public class AmarongGameRules {
             GameRuleRegistry.register("amarong:boomerangDamage", GameRules.Category.MISC, GameRuleFactory.createDoubleRule(4.0F, 0.01F, Float.MAX_VALUE));
     public static final GameRules.Key<GameRules.BooleanRule> VERYLONGSWORD_PASSIVE_CHARGE =
             GameRuleRegistry.register("amarong:verylongswordPassiveCharge", GameRules.Category.MISC, GameRuleFactory.createBooleanRule(true));
+    public static final GameRules.Key<GameRules.BooleanRule> OBSCURE_SPAWNS_PARTICLES =
+            GameRuleRegistry.register("amarong:obscure_spawns_particles", GameRules.Category.MISC, GameRuleFactory.createBooleanRule(false));
 
     public static void init() {
 

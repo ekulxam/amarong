@@ -34,6 +34,7 @@ import java.util.List;
 public class SomewhatADuckItem extends Item {
 
     public static final int MAX_WATER = 100;
+    public static final int ENCHANTABILITY = (Items.BOW.getEnchantability() + Items.CROSSBOW.getEnchantability()) / 2;
     public static final Color WATER_COLOR = new Color(56, 208, 242);
 
     public SomewhatADuckItem(Settings settings) {
@@ -151,7 +152,7 @@ public class SomewhatADuckItem extends Item {
 
     @Override
     public int getEnchantability() {
-        return (Items.BOW.getEnchantability() + Items.CROSSBOW.getEnchantability()) / 2;
+        return ENCHANTABILITY;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package survivalblock.amarong.common;
 
-import com.mojang.logging.LogUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.decoration.ArmorStandEntity;
@@ -19,6 +18,8 @@ import java.awt.*;
 public class AmarongUtil {
 
     public static final Identifier EASY_CORE_DUPLICATION_PACK = Amarong.id("easy_core_duplication_pack");
+
+    public static final Identifier AMARONG_HAMMER_RECIPE_PACK = Amarong.id("amarong_hammer_recipe_pack");
 
     public static boolean increaseThrowablePotionVelocity = false;
 
