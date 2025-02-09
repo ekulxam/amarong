@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 
 public class AmarongItems {
 
@@ -31,31 +32,40 @@ public class AmarongItems {
 
     public static final List<Item> AMARONG_ITEMS = new ArrayList<>();
 
-    public static final Item AMARONG_CHUNK = registerItem("amarong_chunk", new Item(new Item.Settings().maxCount(64)));
-    public static final Item AMARONG_SHEET = registerItem("amarong_sheet", new Item(new Item.Settings().maxCount(64)));
-    public static final Item KALEIDOSCOPE = registerItem("amarong_kaleidoscope", new KaleidoscopeItem(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)));
-    public static final Item AMARONG_VERYLONGSWORD = registerItem("amarong_verylongsword", new AmarongVerylongswordItem(AmarongToolMaterial.INSTANCE,
+    public static final Item AMARONG_CHUNK = registerItem("amarong_chunk", Item::new, new Item.Settings().maxCount(64));
+
+    public static final Item AMARONG_SHEET = registerItem("amarong_sheet", Item::new, new Item.Settings().maxCount(64));
+
+    public static final Item KALEIDOSCOPE = registerItem("amarong_kaleidoscope", KaleidoscopeItem::new, new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON));
+
+    public static final Item AMARONG_VERYLONGSWORD = registerItem("amarong_verylongsword", settings -> new AmarongVerylongswordItem(AmarongToolMaterial.INSTANCE, settings),
             new AmarongToolMaterial.Configuration()
                     .attributeModifiers(AmarongVerylongswordItem.createAttributeModifiers(22.4F, 0.5F, AMARONG_TOOL_REACH + 0.5F, AMARONG_TOOL_REACH))
-    ));
-    public static final Item AMARONG_HAMMER = registerItem("amarong_hammer", new AmarongHammerItem(AmarongToolMaterial.INSTANCE,
+    );
+
+    public static final Item AMARONG_HAMMER = registerItem("amarong_hammer", settings -> new AmarongHammerItem(AmarongToolMaterial.INSTANCE, settings),
             new AmarongToolMaterial.Configuration()
                     .attributeModifiers(AmarongVerylongswordItem.createAttributeModifiers(6.0F, 0.6F, AMARONG_TOOL_REACH + 0.75F, AMARONG_TOOL_REACH + 0.5F))
                     .rarity(Rarity.EPIC)
-    ));
+    );
 
-    public static final Item TICKET_LAUNCHER = registerItem("amarong_ticket_dispenser", new TicketLauncherItem(new Item.Settings().maxCount(1).component(AmarongDataComponentTypes.TICKETS, 0)));
-    public static final Item SOMEWHAT_A_DUCK = registerItem("somewhat_a_duck", new SomewhatADuckItem(new Item.Settings().maxCount(1).component(AmarongDataComponentTypes.WATERGUN, SomewhatADuckItem.MAX_WATER).equipmentSlot((living, stack) -> EquipmentSlot.HEAD)));
+    public static final Item TICKET_LAUNCHER = registerItem("amarong_ticket_dispenser", TicketLauncherItem::new, new Item.Settings().maxCount(1).component(AmarongDataComponentTypes.TICKETS, 0));
+
+    public static final Item SOMEWHAT_A_DUCK = registerItem("somewhat_a_duck", SomewhatADuckItem::new, new Item.Settings().maxCount(1)
+            .component(AmarongDataComponentTypes.WATERGUN, SomewhatADuckItem.MAX_WATER).equipmentSlot((living, stack) -> EquipmentSlot.HEAD));
+
     public static final Item AMARONG_CORE = registerBlockItem(AmarongBlocks.AMARONG_CORE, new Item.Settings());
 
-    public static final Item AMARONG_BOOMERANG = registerItem("amarong_boomerang", new AmarongBoomerangItem(AmarongToolMaterial.INSTANCE, new AmarongToolMaterial.Configuration()
+    public static final Item AMARONG_BOOMERANG = registerItem("amarong_boomerang", settings -> new AmarongBoomerangItem(AmarongToolMaterial.INSTANCE, settings), new AmarongToolMaterial.Configuration()
             .attributeModifiers(AmarongVerylongswordItem.createAttributeModifiers(4.0F, 1.6F, AMARONG_TOOL_REACH, AMARONG_TOOL_REACH))
-    ));
-    public static final Item AMARONG_STAFF = registerItem("amarong_staff", new AmarongStaffItem(new Item.Settings().maxCount(1).component(AmarongDataComponentTypes.STAFF_STACK, ItemStack.EMPTY)
-            .attributeModifiers(AmarongStaffItem.createAttributeModifiers(8f, 7.6f))
-    ));
+    );
 
-    private static Item registerItem(String name, Item item) {
+    public static final Item AMARONG_STAFF = registerItem("amarong_staff", AmarongStaffItem::new, new Item.Settings().maxCount(1).component(AmarongDataComponentTypes.STAFF_STACK, ItemStack.EMPTY)
+            .attributeModifiers(AmarongStaffItem.createAttributeModifiers(8f, 7.6f))
+    );
+
+    private static <T extends Item, S extends Item.Settings> Item registerItem(String name, Function<S, T> itemFunction, S settings) {
+        Item item = itemFunction.apply(settings);
         AMARONG_ITEMS.add(item);
         return Registry.register(Registries.ITEM, Amarong.id(name), item);
     }

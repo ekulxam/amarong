@@ -11,7 +11,6 @@ import survivalblock.amarong.client.particle.ObscureGlowParticleFactory;
 @Mixin(GlowParticle.class)
 public class GlowParticleMixin {
 
-    @Debug(export = true)
     @Mixin(GlowParticle.GlowFactory.class)
     public static class GlowFactoryMixin {
 

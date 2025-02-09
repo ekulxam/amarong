@@ -22,17 +22,15 @@ public class AmarongDamageTypes {
      * @return an {@link ImmutableMap}
      */
     public static ImmutableMap<RegistryKey<DamageType>, DamageType> asDamageTypes() {
-        Map<RegistryKey<DamageType>, DamageType> damageTypes = new HashMap<>();
+        ImmutableMap.Builder<RegistryKey<DamageType>, DamageType> damageTypes = ImmutableMap.builder();
         damageTypes.put(WATER_STREAM_HIT, new DamageType("amarong.water_stream_hit", 0.1F));
         damageTypes.put(FLYING_TICKET_HIT, new DamageType("amarong.flying_ticket_hit", 0.1F));
         damageTypes.put(RAILGUN_HIT, new DamageType("amarong.railgun_hit", 0.3F));
         damageTypes.put(BOOMERANG_HIT, new DamageType("amarong.boomerang_hit", 0.1F));
-        return ImmutableMap.copyOf(damageTypes);
+        return damageTypes.build();
     }
 
     public static void bootstrap(Registerable<DamageType> damageTypeRegisterable) {
-        for (Map.Entry<RegistryKey<DamageType>, DamageType> entry : asDamageTypes().entrySet()) {
-            damageTypeRegisterable.register(entry.getKey(), entry.getValue());
-        }
+        asDamageTypes().forEach(damageTypeRegisterable::register);
     }
 }

@@ -22,7 +22,6 @@ import survivalblock.amarong.common.init.AmarongItems;
 
 import static survivalblock.amarong.common.item.KaleidoscopeItem.SUPER_SECRET_SETTING_PROGRAMS;
 
-@Debug(export = true)
 @Mixin(value = GameRenderer.class, priority = 5000)
 public abstract class GameRendererMixin {
 

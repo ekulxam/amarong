@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import survivalblock.amarong.common.item.AmarongVerylongswordItem;
 
-@Debug(export = true)
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 

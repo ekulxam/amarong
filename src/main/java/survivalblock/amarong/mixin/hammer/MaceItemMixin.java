@@ -18,7 +18,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import survivalblock.amarong.common.init.AmarongItems;
 
-@Debug(export = true)
 @Mixin(MaceItem.class)
 public class MaceItemMixin {
 

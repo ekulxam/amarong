@@ -19,7 +19,6 @@ import static survivalblock.amarong.common.item.AmarongVerylongswordItem.RAILGUN
 import static survivalblock.amarong.common.item.AmarongVerylongswordItem.RAILGUN_RGB;
 
 @Environment(EnvType.CLIENT)
-@Debug(export = true)
 @Mixin(AmarongVerylongswordItem.class)
 public class AmarongVerylongswordItemMixin {
 

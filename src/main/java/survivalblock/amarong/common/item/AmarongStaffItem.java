@@ -175,6 +175,7 @@ public class AmarongStaffItem extends Item {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
     }
+
     public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return 72000;
     }
