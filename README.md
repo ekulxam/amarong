@@ -21,7 +21,7 @@ Originally created for ModFest</br>
 Comes with EMI integration (for the Kaleidoscope recipes) because I couldn't be bothered to add support for JEI and REI (I might get around to it later, who knows?)
 
 ### Enchantments:
-- Pnuematic : Ticket Launcher enchantment. Allows the ticket launcher to shoot wind charges when wind charges are in the offhand. Does not consume any tickets.
+- Pneumatic : Ticket Launcher enchantment. Allows the ticket launcher to shoot wind charges when wind charges are in the offhand. Does not consume any tickets.
 - Particle Accelerator : Ticket Launcher enchantment. Allows the ticket launcher to shoot throwable potions (splash / lingering) when they are in the offhand. Does not consume any tickets.
 - Obscure : Verylongsword enchantment. Using the power of the nether star, the verylongsword bends light around the user for a few seconds so that they can no longer be seen at all. Requires a charge of 8.
 - Railcannon : Verylongsword enchantment. Allows the verylongsword to shoot a beam of particles on right-click. Requires a charge of 20. The railcannon will fire a warning laser (end rod particles), then fire the actual shot a few seconds later.
