@@ -30,8 +30,7 @@ public abstract class GameRendererMixin {
 
     @WrapOperation(method = "onCameraEntitySet", constant = @Constant(classValue = EndermanEntity.class))
     private boolean notSoSuperSecretSettingsAnymore(Object entity, Operation<Boolean> original) {
-        boolean isAnEnderman = original.call(entity);
-        if (isAnEnderman) {
+        if (original.call(entity)) { // is an enderman
             return true;
         }
         MinecraftClient client = MinecraftClient.getInstance();

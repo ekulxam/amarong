@@ -7,9 +7,11 @@ import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageType;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
@@ -47,11 +49,13 @@ public class AmarongTagGenerator {
             getOrCreateTagBuilder(ItemTags.SWORD_ENCHANTABLE).add(AmarongItems.AMARONG_BOOMERANG);
             getOrCreateTagBuilder(ItemTags.SHARP_WEAPON_ENCHANTABLE).add(AmarongItems.AMARONG_BOOMERANG);
 
-            getOrCreateTagBuilder(ConventionalItemTags.MELEE_WEAPON_TOOLS).add(AmarongItems.AMARONG_BOOMERANG);
-            getOrCreateTagBuilder(ConventionalItemTags.MELEE_WEAPON_TOOLS).add(AmarongItems.AMARONG_STAFF);
+            FabricTagProvider<Item>.FabricTagBuilder meleeWeapons = getOrCreateTagBuilder(ConventionalItemTags.MELEE_WEAPON_TOOLS);
+            meleeWeapons.add(AmarongItems.AMARONG_BOOMERANG);
+            meleeWeapons.add(AmarongItems.AMARONG_STAFF);
 
-            getOrCreateTagBuilder(ConventionalItemTags.RANGED_WEAPON_TOOLS).add(AmarongItems.SOMEWHAT_A_DUCK);
-            getOrCreateTagBuilder(ConventionalItemTags.RANGED_WEAPON_TOOLS).add(AmarongItems.TICKET_LAUNCHER);
+            FabricTagProvider<Item>.FabricTagBuilder rangedWeapons = getOrCreateTagBuilder(ConventionalItemTags.RANGED_WEAPON_TOOLS);
+            rangedWeapons.add(AmarongItems.SOMEWHAT_A_DUCK);
+            rangedWeapons.add(AmarongItems.TICKET_LAUNCHER);
 
             getOrCreateTagBuilder(AmarongTags.AmarongItemTags.RAINBOW_CORE_GENERATORS).add(Items.GLOW_INK_SAC);
 
@@ -61,24 +65,27 @@ public class AmarongTagGenerator {
             getOrCreateTagBuilder(AmarongTags.AmarongItemTags.HAMMER_ENCHANTABLE).add(AmarongItems.AMARONG_HAMMER);
             getOrCreateTagBuilder(ItemTags.MACE_ENCHANTABLE).add(AmarongItems.AMARONG_HAMMER);
 
-            getOrCreateTagBuilder(ConventionalItemTags.ENCHANTABLES).addTag(AmarongTags.AmarongItemTags.TICKET_LAUNCHER_ENCHANTABLE);
-            getOrCreateTagBuilder(ConventionalItemTags.ENCHANTABLES).addTag(AmarongTags.AmarongItemTags.VERYLONGSWORD_ENCHANTABLE);
-            getOrCreateTagBuilder(ConventionalItemTags.ENCHANTABLES).addTag(AmarongTags.AmarongItemTags.DUCK_ENCHANTABLE);
-            getOrCreateTagBuilder(ConventionalItemTags.ENCHANTABLES).addTag(AmarongTags.AmarongItemTags.HAMMER_ENCHANTABLE);
+            FabricTagProvider<Item>.FabricTagBuilder enchantables = getOrCreateTagBuilder(ConventionalItemTags.ENCHANTABLES);
+            enchantables.addTag(AmarongTags.AmarongItemTags.TICKET_LAUNCHER_ENCHANTABLE);
+            enchantables.addTag(AmarongTags.AmarongItemTags.VERYLONGSWORD_ENCHANTABLE);
+            enchantables.addTag(AmarongTags.AmarongItemTags.DUCK_ENCHANTABLE);
+            enchantables.addTag(AmarongTags.AmarongItemTags.HAMMER_ENCHANTABLE);
 
             getOrCreateTagBuilder(ItemTags.PICKAXES).add(AmarongItems.AMARONG_HAMMER);
             getOrCreateTagBuilder(AmarongTags.AmarongItemTags.TWIRL_DAMAGE).add(AmarongItems.AMARONG_HAMMER);
+
             Registries.ITEM.getKey(AmarongItems.AMARONG_HAMMER).ifPresent((registryKey) -> {
                 getOrCreateTagBuilder(Twirl.KEEP_USE).addOptional(registryKey);
                 getOrCreateTagBuilder(Twirl.KEEP_TICK).addOptional(registryKey);
             });
 
-            getOrCreateTagBuilder(AmarongTags.AmarongItemTags.STICKS).add(Items.STICK);
-            getOrCreateTagBuilder(AmarongTags.AmarongItemTags.STICKS).add(Items.DEBUG_STICK);
-            getOrCreateTagBuilder(AmarongTags.AmarongItemTags.STICKS).add(Items.END_ROD);
-            getOrCreateTagBuilder(AmarongTags.AmarongItemTags.STICKS).add(Items.BREEZE_ROD);
-            getOrCreateTagBuilder(AmarongTags.AmarongItemTags.STICKS).add(Items.BLAZE_ROD);
-            getOrCreateTagBuilder(AmarongTags.AmarongItemTags.STICKS).add(Items.LIGHTNING_ROD);
+            FabricTagProvider<Item>.FabricTagBuilder sticks = getOrCreateTagBuilder(AmarongTags.AmarongItemTags.STICKS);
+            sticks.add(Items.STICK);
+            sticks.add(Items.DEBUG_STICK);
+            sticks.add(Items.END_ROD);
+            sticks.add(Items.BREEZE_ROD);
+            sticks.add(Items.BLAZE_ROD);
+            sticks.add(Items.LIGHTNING_ROD);
         }
     }
 
@@ -89,23 +96,31 @@ public class AmarongTagGenerator {
 
         @Override
         protected void configure(RegistryWrapper.WrapperLookup lookup) {
-            getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ARMOR).add(AmarongDamageTypes.WATER_STREAM_HIT);
-            getOrCreateTagBuilder(DamageTypeTags.BYPASSES_COOLDOWN).add(AmarongDamageTypes.WATER_STREAM_HIT);
-            getOrCreateTagBuilder(AtmosphericDamageTypeTags.BYPASSES_CREATIVE).add(AmarongDamageTypes.WATER_STREAM_HIT);
-            getOrCreateTagBuilder(DamageTypeTags.CAN_BREAK_ARMOR_STAND).add(AmarongDamageTypes.WATER_STREAM_HIT);
-            getOrCreateTagBuilder(DamageTypeTags.NO_KNOCKBACK).add(AmarongDamageTypes.WATER_STREAM_HIT);
+            FabricTagProvider<DamageType>.FabricTagBuilder bypassesArmor = getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ARMOR);
+            FabricTagProvider<DamageType>.FabricTagBuilder bypassesCooldown = getOrCreateTagBuilder(DamageTypeTags.BYPASSES_COOLDOWN);
+            FabricTagProvider<DamageType>.FabricTagBuilder bypassesCreative = getOrCreateTagBuilder(AtmosphericDamageTypeTags.BYPASSES_CREATIVE);
+            FabricTagProvider<DamageType>.FabricTagBuilder canBreakArmorStand = getOrCreateTagBuilder(DamageTypeTags.CAN_BREAK_ARMOR_STAND);
+            FabricTagProvider<DamageType>.FabricTagBuilder noKnockback = getOrCreateTagBuilder(DamageTypeTags.NO_KNOCKBACK);
+            FabricTagProvider<DamageType>.FabricTagBuilder bypassesResistance = getOrCreateTagBuilder(DamageTypeTags.BYPASSES_RESISTANCE);
+            FabricTagProvider<DamageType>.FabricTagBuilder alwaysKillsArmorStands = getOrCreateTagBuilder(DamageTypeTags.ALWAYS_KILLS_ARMOR_STANDS);
 
-            getOrCreateTagBuilder(DamageTypeTags.BYPASSES_COOLDOWN).add(AmarongDamageTypes.FLYING_TICKET_HIT);
-            getOrCreateTagBuilder(DamageTypeTags.BYPASSES_RESISTANCE).add(AmarongDamageTypes.FLYING_TICKET_HIT);
-            getOrCreateTagBuilder(DamageTypeTags.ALWAYS_KILLS_ARMOR_STANDS).add(AmarongDamageTypes.FLYING_TICKET_HIT);
+            bypassesArmor.add(AmarongDamageTypes.WATER_STREAM_HIT);
+            bypassesCooldown.add(AmarongDamageTypes.WATER_STREAM_HIT);
+            bypassesCreative.add(AmarongDamageTypes.WATER_STREAM_HIT);
+            canBreakArmorStand.add(AmarongDamageTypes.WATER_STREAM_HIT);
+            noKnockback.add(AmarongDamageTypes.WATER_STREAM_HIT);
 
-            getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ARMOR).add(AmarongDamageTypes.RAILGUN_HIT);
+            bypassesCooldown.add(AmarongDamageTypes.FLYING_TICKET_HIT);
+            bypassesResistance.add(AmarongDamageTypes.FLYING_TICKET_HIT);
+            alwaysKillsArmorStands.add(AmarongDamageTypes.FLYING_TICKET_HIT);
+
+            bypassesArmor.add(AmarongDamageTypes.RAILGUN_HIT);
             getOrCreateTagBuilder(DamageTypeTags.BYPASSES_EFFECTS).add(AmarongDamageTypes.RAILGUN_HIT);
             getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ENCHANTMENTS).add(AmarongDamageTypes.RAILGUN_HIT);
-            getOrCreateTagBuilder(AtmosphericDamageTypeTags.BYPASSES_CREATIVE).add(AmarongDamageTypes.RAILGUN_HIT);
-            getOrCreateTagBuilder(DamageTypeTags.BYPASSES_RESISTANCE).add(AmarongDamageTypes.RAILGUN_HIT);
-            getOrCreateTagBuilder(DamageTypeTags.NO_KNOCKBACK).add(AmarongDamageTypes.RAILGUN_HIT);
-            getOrCreateTagBuilder(DamageTypeTags.ALWAYS_KILLS_ARMOR_STANDS).add(AmarongDamageTypes.RAILGUN_HIT);
+            bypassesCreative.add(AmarongDamageTypes.RAILGUN_HIT);
+            bypassesResistance.add(AmarongDamageTypes.RAILGUN_HIT);
+            noKnockback.add(AmarongDamageTypes.RAILGUN_HIT);
+            alwaysKillsArmorStands.add(AmarongDamageTypes.RAILGUN_HIT);
             // no bypasses shield for funny
             // no bypasses wolf armor because I'm not that evil
         }
@@ -118,23 +133,24 @@ public class AmarongTagGenerator {
 
         @Override
         protected void configure(RegistryWrapper.WrapperLookup lookup) {
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.ATTRIBUTE_MODIFIERS);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.CUSTOM_MODEL_DATA);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.CUSTOM_NAME);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.ITEM_NAME);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.RECIPES);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.DAMAGE);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.ENCHANTMENTS);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.FIRE_RESISTANT);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.MAX_DAMAGE);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.MAX_STACK_SIZE);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.BUNDLE_CONTENTS);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.CUSTOM_DATA);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.HIDE_ADDITIONAL_TOOLTIP);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.HIDE_TOOLTIP);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.FOOD);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.TOOL);
-            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE).add(DataComponentTypes.UNBREAKABLE);
+            FabricTagProvider<ComponentType<?>>.FabricTagBuilder staffIgnore = getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE);
+            staffIgnore.add(DataComponentTypes.ATTRIBUTE_MODIFIERS);
+            staffIgnore.add(DataComponentTypes.CUSTOM_MODEL_DATA);
+            staffIgnore.add(DataComponentTypes.CUSTOM_NAME);
+            staffIgnore.add(DataComponentTypes.ITEM_NAME);
+            staffIgnore.add(DataComponentTypes.RECIPES);
+            staffIgnore.add(DataComponentTypes.DAMAGE);
+            staffIgnore.add(DataComponentTypes.ENCHANTMENTS);
+            staffIgnore.add(DataComponentTypes.FIRE_RESISTANT);
+            staffIgnore.add(DataComponentTypes.MAX_DAMAGE);
+            staffIgnore.add(DataComponentTypes.MAX_STACK_SIZE);
+            staffIgnore.add(DataComponentTypes.BUNDLE_CONTENTS);
+            staffIgnore.add(DataComponentTypes.CUSTOM_DATA);
+            staffIgnore.add(DataComponentTypes.HIDE_ADDITIONAL_TOOLTIP);
+            staffIgnore.add(DataComponentTypes.HIDE_TOOLTIP);
+            staffIgnore.add(DataComponentTypes.FOOD);
+            staffIgnore.add(DataComponentTypes.TOOL);
+            staffIgnore.add(DataComponentTypes.UNBREAKABLE);
         }
     }
 
@@ -145,8 +161,9 @@ public class AmarongTagGenerator {
 
         @Override
         protected void configure(RegistryWrapper.WrapperLookup lookup) {
-            getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.PNUEMATIC_EFFECT).add(AmarongEnchantments.PNEUMATIC);
-            getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.PNUEMATIC_EFFECT).addOptional(Enchantments.WIND_BURST);
+            FabricTagProvider<Enchantment>.FabricTagBuilder pneumatic = getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.PNUEMATIC_EFFECT);
+            pneumatic.add(AmarongEnchantments.PNEUMATIC);
+            pneumatic.addOptional(Enchantments.WIND_BURST);
             getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.PARTICLE_ACCELERATOR_EFFECT).add(AmarongEnchantments.PARTICLE_ACCELERATOR);
 
             getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.OBSCURE_EFFECT).add(AmarongEnchantments.OBSCURE);
@@ -154,16 +171,20 @@ public class AmarongTagGenerator {
 
             getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.CAPACITY_EFFECT).add(AmarongEnchantments.CAPACITY);
 
-            getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_TICKET_LAUNCHER).add(AmarongEnchantments.PNEUMATIC);
-            getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_TICKET_LAUNCHER).add(AmarongEnchantments.PARTICLE_ACCELERATOR);
-            getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_VERYLONGSWORD).add(AmarongEnchantments.OBSCURE);
-            getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_VERYLONGSWORD).add(AmarongEnchantments.RAILGUN);
+            FabricTagProvider<Enchantment>.FabricTagBuilder ticketLauncherExclusiveSet = getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_TICKET_LAUNCHER);
+            ticketLauncherExclusiveSet.add(AmarongEnchantments.PNEUMATIC);
+            ticketLauncherExclusiveSet.add(AmarongEnchantments.PARTICLE_ACCELERATOR);
+            FabricTagProvider<Enchantment>.FabricTagBuilder verylongswordExclusiveSet = getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_VERYLONGSWORD);
+            verylongswordExclusiveSet.add(AmarongEnchantments.OBSCURE);
+            verylongswordExclusiveSet.add(AmarongEnchantments.RAILGUN);
 
-            getOrCreateTagBuilder(EnchantmentTags.NON_TREASURE).add(AmarongEnchantments.PNEUMATIC);
-            getOrCreateTagBuilder(EnchantmentTags.NON_TREASURE).add(AmarongEnchantments.PARTICLE_ACCELERATOR);
-            getOrCreateTagBuilder(EnchantmentTags.TREASURE).add(AmarongEnchantments.OBSCURE);
-            getOrCreateTagBuilder(EnchantmentTags.TREASURE).add(AmarongEnchantments.RAILGUN);
-            getOrCreateTagBuilder(EnchantmentTags.NON_TREASURE).add(AmarongEnchantments.CAPACITY);
+            FabricTagProvider<Enchantment>.FabricTagBuilder nonTreasure = getOrCreateTagBuilder(EnchantmentTags.NON_TREASURE);
+            FabricTagProvider<Enchantment>.FabricTagBuilder treasure = getOrCreateTagBuilder(EnchantmentTags.TREASURE);
+            nonTreasure.add(AmarongEnchantments.PNEUMATIC);
+            nonTreasure.add(AmarongEnchantments.PARTICLE_ACCELERATOR);
+            treasure.add(AmarongEnchantments.OBSCURE);
+            treasure.add(AmarongEnchantments.RAILGUN);
+            nonTreasure.add(AmarongEnchantments.CAPACITY);
 
             getOrCreateTagBuilder(AmarongTags.AmarongEnchantmentTags.POWER_LIKE).add(Enchantments.POWER);
 
@@ -181,10 +202,11 @@ public class AmarongTagGenerator {
             getOrCreateTagBuilder(EntityTypeTags.IMPACT_PROJECTILES).add(AmarongEntityTypes.FLYING_TICKET);
             getOrCreateTagBuilder(EntityTypeTags.IMPACT_PROJECTILES).add(AmarongEntityTypes.WATER_STREAM);
 
-            getOrCreateTagBuilder(AmarongTags.AmarongEntityTypeTags.AMARONG_HITTABLE).add(EntityType.END_CRYSTAL);
-            getOrCreateTagBuilder(AmarongTags.AmarongEntityTypeTags.AMARONG_HITTABLE).forceAddTag(EntityTypeTags.IMPACT_PROJECTILES);
-            getOrCreateTagBuilder(AmarongTags.AmarongEntityTypeTags.AMARONG_HITTABLE).forceAddTag(ConventionalEntityTypeTags.BOATS);
-            getOrCreateTagBuilder(AmarongTags.AmarongEntityTypeTags.AMARONG_HITTABLE).forceAddTag(ConventionalEntityTypeTags.MINECARTS);
+            FabricTagProvider<EntityType<?>>.FabricTagBuilder amarongHittable = getOrCreateTagBuilder(AmarongTags.AmarongEntityTypeTags.AMARONG_HITTABLE);
+            amarongHittable.add(EntityType.END_CRYSTAL);
+            amarongHittable.forceAddTag(EntityTypeTags.IMPACT_PROJECTILES);
+            amarongHittable.forceAddTag(ConventionalEntityTypeTags.BOATS);
+            amarongHittable.forceAddTag(ConventionalEntityTypeTags.MINECARTS);
         }
     }
 }

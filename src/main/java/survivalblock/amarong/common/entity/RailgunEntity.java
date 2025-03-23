@@ -113,7 +113,7 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
                 }
             });
         } else if (this.age >= getFiringTicks() && !world.isClient()) {
-            final double boxRadius = 0.5;
+            final double boxRadius = 1.25;
             Set<Entity> entities = new HashSet<>(1024);
             raycastParticle((world1, encountered, pitchYaw, currentRaycastPosition, x, y, z, iterations) -> {
                 if (world1 instanceof ServerWorld serverWorld) {
@@ -124,7 +124,6 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
                     Vec3d lowerCorner = currentRaycastPosition.subtract(boxRadius, boxRadius, boxRadius);
                     Vec3d upperCorner = currentRaycastPosition.add(boxRadius, boxRadius, boxRadius);
                     Box box = new Box(lowerCorner, upperCorner);
-                    box.expand(2);
                     serverWorld.atmospheric_api$getAndAddEntitiesToCollection(entity -> entity.getBoundingBox().intersects(box), entities);
                 }
             });

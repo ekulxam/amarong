@@ -62,7 +62,6 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("resourcePack.amarong.smolverylongsword.name", "Smol Verylongsword");
         translationBuilder.add("resourcePack.amarong.oldticketlauncher.name", "Old Ticket Launcher");
         translationBuilder.add("resourcePack.amarong.amethysthandleticketlauncher.name", "Amethyst Handle Ticket Launcher");
-        translationBuilder.add("resourcePack.amarong.oldchunkandsheet.name", "Old Chunk and Sheet Textures");
 
         translationBuilder.add("dataPack.amarong.easy_core_duplication_pack.name", "Easy Amarong Core Duplication");
         translationBuilder.add("dataPack.amarong.amarong_hamer_recipe_pack.name", "Amarong Hammer Recipe");

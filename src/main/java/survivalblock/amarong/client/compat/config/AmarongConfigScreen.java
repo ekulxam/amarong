@@ -14,8 +14,6 @@ import survivalblock.amarong.client.AmarongClientUtil;
 import survivalblock.amarong.common.Amarong;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.compat.config.ConfigPackScreen;
 
-import java.util.function.Supplier;
-
 @Environment(EnvType.CLIENT)
 public class AmarongConfigScreen extends Screen {
 

@@ -1,7 +1,6 @@
 package survivalblock.amarong.client;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
@@ -11,9 +10,7 @@ import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.particle.GlowParticle;
 import net.minecraft.client.particle.SonicBoomParticle;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.text.Text;
 import survivalblock.amarong.client.compat.config.AmarongConfigScreen;
@@ -25,7 +22,6 @@ import survivalblock.amarong.client.render.entity.RailgunEntityRenderer;
 import survivalblock.amarong.client.render.entity.WaterStreamEntityRenderer;
 import survivalblock.amarong.common.Amarong;
 import survivalblock.amarong.common.compat.config.AmarongConfig;
-import survivalblock.amarong.common.init.AmarongBlocks;
 import survivalblock.amarong.common.init.AmarongEntityTypes;
 import survivalblock.amarong.common.init.AmarongItems;
 import survivalblock.amarong.common.init.AmarongParticleTypes;
@@ -57,7 +53,6 @@ public class AmarongClient implements ClientModInitializer {
 			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.SMOL_VERYLONGSWORD_PACK, modContainer, Text.translatable("resourcePack.amarong.smolverylongsword.name"), ResourcePackActivationType.NORMAL);
 			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.OLD_TICKET_LAUNCHER_PACK, modContainer, Text.translatable("resourcePack.amarong.oldticketlauncher.name"), ResourcePackActivationType.NORMAL);
 			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.AMETHYST_HANDLE_TICKET_LAUNCHER_PACK, modContainer, Text.translatable("resourcePack.amarong.amethysthandleticketlauncher.name"), ResourcePackActivationType.DEFAULT_ENABLED);
-			ResourceManagerHelper.registerBuiltinResourcePack(AmarongClientUtil.OLD_CHUNK_AND_SHEET, modContainer, Text.translatable("resourcePack.amarong.oldchunkandsheet.name"), ResourcePackActivationType.NORMAL);
 			ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(STAFF_TRANSFORMATIONS_MANAGER);
 		});
 

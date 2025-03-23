@@ -16,7 +16,6 @@ import net.minecraft.registry.RegistryWrapper;
 
 import static net.minecraft.loot.LootTables.ANCIENT_CITY_CHEST;
 import static net.minecraft.loot.LootTables.END_CITY_TREASURE_CHEST;
-import static net.minecraft.loot.LootTables.TRIAL_CHAMBERS_SUPPLY_CHEST;
 
 public class AmarongLootTableEvents implements LootTableEvents.Modify {
 
