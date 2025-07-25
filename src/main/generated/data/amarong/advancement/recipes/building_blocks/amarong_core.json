@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_amethyst_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:amethyst_shard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_copper_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:copper_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_nether_star": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:nether_star"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "amarong:amarong_core"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_copper_ingot",
+      "has_amethyst_shard",
+      "has_nether_star"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "amarong:amarong_core"
+    ]
+  }
+}

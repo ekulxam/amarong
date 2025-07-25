@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "x": {
+      "item": "amarong:amarong_chunk"
+    }
+  },
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "result": {
+    "count": 1,
+    "id": "amarong:amarong_core"
+  }
+}

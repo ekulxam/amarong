@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_amarong_sheet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:amethyst_shard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_copper_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:copper_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_netherite_sword": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:netherite_sword"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "amarong:amarong_verylongsword"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_netherite_sword",
+      "has_copper_ingot",
+      "has_amarong_sheet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "amarong:amarong_verylongsword"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_amarong_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "amarong:amarong_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_mace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:mace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:stick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "amarong:amarong_hammer"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stick",
+      "has_mace",
+      "has_amarong_core"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "amarong:amarong_hammer"
+    ]
+  }
+}

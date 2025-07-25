@@ -1,0 +1,42 @@
+{
+  "parent": "amarong:obtain_core",
+  "criteria": {
+    "use_kaleidoscope": {
+      "conditions": {
+        "item": {
+          "items": "amarong:amarong_kaleidoscope"
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.amarong.use_kaleidoscope.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "amarong:amarong_kaleidoscope"
+    },
+    "title": {
+      "translate": "advancements.amarong.use_kaleidoscope.title"
+    }
+  },
+  "requirements": [
+    [
+      "use_kaleidoscope"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

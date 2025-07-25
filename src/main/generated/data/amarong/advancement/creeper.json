@@ -1,0 +1,53 @@
+{
+  "parent": "amarong:use_kaleidoscope",
+  "criteria": {
+    "creeper": {
+      "conditions": {
+        "item": {
+          "components": {
+            "amarong:shader_type": "minecraft:shaders/post/creeper.json"
+          },
+          "items": "amarong:amarong_kaleidoscope"
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "minecraft:creeper"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.amarong.creeper.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "amarong:amarong_kaleidoscope"
+    },
+    "title": {
+      "color": "green",
+      "translate": "advancements.amarong.creeper.title"
+    }
+  },
+  "requirements": [
+    [
+      "creeper"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

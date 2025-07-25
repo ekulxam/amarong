@@ -62,7 +62,7 @@ public abstract class ItemRendererMixin {
             }
         }
         if (world != null) {
-            amarong$rotateStaffItem(world, otherStack, gui, ground, leftHanded, matrices, staffTransformation);
+            amarong$rotateStaffItem(world, otherStack, gui, ground, leftHanded, matrices, staffTransformation, client.getRenderTickCounter().getTickDelta(false));
         } else {
             staffTransformation.apply(leftHanded, matrices);
         }
@@ -71,12 +71,12 @@ public abstract class ItemRendererMixin {
     }
 
     @Unique
-    private void amarong$rotateStaffItem(ClientWorld world, ItemStack otherStack, boolean isModeGUI, boolean isModeGround, boolean leftHanded, MatrixStack matrices, AmarongStaffTransformation staffTransformation) {
+    private void amarong$rotateStaffItem(ClientWorld world, ItemStack otherStack, boolean isModeGUI, boolean isModeGround, boolean leftHanded, MatrixStack matrices, AmarongStaffTransformation staffTransformation, float tickDelta) {
         float multiplier = AmarongConfig.staffRotationMultiplier();
         if (AtmosphericUtil.isBasicallyEqual(multiplier, 0.0F)) {
             return;
         }
-        final float time = world.getTime() * multiplier;
+        final float time = (world.getTime() + tickDelta) * multiplier;
         final boolean spin = staffTransformation.spins();
         final boolean complexSpin = staffTransformation.usesComplexSpin(otherStack);
         if (isModeGUI || (spin && !complexSpin && !isModeGround)) {

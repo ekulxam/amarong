@@ -1,0 +1,21 @@
+{
+  "values": [
+    "minecraft:attribute_modifiers",
+    "minecraft:custom_model_data",
+    "minecraft:custom_name",
+    "minecraft:item_name",
+    "minecraft:recipes",
+    "minecraft:damage",
+    "minecraft:enchantments",
+    "minecraft:fire_resistant",
+    "minecraft:max_damage",
+    "minecraft:max_stack_size",
+    "minecraft:bundle_contents",
+    "minecraft:custom_data",
+    "minecraft:hide_additional_tooltip",
+    "minecraft:hide_tooltip",
+    "minecraft:food",
+    "minecraft:tool",
+    "minecraft:unbreakable"
+  ]
+}

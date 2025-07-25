@@ -3,6 +3,7 @@ package survivalblock.amarong.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -10,11 +11,13 @@ import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.particle.SonicBoomParticle;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.random.Random;
 import survivalblock.amarong.client.compat.config.AmarongConfigScreen;
 import survivalblock.amarong.client.particle.ObscureGlowParticleFactory;
+import survivalblock.amarong.client.particle.RailcannonParticle;
 import survivalblock.amarong.client.render.StaffTransformationsManager;
 import survivalblock.amarong.client.render.entity.FlyingTicketEntityRenderer;
 import survivalblock.amarong.client.render.entity.PhasingBoomerangEntityRenderer;
@@ -25,6 +28,7 @@ import survivalblock.amarong.common.compat.config.AmarongConfig;
 import survivalblock.amarong.common.init.AmarongEntityTypes;
 import survivalblock.amarong.common.init.AmarongItems;
 import survivalblock.amarong.common.init.AmarongParticleTypes;
+import survivalblock.amarong.common.networking.DirectionalParticleS2CPayload;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.item.client.AlternateItemModelRegistry;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.item.client.AtmosphericSpecialItemRenderHandler;
 
@@ -40,7 +44,7 @@ public class AmarongClient implements ClientModInitializer {
 		EntityRendererRegistry.register(AmarongEntityTypes.BOOMERANG, PhasingBoomerangEntityRenderer::new);
 
 		ParticleFactoryRegistry particleFactoryRegistry = ParticleFactoryRegistry.getInstance();
-		particleFactoryRegistry.register(AmarongParticleTypes.RAILGUN_PARTICLE, SonicBoomParticle.Factory::new);
+		particleFactoryRegistry.register(AmarongParticleTypes.RAILGUN_PARTICLE, RailcannonParticle.Factory::new);
 		particleFactoryRegistry.register(AmarongParticleTypes.OBSCURE_GLOW, ObscureGlowParticleFactory::new);
 
 		AlternateItemModelRegistry.register(AmarongItems.AMARONG_VERYLONGSWORD, AmarongClientUtil.VERYLONGSWORD_INVENTORY);
@@ -70,6 +74,24 @@ public class AmarongClient implements ClientModInitializer {
 				client.send(() -> client.setScreen(configScreen));
 				return 1;
 			}));
+		});
+
+		ClientPlayNetworking.registerGlobalReceiver(DirectionalParticleS2CPayload.ID, (payload, context) -> {
+			ClientWorld world = context.client().world;
+			Random random = world.getRandom();
+			double g = random.nextGaussian() * payload.deltaX();
+			double h = random.nextGaussian() * payload.deltaY();
+			double j = random.nextGaussian() * payload.deltaZ();
+
+
+			try {
+				world.addParticle(payload.particleEffect(),
+						true,
+						payload.x() + g, payload.y() + h, payload.z()+ j,
+						payload.velocityX(), payload.velocityY(), payload.velocityZ());
+			} catch (Throwable throwable) {
+				Amarong.LOGGER.warn("Could not spawn particle effect {}", payload.particleEffect());
+			}
 		});
 	}
 }

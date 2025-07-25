@@ -1,0 +1,35 @@
+{
+  "parent": "amarong:obtain_core",
+  "criteria": {
+    "hammer_time": {
+      "conditions": {
+        "items": [
+          {
+            "items": "amarong:amarong_hammer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.amarong.hammer_time.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "amarong:amarong_hammer"
+    },
+    "title": {
+      "translate": "advancements.amarong.hammer_time.title"
+    }
+  },
+  "requirements": [
+    [
+      "hammer_time"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

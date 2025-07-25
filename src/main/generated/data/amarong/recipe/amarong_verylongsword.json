@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "c": {
+      "item": "amarong:amarong_chunk"
+    },
+    "s": {
+      "item": "minecraft:netherite_sword"
+    },
+    "v": {
+      "item": "minecraft:copper_ingot"
+    },
+    "w": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "x": {
+      "item": "amarong:amarong_sheet"
+    }
+  },
+  "pattern": [
+    " xw",
+    "vcx",
+    "sv "
+  ],
+  "result": {
+    "count": 1,
+    "id": "amarong:amarong_verylongsword"
+  }
+}

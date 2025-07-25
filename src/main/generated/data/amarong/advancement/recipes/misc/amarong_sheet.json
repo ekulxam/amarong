@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_amarong_chunk": {
+      "conditions": {
+        "items": [
+          {
+            "items": "amarong:amarong_chunk"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_amarong_sheet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "amarong:amarong_sheet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "amarong:amarong_sheet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_amarong_sheet",
+      "has_amarong_chunk"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "amarong:amarong_sheet"
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_amarong_chunk": {
+      "conditions": {
+        "items": [
+          {
+            "items": "amarong:amarong_chunk"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_dispenser": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:dispenser"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_end_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:end_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_lever": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:lever"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_passcard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terrifictickets:passcard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "amarong:amarong_ticket_dispenser"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_lever",
+      "has_dispenser",
+      "has_amarong_chunk",
+      "has_end_rod",
+      "has_passcard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "amarong:amarong_ticket_dispenser"
+    ]
+  }
+}

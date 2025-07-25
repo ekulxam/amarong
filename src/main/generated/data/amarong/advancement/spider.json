@@ -1,0 +1,52 @@
+{
+  "parent": "amarong:use_kaleidoscope",
+  "criteria": {
+    "spider": {
+      "conditions": {
+        "item": {
+          "components": {
+            "amarong:shader_type": "minecraft:shaders/post/spider.json"
+          },
+          "items": "amarong:amarong_kaleidoscope"
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "minecraft:spider"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.amarong.spider.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "amarong:amarong_kaleidoscope"
+    },
+    "title": {
+      "translate": "advancements.amarong.spider.title"
+    }
+  },
+  "requirements": [
+    [
+      "spider"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  },
+  "sends_telemetry_event": true
+}

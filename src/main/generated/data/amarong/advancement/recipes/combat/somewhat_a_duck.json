@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_amarong_sheet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "amarong:amarong_sheet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_dispenser": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:dispenser"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_gold_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:gold_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "amarong:somewhat_a_duck"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_water_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:water_bucket"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dispenser",
+      "has_gold_block",
+      "has_water_bucket",
+      "has_amarong_sheet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "amarong:somewhat_a_duck"
+    ]
+  }
+}

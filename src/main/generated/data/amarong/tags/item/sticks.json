@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:stick",
+    "minecraft:debug_stick",
+    "minecraft:end_rod",
+    "minecraft:breeze_rod",
+    "minecraft:blaze_rod",
+    "minecraft:lightning_rod"
+  ]
+}

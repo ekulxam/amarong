@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "amarong:amarong_core"
+  },
+  "result": {
+    "count": 4,
+    "id": "amarong:amarong_chunk"
+  }
+}

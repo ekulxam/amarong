@@ -1,0 +1,26 @@
+{
+  "parent": "amarong:obtain_core",
+  "criteria": {
+    "when_tickets_fly": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.amarong.when_tickets_fly.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "amarong:amarong_ticket_dispenser"
+    },
+    "title": {
+      "translate": "advancements.amarong.when_tickets_fly.title"
+    }
+  },
+  "requirements": [
+    [
+      "when_tickets_fly"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,54 @@
+{
+  "parent": "amarong:use_kaleidoscope",
+  "criteria": {
+    "invert": {
+      "conditions": {
+        "item": {
+          "components": {
+            "amarong:shader_type": "minecraft:shaders/post/invert.json"
+          },
+          "items": "amarong:amarong_kaleidoscope"
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "minecraft:enderman"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.amarong.invert.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "amarong:amarong_kaleidoscope"
+    },
+    "title": {
+      "color": "black",
+      "translate": "advancements.amarong.invert.title"
+    }
+  },
+  "requirements": [
+    [
+      "invert"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

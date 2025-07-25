@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_amarong_chunk": {
+      "conditions": {
+        "items": [
+          {
+            "items": "amarong:amarong_chunk"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_amarong_sheet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "amarong:amarong_sheet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_spyglass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:spyglass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "amarong:amarong_kaleidoscope"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_amarong_sheet",
+      "has_spyglass",
+      "has_amarong_chunk"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "amarong:amarong_kaleidoscope"
+    ]
+  }
+}

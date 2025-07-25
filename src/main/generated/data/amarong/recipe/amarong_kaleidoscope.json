@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "v": {
+      "item": "amarong:amarong_chunk"
+    },
+    "x": {
+      "item": "amarong:amarong_sheet"
+    },
+    "|": {
+      "item": "minecraft:spyglass"
+    }
+  },
+  "pattern": [
+    " x ",
+    " | ",
+    " v "
+  ],
+  "result": {
+    "count": 1,
+    "id": "amarong:amarong_kaleidoscope"
+  }
+}

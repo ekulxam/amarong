@@ -1,0 +1,33 @@
+{
+  "parent": "amarong:obtain_core",
+  "criteria": {
+    "obtain_verylongsword": {
+      "conditions": {
+        "items": [
+          {
+            "items": "amarong:amarong_verylongsword"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.amarong.obtain_verylongsword.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "amarong:amarong_verylongsword"
+    },
+    "title": {
+      "translate": "advancements.amarong.obtain_verylongsword.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_verylongsword"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

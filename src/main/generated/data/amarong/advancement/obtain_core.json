@@ -1,0 +1,34 @@
+{
+  "criteria": {
+    "obtain_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "amarong:amarong_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "amarong:textures/gui/advancements/backgrounds/amethyst_copper.png",
+    "description": {
+      "translate": "advancements.amarong.obtain_core.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "amarong:amarong_core"
+    },
+    "title": {
+      "translate": "advancements.amarong.obtain_core.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_core"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

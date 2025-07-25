@@ -27,13 +27,15 @@ public class AmarongVerylongswordItemMixin {
     private int pulsingItemBar(int original, ItemStack stack) {
         boolean railgun = (original == RAILGUN_RGB);
         if (original == OBSCURE_RGB || railgun) {
-            ClientWorld world = MinecraftClient.getInstance().world;
+            MinecraftClient client = MinecraftClient.getInstance();
+            ClientWorld world = client.world;
             if (world == null) return original;
             if (AmarongVerylongswordItem.getMaxCharge(stack) != AmarongVerylongswordItem.checkForReset(stack)) {
                 return original;
             }
+            double ticks = world.getTime() + client.getRenderTickCounter().getTickDelta(false);
             int otherColor = railgun ? RAILGUN_PULSE_RGB : OBSCURE_PULSE_RGB;
-            return ColorHelper.Argb.lerp((float) Math.abs(Math.sin(world.getTime() * 0.115)), otherColor, original);
+            return ColorHelper.Argb.lerp((float) Math.abs(Math.sin(ticks * 0.115)), otherColor, original);
         }
         return 0;
     }

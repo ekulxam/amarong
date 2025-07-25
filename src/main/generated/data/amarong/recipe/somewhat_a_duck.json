@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "_": {
+      "item": "amarong:amarong_sheet"
+    },
+    "o": {
+      "item": "minecraft:dispenser"
+    },
+    "s": {
+      "item": "minecraft:gold_block"
+    },
+    "u": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    " o ",
+    "sus",
+    " _ "
+  ],
+  "result": {
+    "count": 1,
+    "id": "amarong:somewhat_a_duck"
+  }
+}

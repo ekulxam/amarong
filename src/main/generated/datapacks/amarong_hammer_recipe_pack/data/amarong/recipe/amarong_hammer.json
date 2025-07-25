@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:mace"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "amarong:amarong_core"
+    }
+  },
+  "pattern": [
+    "  X",
+    " # ",
+    "/  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "amarong:amarong_hammer"
+  }
+}

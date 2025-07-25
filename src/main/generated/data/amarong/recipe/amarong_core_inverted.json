@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "m": {
+      "item": "minecraft:nether_star"
+    },
+    "v": {
+      "item": "minecraft:copper_ingot"
+    },
+    "x": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "pattern": [
+    "xvx",
+    "vmv",
+    "xvx"
+  ],
+  "result": {
+    "count": 1,
+    "id": "amarong:amarong_core"
+  }
+}

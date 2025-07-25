@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "amarong:amarong_chunk"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "amarong:amarong_sheet"
+  }
+}

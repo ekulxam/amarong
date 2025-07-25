@@ -1,5 +1,7 @@
 package survivalblock.amarong.common.entity;
 
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.client.network.ClientCommonNetworkHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -11,6 +13,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.network.listener.ClientCommonPacketListener;
+import net.minecraft.network.packet.CustomPayload;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.PlaySoundFromEntityS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
@@ -26,6 +31,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import survivalblock.amarong.common.AmarongUtil;
 import survivalblock.amarong.common.init.*;
+import survivalblock.amarong.common.networking.DirectionalParticleS2CPayload;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.entity.StacklessPersistentProjectile;
 
 import java.util.*;
@@ -92,63 +98,94 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
     @SuppressWarnings("RedundantCollectionOperation")
     @Override
     public void tick() {
-        World world = this.getWorld();
-        if (this.age > getFiringTicks() + 10 && !world.isClient()) {
-            this.discard();
-            return;
-        }
-        if (this.age == WARNING_TICKS && !noDelay()) {
-            RegistryEntry<SoundEvent> registryEntry = Registries.SOUND_EVENT.getEntry(AmarongSounds.RAILGUN_CHARGES);
-            raycastParticle((world1, encountered, pitchYaw, currentRaycastPosition, x, y, z, iterations) -> {
-                if (world1 instanceof ServerWorld serverWorld) {
-                    List<ServerPlayerEntity> players = serverWorld.getPlayers();
-                    for (ServerPlayerEntity player : players) {
-                        serverWorld.spawnParticles(player, ParticleTypes.END_ROD, true, x, y, z, 1, 0, 0, 0, 0);
-                        if (player.getPos().squaredDistanceTo(currentRaycastPosition) < 25 && !encountered.contains(player)) {
-                            // don't send a million playSound packets
-                            player.networkHandler.sendPacket(new PlaySoundFromEntityS2CPacket(registryEntry, this.getSoundCategory(), player, 1.0F, 1.0F, this.getRandom().nextLong()));
-                            encountered.add(player);
-                        }
-                    }
-                }
-            });
-        } else if (this.age >= getFiringTicks() && !world.isClient()) {
-            final double boxRadius = 1.25;
-            Set<Entity> entities = new HashSet<>(1024);
-            raycastParticle((world1, encountered, pitchYaw, currentRaycastPosition, x, y, z, iterations) -> {
-                if (world1 instanceof ServerWorld serverWorld) {
-                    List<ServerPlayerEntity> players = serverWorld.getPlayers();
-                    for (ServerPlayerEntity player : players) {
-                        serverWorld.spawnParticles(player, AmarongParticleTypes.RAILGUN_PARTICLE, true, x, y, z, 1, 0.1, 0.1, 0.1, 0);
-                    }
-                    Vec3d lowerCorner = currentRaycastPosition.subtract(boxRadius, boxRadius, boxRadius);
-                    Vec3d upperCorner = currentRaycastPosition.add(boxRadius, boxRadius, boxRadius);
-                    Box box = new Box(lowerCorner, upperCorner);
-                    serverWorld.atmospheric_api$getAndAddEntitiesToCollection(entity -> entity.getBoundingBox().intersects(box), entities);
-                }
-            });
-            DamageSource source;
-            Entity owner = this.getOwner();
-            RegistryEntry.Reference<DamageType> reference = world.atmospheric_api$getEntryFromKey(RegistryKeys.DAMAGE_TYPE, AmarongDamageTypes.RAILGUN_HIT);
-            if (owner instanceof LivingEntity living) {
-                source = new DamageSource(reference, this, living);
-            } else {
-                source = new DamageSource(reference, this);
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            if (this.age > getFiringTicks() + 10) {
+                this.discard();
+                return;
             }
-            if (owner != null && entities.contains(owner)) {
-                entities.remove(owner);
-            }
-            if (entities.contains(this)) {
-                entities.remove(this);
-            }
-            final float playerDamage = this.getPlayerDamage();
-            entities.forEach(entity -> {
-                if (AmarongUtil.shouldDamageWithAmarong(entity)) {
-                    entity.damage(source, entity instanceof PlayerEntity ? playerDamage : 50);
-                }
-            });
+            this.tickFiring(serverWorld);
         }
         super.tick();
+    }
+
+    protected void tickFiring(ServerWorld serverWorld) {
+        if (this.age == WARNING_TICKS && !noDelay()) {
+            List<ServerPlayerEntity> players = serverWorld.getPlayers();
+            RegistryEntry<SoundEvent> registryEntry = Registries.SOUND_EVENT.getEntry(AmarongSounds.RAILGUN_CHARGES);
+            raycastParticle((encountered, pitch, yaw, currentRaycastPosition, iterations) -> {
+                for (ServerPlayerEntity player : players) {
+                    serverWorld.spawnParticles(player, ParticleTypes.END_ROD, true, currentRaycastPosition.x, currentRaycastPosition.y, currentRaycastPosition.z, 1, 0, 0, 0, 0);
+                    if (player.getPos().squaredDistanceTo(currentRaycastPosition) < 25 && !encountered.contains(player)) {
+                        // don't send a million playSound packets
+                        player.networkHandler.sendPacket(new PlaySoundFromEntityS2CPacket(registryEntry, this.getSoundCategory(), player, 1.0F, 1.0F, this.getRandom().nextLong()));
+                        encountered.add(player);
+                    }
+                }
+            });
+            return;
+        }
+        if (this.age < getFiringTicks()) {
+            return;
+        }
+        List<ServerPlayerEntity> players = serverWorld.getPlayers();
+        final float particleDistSquared = 512 * 512;
+        final double boxRadius = 1.25;
+        Set<Entity> entities = new HashSet<>(1024);
+        Set<Box> boxes = new HashSet<>(100);
+
+        raycastParticle((encountered, pitch, yaw, currentRaycastPosition, iterations) -> {
+            CustomPayload payload = new DirectionalParticleS2CPayload(
+                    new AmarongParticleTypes.RailgunParticleEffect(pitch, yaw),
+                    currentRaycastPosition.x,
+                    currentRaycastPosition.y,
+                    currentRaycastPosition.z,
+                    pitch,
+                    yaw,
+                    0.1,
+                    0.1,
+                    0.1);
+            Packet<ClientCommonPacketListener> packet = ServerPlayNetworking.createS2CPacket(payload);
+            for (ServerPlayerEntity player : players) {
+                if (player.squaredDistanceTo(currentRaycastPosition) < particleDistSquared) {
+                    player.networkHandler.sendPacket(packet);
+                }
+            }
+            Vec3d lowerCorner = currentRaycastPosition.subtract(boxRadius, boxRadius, boxRadius);
+            Vec3d upperCorner = currentRaycastPosition.add(boxRadius, boxRadius, boxRadius);
+            boxes.add(new Box(lowerCorner, upperCorner));
+        });
+
+        serverWorld.atmospheric_api$getAndAddEntitiesToCollection(entity -> {
+            for (Box box : boxes) {
+                if (entity.getBoundingBox().intersects(box)) {
+                    return true;
+                }
+            }
+            return false;
+        }, entities);
+
+        DamageSource source;
+        Entity owner = this.getOwner();
+        RegistryEntry.Reference<DamageType> reference = serverWorld.atmospheric_api$getEntryFromKey(RegistryKeys.DAMAGE_TYPE, AmarongDamageTypes.RAILGUN_HIT);
+        if (owner instanceof LivingEntity living) {
+            source = new DamageSource(reference, this, living);
+        } else {
+            source = new DamageSource(reference, this);
+        }
+
+        if (owner != null && entities.contains(owner)) {
+            entities.remove(owner);
+        }
+        if (entities.contains(this)) {
+            entities.remove(this);
+        }
+
+        final float playerDamage = this.getPlayerDamage();
+        entities.forEach(entity -> {
+            if (AmarongUtil.shouldDamageWithAmarong(entity)) {
+                entity.damage(source, entity instanceof PlayerEntity ? playerDamage : 50);
+            }
+        });
     }
 
     private float getPlayerDamage() {
@@ -168,7 +205,9 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
      */
     @SuppressWarnings({"UnusedReturnValue", "deprecation"})
     public Vec3d raycastParticle(IRailgunRaycast step) {
-        Vec3d vec3d = Vec3d.fromPolar(this.getPitch(), this.getYaw()).normalize();
+        final float pitch = this.getPitch();
+        final float yaw = this.getYaw();
+        Vec3d vec3d = Vec3d.fromPolar(pitch, yaw).normalize();
         Vec3d raycast = this.getEyePos();
         int iterations = 0;
         Set<PlayerEntity> encountered = new HashSet<>();
@@ -177,10 +216,7 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
                 break;
             }
             raycast = raycast.add(vec3d);
-            double x = raycast.getX();
-            double y = raycast.getY();
-            double z = raycast.getZ();
-            step.step(this.getWorld(), encountered, vec3d, raycast, x, y, z, iterations);
+            step.step(encountered, pitch, yaw, raycast, iterations);
             iterations++;
         }
         return raycast;
@@ -228,6 +264,6 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
 
     @FunctionalInterface
     public interface IRailgunRaycast {
-        void step(World world, Set<PlayerEntity> encountered, Vec3d pitchYaw, Vec3d currentRaycastPosition, double x, double y, double z, int iterations);
+        void step(Set<PlayerEntity> encountered, float pitch, float yaw, Vec3d currentRaycastPosition, int iterations);
     }
 }

@@ -1,0 +1,9 @@
+{
+  "values": [
+    "amarong:pneumatic",
+    {
+      "id": "minecraft:wind_burst",
+      "required": false
+    }
+  ]
+}
