@@ -38,14 +38,14 @@ import java.util.*;
 import java.util.List;
 
 public class RailgunEntity extends Entity implements Ownable, StacklessPersistentProjectile {
-    public static final int FIRING_TICKS = 3 * 20;
-    public static final int WARNING_TICKS = 4;
+    public static final int FIRING_TICKS = 40;
     public static final int MAX_ITERATIONS = 384;
     @Nullable
-    private UUID ownerUuid;
+    protected UUID ownerUuid;
     @Nullable
-    private Entity owner;
-    private ItemStack stack;
+    protected Entity owner;
+    protected ItemStack stack;
+    protected boolean hasWarned = false;
 
     public RailgunEntity(EntityType<?> type, World world) {
         super(type, world);
@@ -95,7 +95,6 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
         return this.stack.getOrDefault(AmarongDataComponentTypes.NO_RAILGUN_DELAY, false);
     }
 
-    @SuppressWarnings("RedundantCollectionOperation")
     @Override
     public void tick() {
         if (this.getWorld() instanceof ServerWorld serverWorld) {
@@ -109,7 +108,8 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
     }
 
     protected void tickFiring(ServerWorld serverWorld) {
-        if (this.age == WARNING_TICKS && !noDelay()) {
+        if (!this.hasWarned && !noDelay()) {
+            this.hasWarned = true;
             List<ServerPlayerEntity> players = serverWorld.getPlayers();
             RegistryEntry<SoundEvent> registryEntry = Registries.SOUND_EVENT.getEntry(AmarongSounds.RAILGUN_CHARGES);
             raycastParticle((encountered, pitch, yaw, currentRaycastPosition, iterations) -> {
@@ -173,12 +173,10 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
             source = new DamageSource(reference, this);
         }
 
-        if (owner != null && entities.contains(owner)) {
+        if (owner != null) {
             entities.remove(owner);
         }
-        if (entities.contains(this)) {
-            entities.remove(this);
-        }
+        entities.remove(this);
 
         final float playerDamage = this.getPlayerDamage();
         entities.forEach(entity -> {
@@ -190,12 +188,12 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
 
     private float getPlayerDamage() {
         if (this.stack == null || this.stack.isEmpty()) {
-            return 12.5f;
+            return 17.5f;
         }
         if (AmarongUtil.shouldRetainCharge(this.stack)) {
             return 20;
         }
-        return 12.5f;
+        return 17.5f;
     }
 
 

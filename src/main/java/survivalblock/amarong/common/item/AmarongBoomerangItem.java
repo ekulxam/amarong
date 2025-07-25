@@ -19,6 +19,8 @@ import survivalblock.amarong.common.init.AmarongGameRules;
 import survivalblock.amarong.common.init.AmarongTags;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.item.AlternateModelItem;
 
+import static survivalblock.amarong.common.entity.PhasingBoomerangEntity.VELOCITY_MULTIPLIER;
+
 public class AmarongBoomerangItem extends SwordItem implements AlternateModelItem {
 
     public AmarongBoomerangItem(ToolMaterial toolMaterial, AmarongToolMaterial.Configuration configuration) {
@@ -42,7 +44,7 @@ public class AmarongBoomerangItem extends SwordItem implements AlternateModelIte
             }
             PhasingBoomerangEntity boomerang = new PhasingBoomerangEntity(user, world, stack.copyWithCount(1), slot);
             boomerang.setInfinity(infinity);
-            boomerang.setVelocity(Vec3d.fromPolar(user.getPitch(), user.getYaw()));
+            boomerang.setVelocity(Vec3d.fromPolar(user.getPitch(), user.getYaw()).normalize().multiply(1 + VELOCITY_MULTIPLIER));
             boomerang.setDamage(world.getGameRules().get(AmarongGameRules.BOOMERANG_DAMAGE).get());
             if (user.isInCreativeMode()) {
                 boomerang.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;

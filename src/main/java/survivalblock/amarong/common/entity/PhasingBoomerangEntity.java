@@ -36,6 +36,7 @@ import java.util.Set;
 
 public class PhasingBoomerangEntity extends PersistentProjectileEntity {
 
+    public static final double VELOCITY_MULTIPLIER = 0.95;
     public static final int MAX_AGE = 120;
     public static final int HALF_MAX_AGE = MAX_AGE / 2;
     public static final String INFINITY_KEY = "amarongBoomerangInfinity";
@@ -110,7 +111,7 @@ public class PhasingBoomerangEntity extends PersistentProjectileEntity {
                 Vec3d vec3d = entity.getEyePos().subtract(this.getPos());
                 byte loyalty = 3; // I love tridents
                 double d = 0.05 * (double) loyalty;
-                this.setVelocity(this.getVelocity().multiply(0.95).add(vec3d.normalize().multiply(d)));
+                this.setVelocity(this.getVelocity().multiply(VELOCITY_MULTIPLIER).add(vec3d.normalize().multiply(d)));
             }
         }
     }
@@ -122,7 +123,7 @@ public class PhasingBoomerangEntity extends PersistentProjectileEntity {
         this.discard();
     }
 
-
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean isOwnerAlive() {
         Entity entity = this.getOwner();
         if (entity != null && entity.isAlive()) {
