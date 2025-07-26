@@ -40,7 +40,7 @@ public class AmarongItems {
 
     public static final Item AMARONG_VERYLONGSWORD = registerItem("amarong_verylongsword", settings -> new AmarongVerylongswordItem(AmarongToolMaterial.INSTANCE, settings),
             new AmarongToolMaterial.Configuration()
-                    .attributeModifiers(AmarongVerylongswordItem.createAttributeModifiers(22.4F, 0.5F, AMARONG_TOOL_REACH + 0.5F, AMARONG_TOOL_REACH))
+                    .attributeModifiers(AmarongVerylongswordItem.createAttributeModifiers(22.4F, 0.4F, AMARONG_TOOL_REACH + 0.5F, AMARONG_TOOL_REACH))
     );
 
     public static final Item AMARONG_HAMMER = registerItem("amarong_hammer", settings -> new AmarongHammerItem(AmarongToolMaterial.INSTANCE, settings),

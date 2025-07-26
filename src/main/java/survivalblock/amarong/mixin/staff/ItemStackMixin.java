@@ -25,6 +25,8 @@ public abstract class ItemStackMixin implements ComponentHolder {
 
     @Shadow public abstract ComponentMap getDefaultComponents();
 
+    @Shadow @Nullable public abstract <T> T remove(ComponentType<? extends T> type);
+
     @ModifyReturnValue(method = "getComponents", at = @At("RETURN"))
     private ComponentMap includeHeldItemComponents(final ComponentMap original) {
         if (!(this.getItem() instanceof AmarongStaffItem)) {
@@ -44,6 +46,12 @@ public abstract class ItemStackMixin implements ComponentHolder {
     @Inject(method = "set", at = @At("HEAD"), cancellable = true)
     private <T> void setOtherStackComponent(ComponentType<? super T> type, @Nullable T value, CallbackInfoReturnable<T> cir) {
         if (!(this.getItem() instanceof AmarongStaffItem)) {
+            if (type == AmarongDataComponentTypes.STAFF_STACK) {
+                if (this.contains(AmarongDataComponentTypes.STAFF_STACK)) {
+                    this.remove(AmarongDataComponentTypes.STAFF_STACK);
+                }
+                cir.setReturnValue((T) ItemStack.EMPTY);
+            }
             return;
         }
         final ItemStack stack = this.get(AmarongDataComponentTypes.STAFF_STACK);

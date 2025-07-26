@@ -7,33 +7,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
 import org.objectweb.asm.Opcodes;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import survivalblock.amarong.common.item.AmarongStaffItem;
 
 @Mixin(BipedEntityModel.class)
 public class BipedEntityModelMixin {
-
-    @Shadow public BipedEntityModel.ArmPose rightArmPose;
-
-    @Inject(method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V", at = @At("HEAD"))
-    private void positionStaffArmWhenUsing(LivingEntity living, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch, CallbackInfo ci) {
-        if (!(living instanceof PlayerEntity player)) {
-            return;
-        }
-        ItemStack stack = player.getMainHandStack();
-        if (!(stack.getItem() instanceof AmarongStaffItem)) {
-            return;
-        }
-        if (player.isUsingItem() && stack.equals(player.getActiveItem())) {
-            this.rightArmPose = BipedEntityModel.ArmPose.CROSSBOW_HOLD;
-        }
-    }
 
     @ModifyExpressionValue(method = "positionRightArm", at = @At(value = "FIELD", target = "Lnet/minecraft/client/model/ModelPart;pitch:F", ordinal = 0, opcode = Opcodes.GETFIELD))
     private float modifyRightArmStaffPitch(float original, LivingEntity living) {

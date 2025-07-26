@@ -31,7 +31,8 @@ public class AmarongTags {
     }
 
     public static class AmarongDataComponentTypeTags {
-        public static final TagKey<ComponentType<?>> STAFF_IGNORE = TagKey.of(RegistryKeys.DATA_COMPONENT_TYPE, Amarong.id("staff_ignore"));
+        public static final TagKey<ComponentType<?>> STAFF_VALID = TagKey.of(RegistryKeys.DATA_COMPONENT_TYPE, Amarong.id("staff_valid"));
+        public static final TagKey<ComponentType<?>> STAFF_PRIORITY = TagKey.of(RegistryKeys.DATA_COMPONENT_TYPE, Amarong.id("staff_priority"));
     }
 
     public static class AmarongEnchantmentTags {

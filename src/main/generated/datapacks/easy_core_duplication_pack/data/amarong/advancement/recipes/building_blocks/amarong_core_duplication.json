@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:amarong_core_duplication"
+        "recipe": "amarong:amarong_core_duplication"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -48,7 +48,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:amarong_core_duplication"
+      "amarong:amarong_core_duplication"
     ]
   }
 }

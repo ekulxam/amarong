@@ -133,24 +133,14 @@ public class AmarongTagGenerator {
 
         @Override
         protected void configure(RegistryWrapper.WrapperLookup lookup) {
-            FabricTagProvider<ComponentType<?>>.FabricTagBuilder staffIgnore = getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_IGNORE);
-            staffIgnore.add(DataComponentTypes.ATTRIBUTE_MODIFIERS);
-            staffIgnore.add(DataComponentTypes.CUSTOM_MODEL_DATA);
-            staffIgnore.add(DataComponentTypes.CUSTOM_NAME);
-            staffIgnore.add(DataComponentTypes.ITEM_NAME);
-            staffIgnore.add(DataComponentTypes.RECIPES);
-            staffIgnore.add(DataComponentTypes.DAMAGE);
-            staffIgnore.add(DataComponentTypes.ENCHANTMENTS);
-            staffIgnore.add(DataComponentTypes.FIRE_RESISTANT);
-            staffIgnore.add(DataComponentTypes.MAX_DAMAGE);
-            staffIgnore.add(DataComponentTypes.MAX_STACK_SIZE);
-            staffIgnore.add(DataComponentTypes.BUNDLE_CONTENTS);
-            staffIgnore.add(DataComponentTypes.CUSTOM_DATA);
-            staffIgnore.add(DataComponentTypes.HIDE_ADDITIONAL_TOOLTIP);
-            staffIgnore.add(DataComponentTypes.HIDE_TOOLTIP);
-            staffIgnore.add(DataComponentTypes.FOOD);
-            staffIgnore.add(DataComponentTypes.TOOL);
-            staffIgnore.add(DataComponentTypes.UNBREAKABLE);
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_VALID)
+                    .add(DataComponentTypes.CREATIVE_SLOT_LOCK)
+                    .add(DataComponentTypes.LOCK)
+                    .addTag(AmarongTags.AmarongDataComponentTypeTags.STAFF_PRIORITY);
+
+            getOrCreateTagBuilder(AmarongTags.AmarongDataComponentTypeTags.STAFF_PRIORITY)
+                    .add(DataComponentTypes.ATTRIBUTE_MODIFIERS)
+                    .add(DataComponentTypes.ENCHANTMENTS);
         }
     }
 

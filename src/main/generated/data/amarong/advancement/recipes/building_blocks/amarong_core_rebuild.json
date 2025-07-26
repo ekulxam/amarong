@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:amarong_core_rebuild"
+        "recipe": "amarong:amarong_core_rebuild"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:amarong_core_rebuild"
+      "amarong:amarong_core_rebuild"
     ]
   }
 }
