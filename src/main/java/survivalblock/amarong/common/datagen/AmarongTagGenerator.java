@@ -19,6 +19,7 @@ import survivalblock.amarong.common.init.*;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.damage_type.AtmosphericDamageTypeTags;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class AmarongTagGenerator {
 
@@ -74,9 +75,20 @@ public class AmarongTagGenerator {
             getOrCreateTagBuilder(ItemTags.PICKAXES).add(AmarongItems.AMARONG_HAMMER);
             getOrCreateTagBuilder(AmarongTags.AmarongItemTags.TWIRL_DAMAGE).add(AmarongItems.AMARONG_HAMMER);
 
-            Registries.ITEM.getKey(AmarongItems.AMARONG_HAMMER).ifPresent((registryKey) -> {
-                getOrCreateTagBuilder(Twirl.KEEP_USE).addOptional(registryKey);
-                getOrCreateTagBuilder(Twirl.KEEP_TICK).addOptional(registryKey);
+            FabricTagProvider<Item>.FabricTagBuilder twirlKeepUse = getOrCreateTagBuilder(Twirl.KEEP_USE);
+            FabricTagProvider<Item>.FabricTagBuilder twirlKeepTick = getOrCreateTagBuilder(Twirl.KEEP_TICK);
+
+            Consumer<RegistryKey<Item>> addToTwirl = registryKey -> {
+                twirlKeepUse.addOptional(registryKey);
+                twirlKeepTick.addOptional(registryKey);
+            };
+
+            Registries.ITEM.getKey(AmarongItems.AMARONG_HAMMER).ifPresent(addToTwirl);
+            Registries.ITEM.getKey(AmarongItems.AMARONG_STAFF).ifPresent(registryKey -> {
+                addToTwirl.accept(registryKey);
+                getOrCreateTagBuilder(Twirl.KEEP_FINISH).add(registryKey);
+                getOrCreateTagBuilder(Twirl.KEEP_STOP).add(registryKey);
+                getOrCreateTagBuilder(Twirl.KEEP_ACTION).add(registryKey);
             });
 
             FabricTagProvider<Item>.FabricTagBuilder sticks = getOrCreateTagBuilder(AmarongTags.AmarongItemTags.STICKS);

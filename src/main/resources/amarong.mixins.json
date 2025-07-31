@@ -32,6 +32,7 @@
     "compat.twirl.client.ClientPlayerEntityMixin",
     "kaleidoscope.client.GameRendererMixin",
     "staff.client.BipedEntityModelMixin",
+    "staff.client.DrawContextMixin",
     "staff.client.ItemRendererMixin",
     "verylongsword.client.AmarongVerylongswordItemMixin",
     "verylongsword.client.GlowParticleMixin",

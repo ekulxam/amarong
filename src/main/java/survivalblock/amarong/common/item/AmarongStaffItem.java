@@ -48,6 +48,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("unchecked")
 public class AmarongStaffItem extends Item {
 
     public static final Identifier STAFF_ENTITY_REACH_ID = Amarong.id("staff_entity_reach");
@@ -99,7 +100,11 @@ public class AmarongStaffItem extends Item {
         if (!(stack.getItem() instanceof AmarongStaffItem staff)) {
             return super.canMine(state, world, pos, miner);
         }
-        return staff.getStaffStack(stack).getItem().canMine(state, world, pos, miner);
+        ItemStack other = staff.getStaffStack(stack);
+        usingStaff = true;
+        boolean mine = other.getItem().canMine(state, world, pos, miner);
+        usingStaff = false;
+        return mine;
     }
 
     public ActionResult useOnBlock(ItemUsageContext context) {
@@ -120,6 +125,9 @@ public class AmarongStaffItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack staff = user.getStackInHand(hand);
         ItemStack other = this.getStaffStack(staff);
+        if (user.getItemCooldownManager().isCoolingDown(other.getItem())) {
+            return TypedActionResult.pass(staff);
+        }
         usingStaff = true;
         TypedActionResult<ItemStack> typedActionResult = other.use(world, user, hand);
         usingStaff = false;
@@ -202,6 +210,9 @@ public class AmarongStaffItem extends Item {
     }
 
     public ItemStack postDoSomething(ItemStack stack) {
+        if (stack == null || stack.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
         ItemStack otherStack = this.getStaffStack(stack).copy();
         stack.set(AmarongDataComponentTypes.STAFF_STACK, otherStack);
         return otherStack;
@@ -315,7 +326,6 @@ public class AmarongStaffItem extends Item {
                     }
                     builder.add(entry.attribute(), entry.modifier(), entry.slot());
                 }
-                //noinspection unchecked
                 return (T) builder.build();
             }
             if (isIn(type, AmarongTags.AmarongDataComponentTypeTags.STAFF_PRIORITY)) {

@@ -3,6 +3,10 @@
     {
       "id": "amarong:amarong_hammer",
       "required": false
+    },
+    {
+      "id": "amarong:amarong_staff",
+      "required": false
     }
   ]
 }

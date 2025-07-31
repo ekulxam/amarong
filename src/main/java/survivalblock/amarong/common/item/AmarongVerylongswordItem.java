@@ -155,7 +155,7 @@ public class AmarongVerylongswordItem extends SwordItem implements TwoHandedItem
         if (!world.getGameRules().getBoolean(AmarongGameRules.VERYLONGSWORD_PASSIVE_CHARGE)) {
             return;
         }
-        int ticks = 60 * (selected ? 1 : 3); // charge slower when not selected
+        int ticks = 80 * (selected ? 1 : 3); // charge slower when not selected
         if (world.getTime() % ticks == 0) {
             int maxCharge = getMaxCharge(stack);
             if (maxCharge <= 0) {
