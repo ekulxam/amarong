@@ -45,8 +45,7 @@ public class KaleidoscopeItem extends SpyglassItem implements IAmASpyglassItem {
             Identifier.ofVanilla("shaders/post/blobs.json"),
             Identifier.ofVanilla("shaders/post/antialias.json"),
             CREEPER,
-            SPIDER,
-            Amarong.id("shaders/post/test.json")));
+            SPIDER));
 
     public static final Identifier KALEIDOSCOPE_SCOPE = Amarong.id("textures/misc/kaleidoscope_scope.png");
 
