@@ -5,8 +5,8 @@ import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.SimpleParticleType;
 import survivalblock.amarong.common.init.AmarongParticleTypes;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.particle.client.SpriteDirectionalParticle;
 
 public class RailcannonParticle extends SpriteDirectionalParticle {
 
@@ -46,12 +46,7 @@ public class RailcannonParticle extends SpriteDirectionalParticle {
         return ParticleTextureSheet.PARTICLE_SHEET_LIT;
     }
 
-    public static class Factory implements ParticleFactory<AmarongParticleTypes.RailgunParticleEffect> {
-        private final SpriteProvider spriteProvider;
-
-        public Factory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
-        }
+    public record Factory(SpriteProvider spriteProvider) implements ParticleFactory<AmarongParticleTypes.RailgunParticleEffect> {
 
         public Particle createParticle(AmarongParticleTypes.RailgunParticleEffect parameters, ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
             RailcannonParticle particle = new RailcannonParticle(clientWorld, x, y, z, this.spriteProvider);

@@ -23,7 +23,7 @@ import survivalblock.amarong.client.AmarongClient;
 import survivalblock.amarong.client.render.AmarongStaffTransformation;
 import survivalblock.amarong.common.compat.config.AmarongConfig;
 import survivalblock.amarong.common.item.AmarongStaffItem;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.util.AtmosphericUtil;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.util.Approximatics;
 
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin {
@@ -73,7 +73,7 @@ public abstract class ItemRendererMixin {
     @Unique
     private void amarong$rotateStaffItem(ClientWorld world, ItemStack otherStack, boolean isModeGUI, boolean isModeGround, boolean leftHanded, MatrixStack matrices, AmarongStaffTransformation staffTransformation, float tickDelta) {
         float multiplier = AmarongConfig.staffRotationMultiplier();
-        if (AtmosphericUtil.isBasicallyEqual(multiplier, 0.0F)) {
+        if (Approximatics.isBasicallyEqual(multiplier, 0.0F)) {
             return;
         }
         final float time = (world.getTime() + tickDelta) * multiplier;

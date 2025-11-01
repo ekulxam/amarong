@@ -3,7 +3,6 @@ package survivalblock.amarong.common;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -13,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import survivalblock.amarong.common.compat.config.AmarongConfig;
 import survivalblock.amarong.common.init.*;
-import survivalblock.amarong.common.networking.DirectionalParticleS2CPayload;
 import survivalblock.amarong.common.recipe.KaleidoscopeShaderTypeRecipe;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.resource.AtmosphericResourceManagerHelper;
 
@@ -50,8 +48,6 @@ public class Amarong implements ModInitializer {
 		LootTableEvents.MODIFY.register(AmarongLootTableEvents.INSTANCE);
 
 		fabricLoader.getModContainer(MOD_ID).ifPresent(Amarong::registerBuiltinDataPacks);
-
-		PayloadTypeRegistry.playS2C().register(DirectionalParticleS2CPayload.ID, DirectionalParticleS2CPayload.PACKET_CODEC);
 	}
 
 	private static void registerBuiltinDataPacks(ModContainer modContainer) {

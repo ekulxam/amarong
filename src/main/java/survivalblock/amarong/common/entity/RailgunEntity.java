@@ -31,8 +31,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import survivalblock.amarong.common.AmarongUtil;
 import survivalblock.amarong.common.init.*;
-import survivalblock.amarong.common.networking.DirectionalParticleS2CPayload;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.entity.StacklessPersistentProjectile;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.particle.DirectionalParticleS2CPayload;
 
 import java.util.*;
 import java.util.List;
@@ -134,16 +134,13 @@ public class RailgunEntity extends Entity implements Ownable, StacklessPersisten
         Set<Box> boxes = new HashSet<>(100);
 
         raycastParticle((encountered, pitch, yaw, currentRaycastPosition, iterations) -> {
-            CustomPayload payload = new DirectionalParticleS2CPayload(
-                    new AmarongParticleTypes.RailgunParticleEffect(pitch, yaw),
-                    currentRaycastPosition.x,
-                    currentRaycastPosition.y,
-                    currentRaycastPosition.z,
-                    pitch,
-                    yaw,
-                    0.1,
-                    0.1,
-                    0.1);
+            CustomPayload payload = new DirectionalParticleS2CPayload.Builder()
+                    .particleEffect(new AmarongParticleTypes.RailgunParticleEffect(pitch, yaw))
+                    .pos(currentRaycastPosition)
+                    .direction(pitch, yaw)
+                    .deltaPos(0.1, 0.1, 0.1)
+                    .force(true)
+                    .build();
             Packet<ClientCommonPacketListener> packet = ServerPlayNetworking.createS2CPacket(payload);
             for (ServerPlayerEntity player : players) {
                 if (player.squaredDistanceTo(currentRaycastPosition) < particleDistSquared) {
