@@ -28,7 +28,7 @@ public class PhasingBoomerangEntityRenderer extends EntityRenderer<PhasingBoomer
     public void render(PhasingBoomerangEntity boomerang, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
-        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(boomerang.getYaw(tickDelta) * AmarongConfig.boomerangSpinMultiplier()));
+        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(boomerang.getYaw(tickDelta) * AmarongConfig.INSTANCE.boomerangSpinMultiplier()));
         ItemStack stack = boomerang.getItemStack().copy();
         if (boomerang.getBoomerangComponent().isEnchanted()) {
             stack.set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true);

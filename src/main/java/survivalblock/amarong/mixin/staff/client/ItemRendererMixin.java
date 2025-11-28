@@ -72,7 +72,7 @@ public abstract class ItemRendererMixin {
 
     @Unique
     private void amarong$rotateStaffItem(ClientWorld world, ItemStack otherStack, boolean isModeGUI, boolean isModeGround, boolean leftHanded, MatrixStack matrices, AmarongStaffTransformation staffTransformation, float tickDelta) {
-        float multiplier = AmarongConfig.staffRotationMultiplier();
+        float multiplier = AmarongConfig.INSTANCE.staffRotationMultiplier();
         if (Approximatics.isBasicallyEqual(multiplier, 0.0F)) {
             return;
         }

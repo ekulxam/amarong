@@ -27,8 +27,6 @@
     "defaultRequire": 1
   },
   "client": [
-    "compat.config.AmarongConfigMixin",
-    "compat.config.client.AmarongConfigScreenMixin",
     "compat.twirl.client.ClientPlayerEntityMixin",
     "kaleidoscope.client.GameRendererMixin",
     "staff.client.BipedEntityModelMixin",

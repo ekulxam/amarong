@@ -47,7 +47,7 @@ public class BeaconBlockEntityMixin {
 
     @ModifyExpressionValue(method = "tick", at = @At(value = "CONSTANT", args = "intValue=10"))
     private static int amarongCoreChange(int original, @Local(argsOnly = true) World world) {
-        return world.isClient() ? AmarongConfig.maxBeaconBeamIterations() : original;
+        return world.isClient() ? AmarongConfig.INSTANCE.maxBeaconBeamIterations() : original;
     }
 
     @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/DyeColor;getEntityColor()I"))
@@ -63,7 +63,7 @@ public class BeaconBlockEntityMixin {
         if (!world.isClient()) {
             return;
         }
-        if (!AmarongConfig.verboseLogging()) {
+        if (!AmarongConfig.INSTANCE.verboseLogging()) {
             return;
         }
         long time = world.getTime();
@@ -73,7 +73,7 @@ public class BeaconBlockEntityMixin {
 
     @Unique
     private static void amarong$logBeaconTick(long time) {
-        BeaconBeamDebugMode debugMode = AmarongConfig.debugBeaconBeams();
+        BeaconBeamDebugMode debugMode = AmarongConfig.INSTANCE.debugBeaconBeams();
         if (BeaconBeamDebugMode.NEVER.equals(debugMode)) {
             return;
         }

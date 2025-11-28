@@ -52,11 +52,11 @@ public abstract class GameRendererMixin {
                     I'm not exactly sure what outline does
                     */
                 } catch (Throwable throwable) {
-                    if (AmarongConfig.verboseLogging()) {
+                    if (AmarongConfig.INSTANCE.verboseLogging()) {
                         Amarong.LOGGER.error("Failed to load shader due to an exception!", throwable);
                     }
                 }
-                if (AmarongConfig.verboseLogging()) {
+                if (AmarongConfig.INSTANCE.verboseLogging()) {
                     Amarong.LOGGER.info("Loading shader {}", shaderId);
                 }
             });

@@ -2,7 +2,6 @@ package survivalblock.amarong.common.init;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.block.Block;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.BlockItem;
@@ -98,7 +97,7 @@ public class AmarongItems {
                     } else if (item.equals(SOMEWHAT_A_DUCK)) {
                         addEnchantedStack(item, displayContext, "amarong:capacity", entries);
                     } else if (item.equals(AMARONG_HAMMER)) {
-                        if (Amarong.twirl) addEnchantedStack(item, displayContext, "twirl:twirling", entries);
+                        if (Amarong.TWIRL) addEnchantedStack(item, displayContext, "twirl:twirling", entries);
                     }
                 }
             }).build();
@@ -121,12 +120,12 @@ public class AmarongItems {
                     stack.set(AmarongDataComponentTypes.WATERGUN, SomewhatADuckItem.getMaxWater(stack));
                 }
                 entries.add(stack);
-            } else if (AmarongConfig.verboseLogging()) {
+            } else if (AmarongConfig.INSTANCE.verboseLogging()) {
                 Amarong.LOGGER.error("Avoided adding an ItemStack of {} because enchantment amarong:{} does not support that item", Registries.ITEM.getId(item), enchantmentId);
             }
         } catch (Throwable throwable) {
             try {
-                if (AmarongConfig.verboseLogging()) {
+                if (AmarongConfig.INSTANCE.verboseLogging()) {
                     Amarong.LOGGER.error("Unable to add an ItemStack of {} because of an error when getting enchantment {}", Registries.ITEM.getId(item), enchantmentId, throwable);
                 }
             } catch (Throwable throwable1) {

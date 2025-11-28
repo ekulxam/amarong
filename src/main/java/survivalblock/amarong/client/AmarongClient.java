@@ -13,6 +13,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.text.Text;
 import survivalblock.amarong.client.compat.config.AmarongConfigScreen;
+import survivalblock.amarong.client.compat.config.AmarongConfigScreenCreator;
 import survivalblock.amarong.client.particle.ObscureGlowParticleFactory;
 import survivalblock.amarong.client.particle.RailcannonParticle;
 import survivalblock.amarong.client.render.StaffTransformationsManager;
@@ -34,7 +35,9 @@ public class AmarongClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		EntityRendererRegistry.register(AmarongEntityTypes.WATER_STREAM, WaterStreamEntityRenderer::new);
+        AmarongConfigScreenCreator.init();
+
+        EntityRendererRegistry.register(AmarongEntityTypes.WATER_STREAM, WaterStreamEntityRenderer::new);
 		EntityRendererRegistry.register(AmarongEntityTypes.FLYING_TICKET, FlyingTicketEntityRenderer::new);
 		EntityRendererRegistry.register(AmarongEntityTypes.RAILGUN, RailgunEntityRenderer::new);
 		EntityRendererRegistry.register(AmarongEntityTypes.BOOMERANG, PhasingBoomerangEntityRenderer::new);
@@ -58,9 +61,9 @@ public class AmarongClient implements ClientModInitializer {
 
 		//BlockRenderLayerMap.INSTANCE.putBlock(AmarongBlocks.CUBE, RenderLayer.getArmorEntityGlint());
 
-		AtmosphericSpecialItemRenderHandler.handleShouldZoomIn(AmarongItems.KALEIDOSCOPE, stack -> !AmarongConfig.noKaleidoscopeZoom());
+		AtmosphericSpecialItemRenderHandler.handleShouldZoomIn(AmarongItems.KALEIDOSCOPE, stack -> !AmarongConfig.INSTANCE.noKaleidoscopeZoom());
 		AtmosphericSpecialItemRenderHandler.handleShouldRenderOverlay(AmarongItems.KALEIDOSCOPE, stack -> !MinecraftClient.getInstance().atmospheric_api$isResourcePackLoaded(AmarongClientUtil.NO_KALEIDOSCOPE_OVERLAY_PACK.toString()));
-		AtmosphericSpecialItemRenderHandler.handleShouldRenderTwoHanded(AmarongItems.AMARONG_VERYLONGSWORD, stack -> AmarongConfig.twoHandedVerylongsword());
+		AtmosphericSpecialItemRenderHandler.handleShouldRenderTwoHanded(AmarongItems.AMARONG_VERYLONGSWORD, stack -> AmarongConfig.INSTANCE.twoHandedVerylongsword());
 
 		//noinspection CodeBlock2Expr
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {

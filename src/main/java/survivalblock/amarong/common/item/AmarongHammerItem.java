@@ -1,7 +1,6 @@
 package survivalblock.amarong.common.item;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -48,7 +47,7 @@ public class AmarongHammerItem extends MiningToolItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
-        if (Amarong.twirl) {
+        if (Amarong.TWIRL) {
             if (AmarongHammerTwirlCompat.hasTwirl(stack)) {
                 user.setCurrentHand(hand);
                 return TypedActionResult.success(stack);
@@ -59,7 +58,7 @@ public class AmarongHammerItem extends MiningToolItem {
 
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
-        if (Amarong.twirl && user instanceof ServerPlayerEntity serverPlayer) {
+        if (Amarong.TWIRL && user instanceof ServerPlayerEntity serverPlayer) {
             AmarongHammerTwirlCompat.whack(serverPlayer);
         }
     }

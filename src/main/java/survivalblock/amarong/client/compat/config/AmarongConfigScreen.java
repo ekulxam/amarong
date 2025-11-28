@@ -39,8 +39,7 @@ public class AmarongConfigScreen extends Screen {
                     if (this.client == null) {
                         return;
                     }
-                    Screen screen = Amarong.shouldDoConfig ? create(this) : this;
-                    //noinspection ConstantValue
+                    Screen screen = Amarong.YACL ? AmarongConfigScreenCreator.INSTANCE.create(this) : this;
                     if (screen == null || this.equals(screen)) {
                         return;
                     }
@@ -67,14 +66,10 @@ public class AmarongConfigScreen extends Screen {
         if (this.client != null) this.client.setScreen(this.parent);
     }
 
-    public static Screen create(Screen parent) {
-        return parent;
-    }
-
     @Nullable
     public static Tooltip getYACLFailTooltip() {
         MutableText text = null;
-        if (!Amarong.shouldDoConfig) {
+        if (!Amarong.YACL) {
             text = Text.stringifiedTranslatable("commands.amarongconfig.noyacl");
         } else if (!Amarong.configLoaded) {
             text = Text.stringifiedTranslatable("commands.amarongconfig.fail");

@@ -11,10 +11,8 @@ public class AmarongMixinPlugin implements AtmosphericMixinConfigPlugin {
         if (mixinClassName.contains("compat")) {
             if (mixinClassName.contains("honque")) {
                 return FabricLoader.getInstance().isModLoaded("honque");
-            } else if (mixinClassName.contains("config")) {
-                return Amarong.resetShouldDoConfig();
             } else if (mixinClassName.contains("twirl")) {
-                return FabricLoader.getInstance().isModLoaded("twirl");
+                return Amarong.TWIRL;
             }
         }
         return true;

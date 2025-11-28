@@ -19,12 +19,15 @@ public class Amarong implements ModInitializer {
 
 	public static final String MOD_ID = "amarong";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID.substring(0, 1).toUpperCase() + MOD_ID.substring(1).toLowerCase());
-	public static boolean shouldDoConfig = false;
-	public static boolean configLoaded = false;
-	public static boolean twirl = false;
+
+    public static final boolean YACL = FabricLoader.getInstance().isModLoaded("yet_another_config_lib_v3");
+    public static boolean configLoaded = false;
+	public static final boolean TWIRL = FabricLoader.getInstance().isModLoaded("twirl");
 
     @Override
 	public void onInitialize() {
+        AmarongConfig.init();
+
 		AmarongGameRules.init();
 		AmarongDataComponentTypes.init();
 		AmarongSounds.init();
@@ -34,20 +37,9 @@ public class Amarong implements ModInitializer {
 		KaleidoscopeShaderTypeRecipe.init();
 		AmarongParticleTypes.init();
 
-		final FabricLoader fabricLoader = FabricLoader.getInstance();
-		if (!resetShouldDoConfig()) {
-			LOGGER.warn("YACL is not installed, so Amarong's YACL Config will not be accessible!");
-		} else {
-			configLoaded = AmarongConfig.load();
-			if (!configLoaded) {
-				LOGGER.warn("Amarong YACL Config could not be loaded!");
-			}
-		}
-		twirl = fabricLoader.isModLoaded("twirl");
-
 		LootTableEvents.MODIFY.register(AmarongLootTableEvents.INSTANCE);
 
-		fabricLoader.getModContainer(MOD_ID).ifPresent(Amarong::registerBuiltinDataPacks);
+        FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(Amarong::registerBuiltinDataPacks);
 	}
 
 	private static void registerBuiltinDataPacks(ModContainer modContainer) {
@@ -57,10 +49,5 @@ public class Amarong implements ModInitializer {
 
 	public static Identifier id(String path) {
 		return Identifier.of(MOD_ID, path);
-	}
-
-	public static boolean resetShouldDoConfig() {
-		shouldDoConfig = FabricLoader.getInstance().isModLoaded("yet_another_config_lib_v3");
-		return shouldDoConfig;
 	}
 }
