@@ -11,6 +11,7 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.item.ExtendableItemSettings;
 
 public class AmarongToolMaterial implements ToolMaterial {
 
@@ -49,7 +50,7 @@ public class AmarongToolMaterial implements ToolMaterial {
         return null;
     }
 
-    public static class Configuration extends Item.Settings {
+    public static class Configuration extends ExtendableItemSettings<Configuration> {
 
         public Configuration() {
             super();
@@ -63,42 +64,42 @@ public class AmarongToolMaterial implements ToolMaterial {
 
         @Override
         public Configuration maxCount(int maxCount) {
-            return (Configuration) super.maxCount(1);
+            return apply(super::maxCount, 1);
         }
 
-        @SuppressWarnings({"UnusedReturnValue", "unused"})
+        @SuppressWarnings("UnusedReturnValue")
         public Configuration maxCount() {
             return this.maxCount(1);
         }
 
         @Override
         public Configuration attributeModifiers(AttributeModifiersComponent attributeModifiersComponent) {
-            return (Configuration) super.attributeModifiers(attributeModifiersComponent);
+            return apply(super::attributeModifiers, attributeModifiersComponent);
         }
 
         @Override
         public Configuration rarity(Rarity rarity) {
-            return (Configuration) super.rarity(rarity);
+            return apply(super::rarity, rarity);
         }
 
         @Override
         public <T> Configuration component(ComponentType<T> type, T value) {
-            return (Configuration) super.component(type, value);
+            return apply(super::component, type, value);
         }
 
         @Override
         public Configuration recipeRemainder(Item recipeRemainder) {
-            return (Configuration) super.recipeRemainder(recipeRemainder);
+            return apply(super::recipeRemainder, recipeRemainder);
         }
 
         @Override
         public Configuration fireproof() {
-            return (Configuration) super.fireproof();
+            return apply(super::fireproof);
         }
 
         @Override
         public Configuration equipmentSlot(EquipmentSlotProvider equipmentSlotProvider) {
-            return (Configuration) super.equipmentSlot(equipmentSlotProvider);
+            return apply(super::equipmentSlot, equipmentSlotProvider);
         }
     }
 }

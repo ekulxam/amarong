@@ -14,8 +14,8 @@ import survivalblock.amarong.common.block.AmarongCoreBlockEntity;
 public class AmarongBlocks {
 
     public static final Block AMARONG_CORE = registerBlock("amarong_core",
-            new AmarongCoreBlock(AbstractBlock.Settings.copy(Blocks.HEAVY_CORE).
-                    requiresTool()
+            new AmarongCoreBlock(AbstractBlock.Settings.copy(Blocks.HEAVY_CORE)
+                    .requiresTool()
                     .mapColor(MapColor.ORANGE) // copper
                     .luminance((state) -> 10)));
 

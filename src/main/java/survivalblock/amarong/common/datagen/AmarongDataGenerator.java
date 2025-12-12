@@ -19,7 +19,7 @@ public class AmarongDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(AmarongRecipeGenerator::new);
 		pack.addProvider(AmarongAdvancementGenerator::new);
 		pack.addProvider(AmarongBlockLootTableGenerator::new);
-		pack.addProvider(AmarongDamageTypeGenerator::new);
+		pack.addProvider(AmarongDynamicRegistriesGenerator::new);
 		pack.addProvider(AmarongEnchantmentGenerator::new);
 		pack.addProvider(AmarongTagGenerator.AmarongBlockTagGenerator::new);
 		pack.addProvider(AmarongTagGenerator.AmarongItemTagGenerator::new);

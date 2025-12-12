@@ -15,6 +15,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import org.jetbrains.annotations.Nullable;
 import survivalblock.amarong.common.Amarong;
 import survivalblock.amarong.common.compat.config.AmarongConfig;
 import survivalblock.amarong.common.item.*;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class AmarongItems {
@@ -89,13 +91,15 @@ public class AmarongItems {
                             entries.add(stack);
                         }
                     } else if (item.equals(AMARONG_VERYLONGSWORD)) {
-                        addEnchantedStack(item, displayContext, "amarong:obscure", entries);
-                        addEnchantedStack(item, displayContext, "amarong:railgun", entries);
+                        final Consumer<ItemStack> longswordCharge = stack -> stack.set(AmarongDataComponentTypes.VERYLONGSWORD_CHARGE, AmarongVerylongswordItem.getMaxCharge(stack));
+                        addEnchantedStack(item, displayContext, "amarong:obscure", entries, longswordCharge);
+                        addEnchantedStack(item, displayContext, "amarong:railgun", entries, longswordCharge);
                     } else if (item.equals(TICKET_LAUNCHER)) {
                         addEnchantedStack(item, displayContext, "amarong:pneumatic", entries);
                         addEnchantedStack(item, displayContext, "amarong:particle_accelerator", entries);
                     } else if (item.equals(SOMEWHAT_A_DUCK)) {
-                        addEnchantedStack(item, displayContext, "amarong:capacity", entries);
+                        final Consumer<ItemStack> water = stack -> stack.set(AmarongDataComponentTypes.WATERGUN, SomewhatADuckItem.getMaxWater(stack));
+                        addEnchantedStack(item, displayContext, "amarong:capacity", entries, water);
                     } else if (item.equals(AMARONG_HAMMER)) {
                         if (Amarong.TWIRL) addEnchantedStack(item, displayContext, "twirl:twirling", entries);
                     }
@@ -103,22 +107,28 @@ public class AmarongItems {
             }).build();
 
     private static void addEnchantedStack(Item item, ItemGroup.DisplayContext displayContext, String enchantmentId, ItemGroup.Entries entries) {
+        addEnchantedStack(item, displayContext, enchantmentId, entries, null);
+    }
+
+    private static void addEnchantedStack(Item item, ItemGroup.DisplayContext displayContext, String enchantmentId, ItemGroup.Entries entries, @Nullable Consumer<ItemStack> stackModifier) {
         try {
             ItemStack stack = new ItemStack(item);
             AtomicReference<RegistryEntry<Enchantment>> reference = new AtomicReference<>(null);
-            displayContext.lookup().getWrapperOrThrow(RegistryKeys.ENCHANTMENT).streamEntries().forEach((enchantmentReference) -> {
-                if (enchantmentReference.matchesId(Identifier.of(enchantmentId))) {
-                    reference.set(enchantmentReference);
-                }
-            });
+            Identifier id = Identifier.of(enchantmentId);
+            displayContext.lookup()
+                    .getWrapperOrThrow(RegistryKeys.ENCHANTMENT)
+                    .streamEntries()
+                    .filter(enchantmentRef -> enchantmentRef.matchesId(id))
+                    .findFirst()
+                    .ifPresent(reference::set);
             RegistryEntry<Enchantment> enchantmentEntry = Objects.requireNonNull(reference.get());
             if (enchantmentEntry.value().isAcceptableItem(stack)) {
                 stack.addEnchantment(enchantmentEntry, enchantmentEntry.value().getMaxLevel());
-                if (item.equals(AMARONG_VERYLONGSWORD)) {
-                    stack.set(AmarongDataComponentTypes.VERYLONGSWORD_CHARGE, AmarongVerylongswordItem.getMaxCharge(stack));
-                } else if (item.equals(SOMEWHAT_A_DUCK)) {
-                    stack.set(AmarongDataComponentTypes.WATERGUN, SomewhatADuckItem.getMaxWater(stack));
+
+                if (stackModifier != null) {
+                    stackModifier.accept(stack);
                 }
+
                 entries.add(stack);
             } else if (AmarongConfig.INSTANCE.verboseLogging()) {
                 Amarong.LOGGER.error("Avoided adding an ItemStack of {} because enchantment amarong:{} does not support that item", Registries.ITEM.getId(item), enchantmentId);
