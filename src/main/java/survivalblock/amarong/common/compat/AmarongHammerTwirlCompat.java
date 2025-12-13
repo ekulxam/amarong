@@ -47,9 +47,11 @@ public class AmarongHammerTwirlCompat {
             entities.remove(player);
         }
         DamageSource source = serverWorld.getDamageSources().playerAttack(player);
+        float playerDamage = 0.5f * (float) level;
+        float entityDamage = 0.25f * (float) level;
         entities.forEach(entity -> {
             if (AmarongUtil.shouldDamageWithAmarong(entity)) {
-                entity.damage(source, (entity instanceof PlayerEntity ? 0.5f : 0.25f) * (float) level);
+                entity.damage(source, entity instanceof PlayerEntity ? playerDamage : entityDamage);
             }
         });
     }

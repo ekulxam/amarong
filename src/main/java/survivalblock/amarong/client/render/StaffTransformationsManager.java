@@ -44,7 +44,7 @@ public class StaffTransformationsManager extends AtmosphericResourceReader<Amaro
     }
 
     private AmarongStaffTransformation getTransformationInternal(Identifier itemId, Map<Identifier, AmarongStaffTransformation> staffTransformations) {
-        // for some reason, the ids have the format <namespace>:amarong_staff_transformations<path>.json and I don't know how to fix that right now so I'm using this workaround
+        // for some reason, the ids have the format <namespace>:amarong_staff_transformations/<path>.json and I don't know how to fix that right now so I'm using this workaround
         // hopefully string operations are fast
         Identifier id = Identifier.of(itemId.getNamespace(), STAFF_TRANSFORMATIONS_DIRECTORY + "/" + itemId.getPath() + ".json");
         return staffTransformations.get(id);
