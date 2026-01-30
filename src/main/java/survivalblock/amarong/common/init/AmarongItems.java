@@ -1,151 +1,106 @@
 package survivalblock.amarong.common.init;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import org.jetbrains.annotations.Nullable;
 import survivalblock.amarong.common.Amarong;
-import survivalblock.amarong.common.compat.config.AmarongConfig;
 import survivalblock.amarong.common.item.*;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.ItemRegistrant;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.delayed.DelayedItemGroupRegistrant;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
-public class AmarongItems {
+import static survivalblock.atmosphere.atmospheric_api.not_mixin.item.CreativeTabEnchantmentAdder.addEnchantedStack;
 
-    private static final float AMARONG_TOOL_REACH = 1.25f;
+@SuppressWarnings("UnstableApiUsage")
+public sealed interface AmarongItems permits AmarongItems.Dummy {
 
-    public static final List<Item> AMARONG_ITEMS = new ArrayList<>();
+    float AMARONG_TOOL_REACH = 1.25f;
+    ItemRegistrant registrant = new ItemRegistrant(Amarong::id);
+    DelayedItemGroupRegistrant itemGroupRegistrant = new DelayedItemGroupRegistrant(Amarong::id);
 
-    public static final Item AMARONG_CHUNK = registerItem("amarong_chunk", Item::new, new Item.Settings().maxCount(64));
+    Item AMARONG_CHUNK = registrant.register("amarong_chunk", Item::new, new Item.Settings().maxCount(64));
 
-    public static final Item AMARONG_SHEET = registerItem("amarong_sheet", Item::new, new Item.Settings().maxCount(64));
+    Item AMARONG_SHEET = registrant.register("amarong_sheet", Item::new, new Item.Settings().maxCount(64));
 
-    public static final Item KALEIDOSCOPE = registerItem("amarong_kaleidoscope", KaleidoscopeItem::new, new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON));
+    Item KALEIDOSCOPE = registrant.register("amarong_kaleidoscope", KaleidoscopeItem::new, new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON));
 
-    public static final Item AMARONG_VERYLONGSWORD = registerItem("amarong_verylongsword", settings -> new AmarongVerylongswordItem(AmarongToolMaterial.INSTANCE, settings),
+    Item AMARONG_VERYLONGSWORD = registrant.register("amarong_verylongsword", settings -> new AmarongVerylongswordItem(AmarongToolMaterial.INSTANCE, settings),
             new AmarongToolMaterial.Configuration()
                     .attributeModifiers(AmarongVerylongswordItem.createAttributeModifiers(22.4F, 0.4F, AMARONG_TOOL_REACH + 0.5F, AMARONG_TOOL_REACH))
     );
 
-    public static final Item AMARONG_HAMMER = registerItem("amarong_hammer", settings -> new AmarongHammerItem(AmarongToolMaterial.INSTANCE, settings),
+    Item AMARONG_HAMMER = registrant.register("amarong_hammer", settings -> new AmarongHammerItem(AmarongToolMaterial.INSTANCE, settings),
             new AmarongToolMaterial.Configuration()
                     .attributeModifiers(AmarongVerylongswordItem.createAttributeModifiers(6.0F, 0.6F, AMARONG_TOOL_REACH + 0.75F, AMARONG_TOOL_REACH + 0.5F))
                     .rarity(Rarity.EPIC)
     );
 
-    public static final Item TICKET_LAUNCHER = registerItem("amarong_ticket_dispenser", TicketLauncherItem::new, new Item.Settings().maxCount(1).component(AmarongDataComponentTypes.TICKETS, 0));
+    Item TICKET_LAUNCHER = registrant.register("amarong_ticket_dispenser", TicketLauncherItem::new, new Item.Settings().maxCount(1).component(AmarongDataComponentTypes.TICKETS, 0));
 
-    public static final Item SOMEWHAT_A_DUCK = registerItem("somewhat_a_duck", SomewhatADuckItem::new, new Item.Settings().maxCount(1)
+    Item SOMEWHAT_A_DUCK = registrant.register("somewhat_a_duck", SomewhatADuckItem::new, new Item.Settings().maxCount(1)
             .component(AmarongDataComponentTypes.WATERGUN, SomewhatADuckItem.MAX_WATER).equipmentSlot((living, stack) -> EquipmentSlot.HEAD));
 
-    public static final Item AMARONG_CORE = registerBlockItem(AmarongBlocks.AMARONG_CORE, new Item.Settings());
+    Item AMARONG_CORE = registrant.register(AmarongBlocks.AMARONG_CORE, new Item.Settings());
 
-    public static final Item AMARONG_BOOMERANG = registerItem("amarong_boomerang", settings -> new AmarongBoomerangItem(AmarongToolMaterial.INSTANCE, settings), new AmarongToolMaterial.Configuration()
+    Item AMARONG_BOOMERANG = registrant.register("amarong_boomerang", settings -> new AmarongBoomerangItem(AmarongToolMaterial.INSTANCE, settings), new AmarongToolMaterial.Configuration()
             .attributeModifiers(AmarongVerylongswordItem.createAttributeModifiers(4.0F, 1.6F, AMARONG_TOOL_REACH, AMARONG_TOOL_REACH))
     );
 
-    public static final Item AMARONG_STAFF = registerItem("amarong_staff", AmarongStaffItem::new, new Item.Settings().maxCount(1).component(AmarongDataComponentTypes.STAFF_STACK, ItemStack.EMPTY)
+    Item AMARONG_STAFF = registrant.register("amarong_staff", AmarongStaffItem::new, new Item.Settings().maxCount(1).component(AmarongDataComponentTypes.STAFF_STACK, ItemStack.EMPTY)
             .attributeModifiers(AmarongStaffItem.createAttributeModifiers(8f, 7.6f))
     );
 
-    private static <T extends Item, S extends Item.Settings> Item registerItem(String name, Function<S, T> itemFunction, S settings) {
-        Item item = itemFunction.apply(settings);
-        AMARONG_ITEMS.add(item);
-        return Registry.register(Registries.ITEM, Amarong.id(name), item);
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    private static Item registerBlockItem(Block block, Item.Settings settings) {
-        BlockItem blockItem = new BlockItem(block, settings);
-        blockItem.appendBlocks(Item.BLOCK_ITEMS, blockItem);
-        AMARONG_ITEMS.add(blockItem);
-        return Registry.register(Registries.ITEM, Registries.BLOCK.getId(block), blockItem);
-    }
-
-    public static final ItemGroup AMARONG_GROUP = FabricItemGroup.builder()
-            .displayName(Text.translatable("amarong.itemGroup.amarong_group"))
-            .icon(KALEIDOSCOPE::getDefaultStack).entries((displayContext, entries) -> {
-                for (Item item : AMARONG_ITEMS) {
-                    entries.add(item.getDefaultStack());
-                    if (item.equals(KALEIDOSCOPE)) {
-                        for (Identifier id : KaleidoscopeItem.SUPER_SECRET_SETTING_PROGRAMS) {
-                            ItemStack stack = new ItemStack(KALEIDOSCOPE);
-                            stack.set(AmarongDataComponentTypes.SHADER_TYPE, id);
-                            entries.add(stack);
+    @SuppressWarnings("unused")
+    ItemGroup AMARONG_GROUP = itemGroupRegistrant.register(
+            "amarong_group",
+            FabricItemGroup.builder()
+                    .displayName(Text.translatable("amarong.itemGroup.amarong_group"))
+                    .icon(KALEIDOSCOPE::getDefaultStack).entries((displayContext, entries) -> {
+                        for (Item item : Registries.ITEM.streamEntries()
+                                .filter(
+                                        reference -> reference.registryKey()
+                                                .getValue()
+                                                .getNamespace()
+                                                .equals(Amarong.MOD_ID)
+                            ).map(RegistryEntry.Reference::value)
+                            .toList()
+                        ) {
+                            entries.add(item.getDefaultStack());
+                            if (item.equals(KALEIDOSCOPE)) {
+                                for (Identifier id : KaleidoscopeItem.SUPER_SECRET_SETTING_PROGRAMS) {
+                                    ItemStack stack = new ItemStack(KALEIDOSCOPE);
+                                    stack.set(AmarongDataComponentTypes.SHADER_TYPE, id);
+                                    entries.add(stack);
+                                }
+                            } else if (item.equals(AMARONG_VERYLONGSWORD)) {
+                                final Consumer<ItemStack> longswordCharge = stack -> stack.set(AmarongDataComponentTypes.VERYLONGSWORD_CHARGE, AmarongVerylongswordItem.getMaxCharge(stack));
+                                addEnchantedStack(item, displayContext, "amarong:obscure", entries, longswordCharge);
+                                addEnchantedStack(item, displayContext, "amarong:railgun", entries, longswordCharge);
+                            } else if (item.equals(TICKET_LAUNCHER)) {
+                                addEnchantedStack(item, displayContext, "amarong:pneumatic", entries);
+                                addEnchantedStack(item, displayContext, "amarong:particle_accelerator", entries);
+                            } else if (item.equals(SOMEWHAT_A_DUCK)) {
+                                final Consumer<ItemStack> water = stack -> stack.set(AmarongDataComponentTypes.WATERGUN, SomewhatADuckItem.getMaxWater(stack));
+                                addEnchantedStack(item, displayContext, "amarong:capacity", entries, water);
+                            } else if (item.equals(AMARONG_HAMMER)) {
+                                if (Amarong.TWIRL) addEnchantedStack(item, displayContext, "twirl:twirling", entries);
+                            }
                         }
-                    } else if (item.equals(AMARONG_VERYLONGSWORD)) {
-                        final Consumer<ItemStack> longswordCharge = stack -> stack.set(AmarongDataComponentTypes.VERYLONGSWORD_CHARGE, AmarongVerylongswordItem.getMaxCharge(stack));
-                        addEnchantedStack(item, displayContext, "amarong:obscure", entries, longswordCharge);
-                        addEnchantedStack(item, displayContext, "amarong:railgun", entries, longswordCharge);
-                    } else if (item.equals(TICKET_LAUNCHER)) {
-                        addEnchantedStack(item, displayContext, "amarong:pneumatic", entries);
-                        addEnchantedStack(item, displayContext, "amarong:particle_accelerator", entries);
-                    } else if (item.equals(SOMEWHAT_A_DUCK)) {
-                        final Consumer<ItemStack> water = stack -> stack.set(AmarongDataComponentTypes.WATERGUN, SomewhatADuckItem.getMaxWater(stack));
-                        addEnchantedStack(item, displayContext, "amarong:capacity", entries, water);
-                    } else if (item.equals(AMARONG_HAMMER)) {
-                        if (Amarong.TWIRL) addEnchantedStack(item, displayContext, "twirl:twirling", entries);
-                    }
-                }
-            }).build();
+                    })
+    );
 
-    private static void addEnchantedStack(Item item, ItemGroup.DisplayContext displayContext, String enchantmentId, ItemGroup.Entries entries) {
-        addEnchantedStack(item, displayContext, enchantmentId, entries, null);
+    static void init() {
+        itemGroupRegistrant.consumeAll();
     }
 
-    private static void addEnchantedStack(Item item, ItemGroup.DisplayContext displayContext, String enchantmentId, ItemGroup.Entries entries, @Nullable Consumer<ItemStack> stackModifier) {
-        try {
-            ItemStack stack = new ItemStack(item);
-            AtomicReference<RegistryEntry<Enchantment>> reference = new AtomicReference<>(null);
-            Identifier id = Identifier.of(enchantmentId);
-            displayContext.lookup()
-                    .getWrapperOrThrow(RegistryKeys.ENCHANTMENT)
-                    .streamEntries()
-                    .filter(enchantmentRef -> enchantmentRef.matchesId(id))
-                    .findFirst()
-                    .ifPresent(reference::set);
-            RegistryEntry<Enchantment> enchantmentEntry = Objects.requireNonNull(reference.get());
-            if (enchantmentEntry.value().isAcceptableItem(stack)) {
-                stack.addEnchantment(enchantmentEntry, enchantmentEntry.value().getMaxLevel());
-
-                if (stackModifier != null) {
-                    stackModifier.accept(stack);
-                }
-
-                entries.add(stack);
-            } else if (AmarongConfig.INSTANCE.verboseLogging()) {
-                Amarong.LOGGER.error("Avoided adding an ItemStack of {} because enchantment amarong:{} does not support that item", Registries.ITEM.getId(item), enchantmentId);
-            }
-        } catch (Throwable throwable) {
-            try {
-                if (AmarongConfig.INSTANCE.verboseLogging()) {
-                    Amarong.LOGGER.error("Unable to add an ItemStack of {} because of an error when getting enchantment {}", Registries.ITEM.getId(item), enchantmentId, throwable);
-                }
-            } catch (Throwable throwable1) {
-                Amarong.LOGGER.error("There was an error while getting enchantment {}", enchantmentId, throwable);
-                Amarong.LOGGER.error("There was an error while trying to get an item's id from the registry!", throwable1);
-            }
-        }
-    }
-
-    public static void init() {
-        Registry.register(Registries.ITEM_GROUP, Amarong.id("amarong_group"), AMARONG_GROUP);
+    record Dummy() implements AmarongItems {
     }
 }

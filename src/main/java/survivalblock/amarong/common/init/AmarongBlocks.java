@@ -1,40 +1,35 @@
 package survivalblock.amarong.common.init;
 
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.enums.NoteBlockInstrument;
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import survivalblock.amarong.common.Amarong;
 import survivalblock.amarong.common.block.AmarongCoreBlock;
 import survivalblock.amarong.common.block.AmarongCoreBlockEntity;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.BlockEntityTypeRegistrant;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.BlockRegistrant;
 
-public class AmarongBlocks {
+@SuppressWarnings("UnstableApiUsage")
+public sealed interface AmarongBlocks permits AmarongBlocks.Dummy {
+    BlockRegistrant registrant = new BlockRegistrant(Amarong::id);
+    BlockEntityTypeRegistrant beregistrant = new BlockEntityTypeRegistrant(Amarong::id);
 
-    public static final Block AMARONG_CORE = registerBlock("amarong_core",
-            new AmarongCoreBlock(AbstractBlock.Settings.copy(Blocks.HEAVY_CORE)
+    Block AMARONG_CORE = registrant.register("amarong_core",
+            AmarongCoreBlock::new,
+            AbstractBlock.Settings.copy(Blocks.HEAVY_CORE)
                     .requiresTool()
                     .mapColor(MapColor.ORANGE) // copper
-                    .luminance((state) -> 10)));
+                    .luminance((state) -> 10)
+    );
 
-    public static final BlockEntityType<AmarongCoreBlockEntity> AMARONG_CORE_BLOCK_ENTITY = registerBlockEntity(
+    BlockEntityType<AmarongCoreBlockEntity> AMARONG_CORE_BLOCK_ENTITY = beregistrant.register(
             "amarong_core_block_entity",
             BlockEntityType.Builder.create(AmarongCoreBlockEntity::new, AMARONG_CORE).build()
     );
 
-    @SuppressWarnings("SameParameterValue")
-    private static Block registerBlock(String name, Block block) {
-        return Registry.register(Registries.BLOCK, Amarong.id(name), block);
+    static void init() {
+        // NO-OP
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String name, BlockEntityType<T> blockEntityType) {
-        return Registry.register(Registries.BLOCK_ENTITY_TYPE, Amarong.id(name), blockEntityType);
-    }
-
-    public static void init() {
-
+    record Dummy() implements AmarongBlocks {
     }
 }

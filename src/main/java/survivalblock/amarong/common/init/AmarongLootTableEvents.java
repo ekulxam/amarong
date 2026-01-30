@@ -26,8 +26,10 @@ public class AmarongLootTableEvents implements LootTableEvents.Modify {
         if (!source.isBuiltin()) {
             return;
         }
+
         RegistryWrapper.Impl<Enchantment> wrapper = registries.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
         LootPool.Builder builder = LootPool.builder();
+
         if (END_CITY_TREASURE_CHEST.equals(key)) {
             builder.rolls(ConstantLootNumberProvider.create(1.0F))
                     .with(ItemEntry.builder(Items.BOOK).weight(1)

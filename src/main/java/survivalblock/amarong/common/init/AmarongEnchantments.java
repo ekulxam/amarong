@@ -12,21 +12,18 @@ import org.apache.logging.log4j.util.TriConsumer;
 import survivalblock.amarong.common.Amarong;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.datagen.RegistryEntryLookupContainer;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-public class AmarongEnchantments {
+public sealed interface AmarongEnchantments permits AmarongEnchantments.Dummy {
 
-    public static final RegistryKey<Enchantment> CAPACITY = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("capacity"));
-    public static final RegistryKey<Enchantment> OBSCURE = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("obscure"));
-    public static final RegistryKey<Enchantment> PARTICLE_ACCELERATOR = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("particle_accelerator"));
-    public static final RegistryKey<Enchantment> PNEUMATIC = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("pneumatic"));
-    public static final RegistryKey<Enchantment> RAILGUN = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("railgun"));
+    RegistryKey<Enchantment> CAPACITY = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("capacity"));
+    RegistryKey<Enchantment> OBSCURE = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("obscure"));
+    RegistryKey<Enchantment> PARTICLE_ACCELERATOR = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("particle_accelerator"));
+    RegistryKey<Enchantment> PNEUMATIC = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("pneumatic"));
+    RegistryKey<Enchantment> RAILGUN = RegistryKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("railgun"));
 
-    public static ImmutableMap<RegistryKey<Enchantment>, Enchantment> asEnchantments(RegistryEntryLookupContainer container) {
+    static ImmutableMap<RegistryKey<Enchantment>, Enchantment> asEnchantments(RegistryEntryLookupContainer container) {
         ImmutableMap.Builder<RegistryKey<Enchantment>, Enchantment> enchantments = ImmutableMap.builder();
         RegistryEntryLookup<Enchantment> enchantmentRegistryEntryLookup = container.get(RegistryKeys.ENCHANTMENT);
         RegistryEntryLookup<Item> itemRegistryEntryLookup = container.get(RegistryKeys.ITEM);
@@ -98,9 +95,12 @@ public class AmarongEnchantments {
         return enchantments.build();
     }
 
-    public static void bootstrap(Registerable<Enchantment> registry) {
+    static void bootstrap(Registerable<Enchantment> registry) {
         for (Map.Entry<RegistryKey<Enchantment>, Enchantment> entry : asEnchantments(new RegistryEntryLookupContainer(registry)).entrySet()) {
             registry.register(entry.getKey(), entry.getValue());
         }
+    }
+
+    record Dummy() implements AmarongEnchantments {
     }
 }

@@ -15,17 +15,21 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import survivalblock.amarong.client.render.AmarongStaffTransformation;
 import survivalblock.amarong.common.Amarong;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.ParticleTypeRegistrant;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.delayed.DelayedParticleTypeRegistrant;
 
-public class AmarongParticleTypes {
-    public static final ParticleType<RailgunParticleEffect> RAILGUN_PARTICLE = FabricParticleTypes.complex(RailgunParticleEffect.CODEC, RailgunParticleEffect.PACKET_CODEC);
-    public static final SimpleParticleType OBSCURE_GLOW = FabricParticleTypes.simple(true);
+@SuppressWarnings("UnstableApiUsage")
+public sealed interface AmarongParticleTypes permits AmarongParticleTypes.Dummy {
+    DelayedParticleTypeRegistrant registrant = new DelayedParticleTypeRegistrant(Amarong::id);
 
-    public static void init() {
-        Registry.register(Registries.PARTICLE_TYPE, Amarong.id("railgun_particle"), RAILGUN_PARTICLE);
-        Registry.register(Registries.PARTICLE_TYPE, Amarong.id("obscure_glow"), OBSCURE_GLOW);
+    ParticleType<RailgunParticleEffect> RAILGUN_PARTICLE = registrant.register("railgun_particle", FabricParticleTypes.complex(RailgunParticleEffect.CODEC, RailgunParticleEffect.PACKET_CODEC));
+    SimpleParticleType OBSCURE_GLOW = registrant.register("obscure_glow", FabricParticleTypes.simple(true));
+
+    static void init() {
+        registrant.consumeAll();
     }
 
-    public record RailgunParticleEffect(float pitch, float yaw) implements ParticleEffect {
+    record RailgunParticleEffect(float pitch, float yaw) implements ParticleEffect {
         public static final MapCodec<RailgunParticleEffect> CODEC = RecordCodecBuilder.mapCodec(
                 instance -> instance.group(
                                 Codec.FLOAT.fieldOf("pitch").forGetter(parameters -> parameters.pitch),
@@ -43,5 +47,8 @@ public class AmarongParticleTypes {
         public ParticleType<RailgunParticleEffect> getType() {
             return RAILGUN_PARTICLE;
         }
+    }
+
+    record Dummy() implements AmarongParticleTypes {
     }
 }

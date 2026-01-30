@@ -1,21 +1,21 @@
 package survivalblock.amarong.common.init;
 
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import survivalblock.amarong.common.Amarong;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.delayed.DelayedSoundEventRegistrant;
 
-public class AmarongSounds {
+public sealed interface AmarongSounds permits AmarongSounds.Dummy {
+    DelayedSoundEventRegistrant registrant = new DelayedSoundEventRegistrant(Amarong::id);
 
-    public static final SoundEvent DUCK_SQUEAKS = SoundEvent.of(Amarong.id("duck_squeaks"));
-    public static final SoundEvent FLYING_TICKET_HITS = SoundEvent.of(Amarong.id("flying_ticket_hits"));
-    public static final SoundEvent WATER_STREAM_HITS = SoundEvent.of(Amarong.id("water_stream_hits"));
-    public static final SoundEvent RAILGUN_CHARGES = SoundEvent.of(Amarong.id("railgun_charges"));
+    SoundEvent DUCK_SQUEAKS = registrant.register("duck_squeaks");
+    SoundEvent FLYING_TICKET_HITS = registrant.register("flying_ticket_hits");
+    SoundEvent WATER_STREAM_HITS = registrant.register("water_stream_hits");
+    SoundEvent RAILGUN_CHARGES = registrant.register("railgun_charges");
 
-    public static void init() {
-        Registry.register(Registries.SOUND_EVENT, DUCK_SQUEAKS.getId(), DUCK_SQUEAKS);
-        Registry.register(Registries.SOUND_EVENT, FLYING_TICKET_HITS.getId(), FLYING_TICKET_HITS);
-        Registry.register(Registries.SOUND_EVENT, WATER_STREAM_HITS.getId(), WATER_STREAM_HITS);
-        Registry.register(Registries.SOUND_EVENT, RAILGUN_CHARGES.getId(), RAILGUN_CHARGES);
+    static void init() {
+        registrant.consumeAll();
+    }
+
+    record Dummy() implements AmarongSounds {
     }
 }

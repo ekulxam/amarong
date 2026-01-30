@@ -9,13 +9,13 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import survivalblock.amarong.common.Amarong;
 
-public class AmarongTags {
+public interface AmarongTags {
 
-    public static class AmarongBlockTags {
+    class AmarongBlockTags {
         public static final TagKey<Block> AMARONG_HAMMER_MINEABLE = TagKey.of(RegistryKeys.BLOCK, Amarong.id("amarong_hammer_mineable"));
     }
 
-    public static class AmarongItemTags {
+    class AmarongItemTags {
         public static final TagKey<Item> RAINBOW_CORE_GENERATORS = TagKey.of(RegistryKeys.ITEM, Amarong.id("rainbow_core_generators"));
 
         public static final TagKey<Item> TICKET_LAUNCHER_ENCHANTABLE = TagKey.of(RegistryKeys.ITEM, Amarong.id("enchantable/ticket_launcher"));
@@ -30,12 +30,12 @@ public class AmarongTags {
         public static final TagKey<Item> STAFF_UNUSABLE = TagKey.of(RegistryKeys.ITEM, Amarong.id("staff_unusable"));
     }
 
-    public static class AmarongDataComponentTypeTags {
+    class AmarongDataComponentTypeTags {
         public static final TagKey<ComponentType<?>> STAFF_VALID = TagKey.of(RegistryKeys.DATA_COMPONENT_TYPE, Amarong.id("staff_valid"));
         public static final TagKey<ComponentType<?>> STAFF_PRIORITY = TagKey.of(RegistryKeys.DATA_COMPONENT_TYPE, Amarong.id("staff_priority"));
     }
 
-    public static class AmarongEnchantmentTags {
+    class AmarongEnchantmentTags {
         public static final TagKey<Enchantment> PNUEMATIC_EFFECT = TagKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("pnuematic_effect"));
         public static final TagKey<Enchantment> PARTICLE_ACCELERATOR_EFFECT = TagKey.of(RegistryKeys.ENCHANTMENT, Amarong.id("particle_accelerator_effect"));
 
@@ -52,8 +52,7 @@ public class AmarongTags {
 
     }
 
-    public static class AmarongEntityTypeTags {
+    class AmarongEntityTypeTags {
         public static final TagKey<EntityType<?>> AMARONG_HITTABLE = TagKey.of(RegistryKeys.ENTITY_TYPE, Amarong.id("amarong_hittable"));
     }
-
 }
