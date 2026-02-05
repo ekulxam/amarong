@@ -1,35 +1,30 @@
 package survivalblock.amarong.common.init;
 
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.entity.damage.*;
-import net.minecraft.registry.Registerable;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import survivalblock.amarong.common.Amarong;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.dynamic.DamageTypeRegistrant;
 
 public sealed interface AmarongDamageTypes permits AmarongDamageTypes.Dummy {
 
-    RegistryKey<DamageType> WATER_STREAM_HIT = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Amarong.id("water_stream_hit"));
-    RegistryKey<DamageType> FLYING_TICKET_HIT = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Amarong.id("flying_ticket_hit"));
-    RegistryKey<DamageType> RAILGUN_HIT = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Amarong.id("railgun_hit"));
-    RegistryKey<DamageType> BOOMERANG_HIT = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Amarong.id("boomerang_hit"));
+    DamageTypeRegistrant registrant = new DamageTypeRegistrant(Amarong::id);
 
-    /**
-     * Creates a map with the {@link RegistryKey<DamageType>}s as keys and {@link DamageType}s as values
-     * @return an {@link ImmutableMap}
-     */
-    static ImmutableMap<RegistryKey<DamageType>, DamageType> asDamageTypes() {
-        ImmutableMap.Builder<RegistryKey<DamageType>, DamageType> damageTypes = ImmutableMap.builder();
-        damageTypes.put(WATER_STREAM_HIT, new DamageType("amarong.water_stream_hit", 0.1F));
-        damageTypes.put(FLYING_TICKET_HIT, new DamageType("amarong.flying_ticket_hit", 0.1F));
-        damageTypes.put(RAILGUN_HIT, new DamageType("amarong.railgun_hit", 0.3F));
-        damageTypes.put(BOOMERANG_HIT, new DamageType("amarong.boomerang_hit", 0.1F));
-        return damageTypes.build();
-    }
-
-    static void bootstrap(Registerable<DamageType> damageTypeRegisterable) {
-        asDamageTypes().forEach(damageTypeRegisterable::register);
-    }
+    RegistryKey<DamageType> WATER_STREAM_HIT = registrant.register(
+            "water_stream_hit",
+            new DamageType("amarong.water_stream_hit", 0.1F)
+    );
+    RegistryKey<DamageType> FLYING_TICKET_HIT = registrant.register(
+            "flying_ticket_hit",
+            new DamageType("amarong.flying_ticket_hit", 0.1F)
+    );
+    RegistryKey<DamageType> RAILGUN_HIT = registrant.register(
+            "railgun_hit",
+            new DamageType("amarong.railgun_hit", 0.3F)
+    );
+    RegistryKey<DamageType> BOOMERANG_HIT = registrant.register(
+            "boomerang_hit",
+            new DamageType("amarong.boomerang_hit", 0.1F)
+    );
 
     record Dummy() implements AmarongDamageTypes {
     }

@@ -15,6 +15,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import survivalblock.amarong.client.render.AmarongStaffTransformation;
 import survivalblock.amarong.common.Amarong;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.datafixer.AtmosphericCodecs;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.ParticleTypeRegistrant;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.delayed.DelayedParticleTypeRegistrant;
 
@@ -30,12 +31,10 @@ public sealed interface AmarongParticleTypes permits AmarongParticleTypes.Dummy 
     }
 
     record RailgunParticleEffect(float pitch, float yaw) implements ParticleEffect {
-        public static final MapCodec<RailgunParticleEffect> CODEC = RecordCodecBuilder.mapCodec(
-                instance -> instance.group(
-                                Codec.FLOAT.fieldOf("pitch").forGetter(parameters -> parameters.pitch),
-                                Codec.FLOAT.fieldOf("yaw").forGetter(parameters -> parameters.yaw)
-                        )
-                        .apply(instance, RailgunParticleEffect::new)
+        public static final MapCodec<RailgunParticleEffect> CODEC = AtmosphericCodecs.RCB.tuple(
+                Codec.FLOAT.fieldOf("pitch"), parameters -> parameters.pitch,
+                Codec.FLOAT.fieldOf("yaw"), parameters -> parameters.yaw,
+                RailgunParticleEffect::new
         );
         public static final PacketCodec<RegistryByteBuf, RailgunParticleEffect> PACKET_CODEC = PacketCodec.tuple(
                 PacketCodecs.FLOAT, parameters -> parameters.pitch,

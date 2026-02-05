@@ -34,7 +34,7 @@ public class AmarongDataGenerator implements DataGeneratorEntrypoint {
 
 	@Override
 	public void buildRegistry(RegistryBuilder registryBuilder) {
-		registryBuilder.addRegistry(RegistryKeys.DAMAGE_TYPE, AmarongDamageTypes::bootstrap);
-		registryBuilder.addRegistry(RegistryKeys.ENCHANTMENT, AmarongEnchantments::bootstrap);
+		registryBuilder.addRegistry(RegistryKeys.DAMAGE_TYPE, AmarongDamageTypes.registrant::bootstrap);
+		registryBuilder.addRegistry(RegistryKeys.ENCHANTMENT, AmarongEnchantments.registrant::bootstrap);
 	}
 }
