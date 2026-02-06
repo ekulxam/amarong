@@ -10,6 +10,7 @@ import survivalblock.amarong.common.init.AmarongItems;
 import survivalblock.amarong.common.init.AmarongTags;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 
 public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
 
@@ -29,7 +30,7 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add(AmarongItems.AMARONG_HAMMER, "Amarong Hammer");
         translationBuilder.add(AmarongItems.AMARONG_BOOMERANG, "Amarong Boomerang");
         translationBuilder.add(AmarongItems.AMARONG_STAFF, "Amarong Staff");
-        translationBuilder.add("amarong.itemGroup.amarong_group", "Amarong");
+        translationBuilder.add(AmarongItems.itemGroupRegistrant.getTranslationKey(AmarongItems.AMARONG_GROUP), "Amarong");
 
         // block
         translationBuilder.add(AmarongBlocks.AMARONG_CORE, "Amarong Core");
@@ -116,30 +117,31 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add(AmarongTags.AmarongEnchantmentTags.EXCLUSIVE_SET_TICKET_LAUNCHER, "Exclusive Set - Ticket Launcher");
 
         // shaders
-        translationBuilder.add("minecraft.shaders/post/notch.json", "Minecraft - Notch");
-        translationBuilder.add("minecraft.shaders/post/fxaa.json", "Minecraft - FXAA");
-        translationBuilder.add("minecraft.shaders/post/art.json", "Minecraft - Art");
-        translationBuilder.add("minecraft.shaders/post/bumpy.json", "Minecraft - Bumpy");
-        translationBuilder.add("minecraft.shaders/post/blobs2.json", "Minecraft - Blobs2");
-        translationBuilder.add("minecraft.shaders/post/pencil.json", "Minecraft - Pencil");
-        translationBuilder.add("minecraft.shaders/post/color_convolve.json", "Minecraft - Color Convolve");
-        translationBuilder.add("minecraft.shaders/post/deconverge.json", "Minecraft - Deconverge");
-        translationBuilder.add("minecraft.shaders/post/flip.json", "Minecraft - Flip");
-        translationBuilder.add("minecraft.shaders/post/invert.json", "Minecraft - Invert");
-        translationBuilder.add("minecraft.shaders/post/ntsc.json", "Minecraft - NTSC");
-        translationBuilder.add("minecraft.shaders/post/outline.json", "Minecraft - Outline");
-        translationBuilder.add("minecraft.shaders/post/phosphor.json", "Minecraft - Phosphor");
-        translationBuilder.add("minecraft.shaders/post/scan_pincushion.json", "Minecraft - Scan Pincushion");
-        translationBuilder.add("minecraft.shaders/post/sobel.json", "Minecraft - Sobel");
-        translationBuilder.add("minecraft.shaders/post/bits.json", "Minecraft - Bits");
-        translationBuilder.add("minecraft.shaders/post/desaturate.json", "Minecraft - Desaturate");
-        translationBuilder.add("minecraft.shaders/post/green.json", "Minecraft - Green");
-        translationBuilder.add("minecraft.shaders/post/blur.json", "Minecraft - Blur");
-        translationBuilder.add("minecraft.shaders/post/wobble.json", "Minecraft - Wobble");
-        translationBuilder.add("minecraft.shaders/post/blobs.json", "Minecraft - Blobs");
-        translationBuilder.add("minecraft.shaders/post/antialias.json", "Minecraft - Antialias");
-        translationBuilder.add("minecraft.shaders/post/creeper.json", "Minecraft - Creeper"); // aw man
-        translationBuilder.add("minecraft.shaders/post/spider.json", "Minecraft - Spider");
+        Function<String, String> shaderKey = (name) -> "minecraft.shaders/post/" + name + ".json";
+        translationBuilder.add(shaderKey.apply("notch"), "Minecraft - Notch");
+        translationBuilder.add(shaderKey.apply("fxaa"), "Minecraft - FXAA");
+        translationBuilder.add(shaderKey.apply("art"), "Minecraft - Art");
+        translationBuilder.add(shaderKey.apply("bumpy"), "Minecraft - Bumpy");
+        translationBuilder.add(shaderKey.apply("blobs2"), "Minecraft - Blobs2");
+        translationBuilder.add(shaderKey.apply("pencil"), "Minecraft - Pencil");
+        translationBuilder.add(shaderKey.apply("color_convolve"), "Minecraft - Color Convolve");
+        translationBuilder.add(shaderKey.apply("deconverge"), "Minecraft - Deconverge");
+        translationBuilder.add(shaderKey.apply("flip"), "Minecraft - Flip");
+        translationBuilder.add(shaderKey.apply("invert"), "Minecraft - Invert");
+        translationBuilder.add(shaderKey.apply("ntsc"), "Minecraft - NTSC");
+        translationBuilder.add(shaderKey.apply("outline"), "Minecraft - Outline");
+        translationBuilder.add(shaderKey.apply("phosphor"), "Minecraft - Phosphor");
+        translationBuilder.add(shaderKey.apply("scan_pincushion"), "Minecraft - Scan Pincushion");
+        translationBuilder.add(shaderKey.apply("sobel"), "Minecraft - Sobel");
+        translationBuilder.add(shaderKey.apply("bits"), "Minecraft - Bits");
+        translationBuilder.add(shaderKey.apply("desaturate"), "Minecraft - Desaturate");
+        translationBuilder.add(shaderKey.apply("green"), "Minecraft - Green");
+        translationBuilder.add(shaderKey.apply("blur"), "Minecraft - Blur");
+        translationBuilder.add(shaderKey.apply("wobble"), "Minecraft - Wobble");
+        translationBuilder.add(shaderKey.apply("blobs"), "Minecraft - Blobs");
+        translationBuilder.add(shaderKey.apply("antialias"), "Minecraft - Antialias");
+        translationBuilder.add(shaderKey.apply("creeper"), "Minecraft - Creeper"); // aw man
+        translationBuilder.add(shaderKey.apply("spider"), "Minecraft - Spider");
 
         // config
         translationBuilder.add("amarong.config.title", "Amarong Config");
