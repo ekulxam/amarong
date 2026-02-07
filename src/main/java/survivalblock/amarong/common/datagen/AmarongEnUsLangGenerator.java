@@ -1,25 +1,27 @@
 package survivalblock.amarong.common.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
 import survivalblock.amarong.common.init.AmarongBlocks;
+import survivalblock.amarong.common.init.AmarongDamageTypes;
+import survivalblock.amarong.common.init.AmarongEnchantments;
 import survivalblock.amarong.common.init.AmarongEntityTypes;
 import survivalblock.amarong.common.init.AmarongGameRules;
 import survivalblock.amarong.common.init.AmarongItems;
 import survivalblock.amarong.common.init.AmarongTags;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.datagen.language.*;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
-public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
+public class AmarongEnUsLangGenerator extends AtmosphericLanguageGenerator {
 
     public AmarongEnUsLangGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
         super(dataOutput, "en_us", registryLookup);
     }
 
     @Override
-    public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, TranslationBuilder translationBuilder) {
+    public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, AtmosphericTranslationBuilder translationBuilder) {
         // item
         translationBuilder.add(AmarongItems.AMARONG_CHUNK, "Amarong Chunk");
         translationBuilder.add(AmarongItems.AMARONG_SHEET, "Amarong Sheet");
@@ -30,7 +32,7 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add(AmarongItems.AMARONG_HAMMER, "Amarong Hammer");
         translationBuilder.add(AmarongItems.AMARONG_BOOMERANG, "Amarong Boomerang");
         translationBuilder.add(AmarongItems.AMARONG_STAFF, "Amarong Staff");
-        translationBuilder.add(AmarongItems.itemGroupRegistrant.getTranslationKey(AmarongItems.AMARONG_GROUP), "Amarong");
+        translationBuilder.add(AmarongItems.AMARONG_GROUP, "Amarong");
 
         // block
         translationBuilder.add(AmarongBlocks.AMARONG_CORE, "Amarong Core");
@@ -42,10 +44,10 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add(AmarongEntityTypes.BOOMERANG, "Amarong Boomerang");
 
         // gamerules
-        translationBuilder.add(AmarongGameRules.FLYING_TICKETS_DROP.getTranslationKey(), "Amarong - Flying Tickets drop themselves on being discarded");
-        translationBuilder.add(AmarongGameRules.BOOMERANG_DAMAGE.getTranslationKey(), "Amarong - Boomerang Damage");
-        translationBuilder.add(AmarongGameRules.VERYLONGSWORD_PASSIVE_CHARGE.getTranslationKey(), "Amarong - Allow Verylongswords to passively build charge in inventory");
-        translationBuilder.add(AmarongGameRules.OBSCURE_SPAWNS_PARTICLES.getTranslationKey(), "Amarong - Entering Obscure Spawns Particles");
+        translationBuilder.add(AmarongGameRules.FLYING_TICKETS_DROP, "Amarong - Flying Tickets drop themselves on being discarded");
+        translationBuilder.add(AmarongGameRules.BOOMERANG_DAMAGE, "Amarong - Boomerang Damage");
+        translationBuilder.add(AmarongGameRules.VERYLONGSWORD_PASSIVE_CHARGE, "Amarong - Allow Verylongswords to passively build charge in inventory");
+        translationBuilder.add(AmarongGameRules.OBSCURE_SPAWNS_PARTICLES, "Amarong - Entering Obscure Spawns Particles");
 
         // subtitles
         translationBuilder.add("subtitles.amarong.item.duck_squeezed", "Duck squeaks");
@@ -86,15 +88,15 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("advancements.amarong.hammer_time.description", "Obtain an Amarong Hammer");
 
         // enchantments and enchantments descriptions
-        translationBuilder.add("enchantment.amarong.pneumatic", "Pneumatic");
+        translationBuilder.addEnchantment(AmarongEnchantments.PNEUMATIC, "Pneumatic");
         translationBuilder.add("enchantment.amarong.pneumatic.desc", "Allows the Ticket Launcher to launch wind charges from the offhand.");
-        translationBuilder.add("enchantment.amarong.particle_accelerator", "Particle Accelerator");
+        translationBuilder.addEnchantment(AmarongEnchantments.PARTICLE_ACCELERATOR, "Particle Accelerator");
         translationBuilder.add("enchantment.amarong.particle_accelerator.desc", "Allows the Ticket Launcher to launch splash and lingering potions from the offhand.");
-        translationBuilder.add("enchantment.amarong.obscure", "Obscure");
+        translationBuilder.addEnchantment(AmarongEnchantments.OBSCURE, "Obscure");
         translationBuilder.add("enchantment.amarong.obscure.desc", "Use the Amarong Verylongsword when fully charged to enter total invisibility temporarily.");
-        translationBuilder.add("enchantment.amarong.railgun", "Railcannon");
+        translationBuilder.addEnchantment(AmarongEnchantments.RAILGUN, "Railcannon");
         translationBuilder.add("enchantment.amarong.railgun.desc", "Use the Amarong Verylongsword when fully charged to fire off a railcannon.");
-        translationBuilder.add("enchantment.amarong.capacity", "Capacity");
+        translationBuilder.addEnchantment(AmarongEnchantments.CAPACITY, "Capacity");
         translationBuilder.add("enchantment.amarong.capacity.desc", "Increases the amount of water a handheld duck can hold.");
 
         // item tags
@@ -169,18 +171,34 @@ public class AmarongEnUsLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("amarong.yacl.option.integer.maxBeaconBeamIterations.desc", "Controls the maximum number of iterations in the loop in the tick method of the beacon block entity. Setting this value too low may affect the smoothness of the color change of the rainbow beacon beam created by the Amarong Core if the beam intersects (transparent) blocks.");
 
         // damage types
-        translationBuilder.add("death.attack.amarong.flying_ticket_hit", "%1$s was shot by %2$s with flying tickets");
-        translationBuilder.add("death.attack.amarong.flying_ticket_hit.player", "%1$s was shot by %2$s with flying tickets");
-        translationBuilder.add("death.attack.amarong.flying_ticket_hit.item", "%2$s used %3$s to shoot %1$s to death with flying tickets");
-        translationBuilder.add("death.attack.amarong.water_stream_hit", "%1$s was sprinkled to death by %2$s");
-        translationBuilder.add("death.attack.amarong.water_stream_hit.player", "%1$s was sprinkled to death by %2$s");
-        translationBuilder.add("death.attack.amarong.water_stream_hit.item", "%1$s was sprinkled to death by %2$s using %3$s");
-        translationBuilder.add("death.attack.amarong.railgun_hit", "%1$s was shot by a railcannon from %2$s");
-        translationBuilder.add("death.attack.amarong.railgun_hit.player", "%1$s was shot by a railcannon from %2$s");
-        translationBuilder.add("death.attack.amarong.railgun_hit.item", "%1$s was shot by a railcannon from %2$s using %3$s");
-        translationBuilder.add("death.attack.amarong.boomerang_hit", "%1$s was shot by %2$s with an Amarong Boomerang");
-        translationBuilder.add("death.attack.amarong.boomerang_hit.player", "%1$s was shot by %2$s with an Amarong Boomerang");
-        translationBuilder.add("death.attack.amarong.boomerang_hit.item", "%2$s used %3$s to shot %1$s with an Amarong Boomerang");
+        translationBuilder.addDamageType(
+                registryLookup,
+                AmarongDamageTypes.FLYING_TICKET_HIT,
+                "%1$s was shot by %2$s with flying tickets",
+                "%1$s was shot by %2$s with flying tickets",
+                "%2$s used %3$s to shoot %1$s to death with flying tickets"
+        );
+        translationBuilder.addDamageType(
+                registryLookup,
+                AmarongDamageTypes.WATER_STREAM_HIT,
+                "%1$s was sprinkled to death by %2$s",
+                "%1$s was sprinkled to death by %2$s",
+                "%1$s was sprinkled to death by %2$s using %3$s"
+        );
+        translationBuilder.addDamageType(
+                registryLookup,
+                AmarongDamageTypes.RAILGUN_HIT,
+                "%1$s was shot by a railcannon from %2$s",
+                "%1$s was shot by a railcannon from %2$s",
+                "%1$s was shot by a railcannon from %2$s using %3$s"
+        );
+        translationBuilder.addDamageType(
+                registryLookup,
+                AmarongDamageTypes.BOOMERANG_HIT,
+                "%1$s was shot by %2$s with an Amarong Boomerang",
+                "%1$s was shot by %2$s with an Amarong Boomerang",
+                "%2$s used %3$s to shot %1$s with an Amarong Boomerang"
+        );
 
         // command
         translationBuilder.add("commands.amarongconfig.noyacl", "Unable to generate Amarong YACL config screen. Do you have YACL installed?");
