@@ -4,7 +4,12 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.ParticleTextureSheet;
 import net.minecraft.client.particle.SpriteProvider;
+import net.minecraft.client.render.Camera;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import org.joml.Quaternionf;
 import survivalblock.amarong.common.init.AmarongParticleTypes;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.particle.client.SpriteDirectionalParticle;
 
@@ -39,6 +44,11 @@ public class RailcannonParticle extends SpriteDirectionalParticle {
         } else {
             this.setSpriteForAge(this.spriteProvider);
         }
+    }
+
+    @Override
+    public RenderMode getRenderMode() {
+        return RenderMode.FRONTFACE;
     }
 
     @Override
