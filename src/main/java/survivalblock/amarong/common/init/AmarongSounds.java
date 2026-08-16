@@ -2,7 +2,7 @@ package survivalblock.amarong.common.init;
 
 import net.minecraft.sound.SoundEvent;
 import survivalblock.amarong.common.Amarong;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.delayed.DelayedSoundEventRegistrant;
+import survivalblock.atmosphere.registrar.delayed.DelayedSoundEventRegistrant;
 
 public sealed interface AmarongSounds permits AmarongSounds.Dummy {
     DelayedSoundEventRegistrant registrant = new DelayedSoundEventRegistrant(Amarong::id);

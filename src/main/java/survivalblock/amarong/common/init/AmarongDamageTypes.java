@@ -3,7 +3,7 @@ package survivalblock.amarong.common.init;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.registry.RegistryKey;
 import survivalblock.amarong.common.Amarong;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.dynamic.DamageTypeRegistrant;
+import survivalblock.atmosphere.registrar.dynamic.DamageTypeRegistrant;
 
 public sealed interface AmarongDamageTypes permits AmarongDamageTypes.Dummy {
 

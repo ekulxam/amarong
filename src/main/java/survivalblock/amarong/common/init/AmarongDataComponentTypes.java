@@ -6,9 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.util.Identifier;
 import survivalblock.amarong.common.Amarong;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.delayed.DelayedDataComponentTypeRegistrant;
+import survivalblock.atmosphere.registrar.delayed.DelayedDataComponentTypeRegistrant;
 
-@SuppressWarnings("UnstableApiUsage")
 public sealed interface AmarongDataComponentTypes permits AmarongDataComponentTypes.Dummy {
     DelayedDataComponentTypeRegistrant registrant = new DelayedDataComponentTypeRegistrant(Amarong::id);
 

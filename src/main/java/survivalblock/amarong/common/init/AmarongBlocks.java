@@ -5,10 +5,9 @@ import net.minecraft.block.entity.BlockEntityType;
 import survivalblock.amarong.common.Amarong;
 import survivalblock.amarong.common.block.AmarongCoreBlock;
 import survivalblock.amarong.common.block.AmarongCoreBlockEntity;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.BlockEntityTypeRegistrant;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.BlockRegistrant;
+import survivalblock.atmosphere.registrar.BlockEntityTypeRegistrant;
+import survivalblock.atmosphere.registrar.BlockRegistrant;
 
-@SuppressWarnings("UnstableApiUsage")
 public sealed interface AmarongBlocks permits AmarongBlocks.Dummy {
     BlockRegistrant registrant = new BlockRegistrant(Amarong::id);
     BlockEntityTypeRegistrant beregistrant = new BlockEntityTypeRegistrant(Amarong::id);

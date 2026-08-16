@@ -12,14 +12,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import survivalblock.amarong.common.Amarong;
 import survivalblock.amarong.common.item.*;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.ItemRegistrant;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.delayed.DelayedItemGroupRegistrant;
+import survivalblock.atmosphere.registrar.ItemRegistrant;
+import survivalblock.atmosphere.registrar.delayed.DelayedItemGroupRegistrant;
 
 import java.util.function.Consumer;
 
 import static survivalblock.atmosphere.atmospheric_api.not_mixin.item.CreativeTabEnchantmentAdder.addEnchantedStack;
 
-@SuppressWarnings("UnstableApiUsage")
 public sealed interface AmarongItems permits AmarongItems.Dummy {
 
     float AMARONG_TOOL_REACH = 1.25f;

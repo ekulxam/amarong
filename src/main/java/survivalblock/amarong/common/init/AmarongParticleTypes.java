@@ -2,24 +2,17 @@ package survivalblock.amarong.common.init;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
-import net.minecraft.particle.ShriekParticleEffect;
 import net.minecraft.particle.SimpleParticleType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import survivalblock.amarong.client.render.AmarongStaffTransformation;
 import survivalblock.amarong.common.Amarong;
 import survivalblock.atmosphere.atmospheric_api.not_mixin.datafixer.AtmosphericCodecs;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.ParticleTypeRegistrant;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.delayed.DelayedParticleTypeRegistrant;
+import survivalblock.atmosphere.registrar.delayed.DelayedParticleTypeRegistrant;
 
-@SuppressWarnings("UnstableApiUsage")
 public sealed interface AmarongParticleTypes permits AmarongParticleTypes.Dummy {
     DelayedParticleTypeRegistrant registrant = new DelayedParticleTypeRegistrant(Amarong::id);
 

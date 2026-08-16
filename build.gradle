@@ -69,6 +69,7 @@ dependencies {
 	modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
 
 	include modApi("survivalblock.atmosphere:atmospheric_api:${project.atmospheric_api_tag}")
+    include modApi("survivalblock.atmosphere:registrar:${project.registrar_version}")
 
 	modCompileOnly "dev.emi:emi-fabric:${project.emi_version}"
 	modRuntimeOnly "dev.emi:emi-fabric:${project.emi_version}"

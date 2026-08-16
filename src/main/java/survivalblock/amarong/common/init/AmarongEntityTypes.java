@@ -7,9 +7,8 @@ import survivalblock.amarong.common.entity.FlyingTicketEntity;
 import survivalblock.amarong.common.entity.PhasingBoomerangEntity;
 import survivalblock.amarong.common.entity.RailgunEntity;
 import survivalblock.amarong.common.entity.WaterStreamEntity;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.EntityTypeRegistrant;
+import survivalblock.atmosphere.registrar.EntityTypeRegistrant;
 
-@SuppressWarnings("UnstableApiUsage")
 public sealed interface AmarongEntityTypes permits AmarongEntityTypes.Dummy {
     EntityTypeRegistrant registrant = new EntityTypeRegistrant(Amarong::id);
 

@@ -4,7 +4,7 @@ import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.registry.RegistryKey;
 import survivalblock.amarong.common.Amarong;
-import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.dynamic.EnchantmentRegistrant;
+import survivalblock.atmosphere.registrar.dynamic.EnchantmentRegistrant;
 
 public sealed interface AmarongEnchantments permits AmarongEnchantments.Dummy {
 
